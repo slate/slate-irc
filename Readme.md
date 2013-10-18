@@ -4,7 +4,7 @@
   General purpose IRC client with:
 
    - plugin system
-   - lots of events
+   - simple api
    - arbitrary input stream
    - __DEBUG__ support for easy debugging
 
