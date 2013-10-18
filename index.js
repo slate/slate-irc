@@ -13,6 +13,7 @@ var replies = require('irc-replies');
  */
 
 var names = require('./lib/plugins/names');
+var nick = require('./lib/plugins/nick');
 var pong = require('./lib/plugins/pong');
 
 /**
@@ -36,6 +37,7 @@ function Client(stream) {
   this.parser = new Parser;
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
+  this.use(nick());
   this.use(names());
   this.use(pong());
 }
@@ -79,6 +81,7 @@ Client.prototype.pass = function(pass, fn){
  */
 
 Client.prototype.nick = function(nick, fn){
+  this.me = nick;
   this.write('NICK ' + nick, fn);
 };
 
