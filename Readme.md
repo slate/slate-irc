@@ -113,7 +113,7 @@ $ DEBUG=slate-irc:names node test.js
 
 ```
 $ DEBUG=slate-irc-parser node test.js
-` +0mse-irc-parser line `:rothfuss.freenode.net NOTICE * :*** Looking up your hostname...
+` slate-irc-parser line `:rothfuss.freenode.net NOTICE * :*** Looking up your hostname...
   slate-irc-parser message {"prefix":"rothfuss.freenode.net","command":"NOTICE","params":"*","trailing":"*** Looking up your hostname...","string":":rothfuss.freenode.net NOTICE * :*** Looking up your hostname..."} +2ms
 ` +450msirc-parser line `:rothfuss.freenode.net NOTICE * :*** Checking Ident
   slate-irc-parser message {"prefix":"rothfuss.freenode.net","command":"NOTICE","params":"*","trailing":"*** Checking Ident","string":":rothfuss.freenode.net NOTICE * :*** Checking Ident"} +0ms
