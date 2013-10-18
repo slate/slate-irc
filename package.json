@@ -1,0 +1,20 @@
+{
+  "name": "slate-irc",
+  "version": "0.0.1",
+  "repository": "slate/slate-irc",
+  "description": "General purpose IRC client",
+  "keywords": [
+    "irc",
+    "client",
+    "chat"
+  ],
+  "dependencies": {
+    "irc-replies": "~2.0.0",
+    "debug": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "license": "MIT"
+}
