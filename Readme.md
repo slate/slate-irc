@@ -76,6 +76,19 @@ function logger(stream) {
 client.use(logger(process.stdout));
 ```
 
+  Here's a slightly more complex example of a __PONG__ plugin responding to __PING__ messages:
+
+```js
+function pong(){
+  return function(irc){
+    irc.on('message', function(msg){
+      if ('PING' != msg.command) return;
+      irc.write('PONG :' + msg.trailing);
+    });
+  }
+}
+```
+
 ## Debugging
 
   Enable debug output:
