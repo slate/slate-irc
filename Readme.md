@@ -42,6 +42,11 @@ client.names('#express', function(err, names){
 
   todo
 
+## Events
+
+  - `message` (msg) parsed IRC message
+  - `nick` (name) on welcome
+
 ## Writing Plugins
 
   Plugins are simply functions that accept the IRC client as an argument. With this you can define methods, listen on events and interact with the
