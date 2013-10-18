@@ -10,7 +10,8 @@
   ],
   "dependencies": {
     "irc-replies": "~2.0.0",
-    "debug": "*"
+    "debug": "*",
+    "slate-irc-parser": "0.0.1"
   },
   "devDependencies": {
     "mocha": "*",
