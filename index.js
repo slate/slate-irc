@@ -16,6 +16,7 @@ var names = require('./lib/plugins/names');
 var nick = require('./lib/plugins/nick');
 var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
+var part = require('./lib/plugins/part');
 
 /**
  * Expose `Client.`
@@ -41,6 +42,7 @@ function Client(stream) {
   this.use(nick());
   this.use(names());
   this.use(join());
+  this.use(part());
   this.use(pong());
 }
 
