@@ -45,7 +45,8 @@ client.names('#express', function(err, names){
 ## Events
 
   - `message` (msg) parsed IRC message
-  - `nick` (name) on welcome
+  - `join` (nick, chan) on __JOIN__
+  - `nick` (nick) on welcome
 
 ## Writing Plugins
 
@@ -126,10 +127,7 @@ $ DEBUG=slate-irc-parser node test.js
 
 ## Todo
 
-  - lots more events
   - examples
-  - tests
-  - logger (separate lib)
   - tcp connection with reconnection (separate lib) (re-auth on connect)
 
 # License
