@@ -45,7 +45,9 @@ client.names('#express', function(err, names){
 ## Events
 
   - `message` (msg) parsed IRC message
-  - `join` (nick, chan) on __JOIN__
+  - `join` (event) on __JOIN__
+  - `part` (event) on __JOIN__
+  - `kick` (event) on __JOIN__
   - `nick` (nick) on welcome
 
 ## Writing Plugins
