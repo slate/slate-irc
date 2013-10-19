@@ -135,7 +135,7 @@ Client.prototype.join = function(channels, fn){
  * @api public
  */
 
-Client.prototype.leave = function(channels, msg, fn){
+Client.prototype.part = function(channels, msg, fn){
   if ('function' == typeof msg) {
     fn = msg;
     msg = '';
