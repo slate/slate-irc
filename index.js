@@ -99,7 +99,7 @@ Client.prototype.user = function(username, realname, fn){
 };
 
 /**
- * Say `msg` to `target`, where `target`
+ * Send `msg` to `target`, where `target`
  * is a channel or user name.
  *
  * @param {String} target
@@ -108,7 +108,7 @@ Client.prototype.user = function(username, realname, fn){
  * @api public
  */
 
-Client.prototype.say = function(target, msg, fn){
+Client.prototype.send = function(target, msg, fn){
   this.write('PRIVMSG ' + target + ' :' + msg, fn);
 };
 
