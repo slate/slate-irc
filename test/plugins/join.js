@@ -4,7 +4,7 @@ var Stream = require('stream').PassThrough;
 
 describe('join()', function(){
   describe('on JOIN', function(){
-    it('should emit "join" with (nick, channel)', function(done){
+    it('should emit "join"', function(done){
       var stream = new Stream;
       var client = irc(stream);
       

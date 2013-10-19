@@ -4,7 +4,7 @@ var Stream = require('stream').PassThrough;
 
 describe('part()', function(){
   describe('on PART', function(){
-    it('should emit "part" with (nick, channel)', function(done){
+    it('should emit "part"', function(done){
       var stream = new Stream;
       var client = irc(stream);
       
