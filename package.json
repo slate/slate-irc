@@ -11,7 +11,7 @@
   "dependencies": {
     "irc-replies": "~2.0.0",
     "debug": "*",
-    "slate-irc-parser": "0.0.1"
+    "slate-irc-parser": "0.0.2"
   },
   "devDependencies": {
     "mocha": "*",

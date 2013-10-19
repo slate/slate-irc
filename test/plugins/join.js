@@ -8,9 +8,9 @@ describe('join()', function(){
       var stream = new Stream;
       var client = irc(stream);
       
-      client.on('join', function(nick, chan){
-        nick.should.equal('tjholowaychuk');
-        chan.should.equal('#express');
+      client.on('join', function(e){
+        e.nick.should.equal('tjholowaychuk');
+        e.channels.should.eql(['#express']);
         done();
       });
 
