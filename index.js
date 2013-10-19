@@ -185,7 +185,7 @@ Client.prototype.use = function(fn){
 Client.prototype.onmessage = function(msg){
   msg.command = replies[msg.command] || msg.command;
   debug('message %s %s', msg.command, msg.string);
-  this.emit('message', msg);
+  this.emit('data', msg);
 };
 
 /**

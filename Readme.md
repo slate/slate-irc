@@ -44,7 +44,7 @@ client.names('#express', function(err, names){
 
 ## Events
 
-  - `message` (msg) parsed IRC message
+  - `data` (msg) parsed IRC message
   - `join` (event) on __JOIN__
   - `part` (event) on __JOIN__
   - `kick` (event) on __JOIN__
@@ -89,7 +89,7 @@ client.use(logger(process.stdout));
 ```js
 function pong(){
   return function(irc){
-    irc.on('message', function(msg){
+    irc.on('data', function(msg){
       if ('PING' != msg.command) return;
       irc.write('PONG :' + msg.trailing);
     });
