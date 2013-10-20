@@ -22,4 +22,21 @@ describe('names()', function(){
       });
     })
   })
+
+  it('should emit "names"', function(done){
+    var stream = new Stream;
+    
+    var client = irc(stream);
+
+    client.on('names', function(e){
+      e.channel.should.equal('#luna-lang');
+      e.names.should.eql('one two three foo bar baz'.split(' '));
+      done();
+    });
+
+    stream.write(':tobi!~tobi@184.151.231.170 JOIN #luna-lang\r\n');
+    stream.write(':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :one two three\r\n');
+    stream.write(':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :foo bar baz\r\n');
+    stream.write(':rothfuss.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n');
+  })
 })
