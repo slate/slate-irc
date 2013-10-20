@@ -2,7 +2,7 @@
 test:
 	@./node_modules/.bin/mocha \
 		--require should \
-		--reporter nyan \
+		--reporter spec \
 		--bail \
 		test/* \
 		test/plugins/*
