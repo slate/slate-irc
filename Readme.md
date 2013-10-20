@@ -49,6 +49,7 @@ client.names('#express', function(err, names){
   - `names` (event) on __RPL_NAMREPLY__
   - `topic` (event) on __TOPIC__
   - `away` (event) on __AWAY__
+  - `quit` (event) on __QUIT__
   - `join` (event) on __JOIN__
   - `part` (event) on __PART__
   - `kick` (event) on __KICK__

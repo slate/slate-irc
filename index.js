@@ -15,6 +15,7 @@ var replies = require('irc-replies');
 var privmsg = require('./lib/plugins/privmsg');
 var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
+var quit = require('./lib/plugins/quit');
 var away = require('./lib/plugins/away');
 var nick = require('./lib/plugins/nick');
 var pong = require('./lib/plugins/pong');
@@ -47,6 +48,7 @@ function Client(stream) {
   this.use(topic());
   this.use(names());
   this.use(away());
+  this.use(quit());
   this.use(join());
   this.use(part());
   this.use(kick());
