@@ -1,4 +1,17 @@
 
+0.1.0 / 2013-10-19 
+==================
+
+ * add away plugin
+ * add topic plugin
+ * add privmsg plugin
+ * add kick plugin
+ * add part plugin
+ * add join plugin
+ * rename "message" event to "data"
+ * rename .leave() to .part()
+ * rename .say() to .send()
+
 0.0.2 / 2013-10-18 
 ==================
 
