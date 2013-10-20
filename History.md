@@ -1,4 +1,10 @@
 
+0.2.1 / 2013-10-20 
+==================
+
+ * fix casing normalization in names plugin method
+ * fix casing normalization in names plugin
+
 0.2.0 / 2013-10-20 
 ==================
 
