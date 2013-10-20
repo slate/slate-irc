@@ -10,7 +10,7 @@ describe('join()', function(){
       
       client.on('join', function(e){
         e.nick.should.equal('tjholowaychuk');
-        e.channels.should.eql(['#express']);
+        e.channel.should.equal('#express');
         done();
       });
 
