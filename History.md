@@ -1,4 +1,11 @@
 
+0.2.0 / 2013-10-20 
+==================
+
+ * add utils and lowercasing of channel names
+ * add quit plugin
+ * use dot reporter
+
 0.1.2 / 2013-10-20 
 ==================
 
