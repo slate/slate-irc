@@ -39,4 +39,20 @@ describe('names()', function(){
     stream.write(':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :foo bar baz\r\n');
     stream.write(':rothfuss.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n');
   })
+
+  it('should strip @ / +', function(done){
+    var stream = new Stream;
+    
+    var client = irc(stream);
+
+    client.on('names', function(e){
+      e.channel.should.equal('##luna-lang');
+      e.names.should.eql(['tjholowaychuk']);
+      done();
+    });
+
+    stream.write(':tobi!~tobi@184.151.231.170 JOIN #luna-lang\r\n');
+    stream.write(':rothfuss.freenode.net 353 tjholowaychuk @ ##luna-lang :@tjholowaychuk\r\n');
+    stream.write(':rothfuss.freenode.net 366 tjholowaychuk ##luna-lang :End of /NAMES list.\r\n');
+  })
 })
