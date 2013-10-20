@@ -1,4 +1,10 @@
 
+0.1.1 / 2013-10-20 
+==================
+
+ * add test for emitting "names"
+ * change "names" event to pass an object
+
 0.1.0 / 2013-10-19 
 ==================
 
