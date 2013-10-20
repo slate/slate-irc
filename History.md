@@ -1,4 +1,10 @@
 
+0.1.2 / 2013-10-20 
+==================
+
+ * add ignoring of @ / + in names plugin for now
+ * refactor `.names(channel, fn)` so that it does not collide with "names" events
+
 0.1.1 / 2013-10-20 
 ==================
 
