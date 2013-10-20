@@ -47,6 +47,7 @@ client.names('#express', function(err, names){
   - `data` (msg) parsed IRC message
   - `message` (event) on __PRIVMSG__
   - `topic` (event) on __TOPIC__
+  - `away` (event) on __AWAY__
   - `join` (event) on __JOIN__
   - `part` (event) on __PART__
   - `kick` (event) on __KICK__
