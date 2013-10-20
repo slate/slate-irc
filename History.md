@@ -1,4 +1,9 @@
 
+0.2.2 / 2013-10-20 
+==================
+
+ * fix missing case normalization causing names to provide undefined
+
 0.2.1 / 2013-10-20 
 ==================
 
