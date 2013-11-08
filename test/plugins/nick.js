@@ -8,7 +8,9 @@ describe('nick()', function(){
       var stream = new Stream;
       var client = irc(stream);
       stream.write(':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n');
-      client.me.should.equal('tobi');
+      process.nextTick(function() {
+        client.me.should.equal('tobi');
+      }); 
     })
 
     it('should emit "nick"', function(done){
