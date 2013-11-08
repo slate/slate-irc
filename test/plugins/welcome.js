@@ -2,7 +2,7 @@
 var irc = require('../..');
 var Stream = require('stream').PassThrough;
 
-describe('nick()', function(){
+describe('welcome()', function(){
   describe('on RPL_WELCOME', function(){
     it('should set client.me to the users nick', function(){
       var stream = new Stream;
@@ -13,11 +13,11 @@ describe('nick()', function(){
       }); 
     })
 
-    it('should emit "nick"', function(done){
+    it('should emit "welcome"', function(done){
       var stream = new Stream;
       var client = irc(stream);
       
-      client.on('nick', function(nick){
+      client.on('welcome', function(nick){
         nick.should.equal('tobi');
         done();
       });

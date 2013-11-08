@@ -17,7 +17,7 @@ var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
 var quit = require('./lib/plugins/quit');
 var away = require('./lib/plugins/away');
-var nick = require('./lib/plugins/nick');
+var welcome = require('./lib/plugins/welcome');
 var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
@@ -53,7 +53,7 @@ function Client(stream) {
   this.use(part());
   this.use(kick());
   this.use(pong());
-  this.use(nick());
+  this.use(welcome());
 }
 
 /**
