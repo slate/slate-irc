@@ -78,6 +78,7 @@ Set the channel topic to `topic`
   - `join` (event) on __JOIN__
   - `part` (event) on __PART__
   - `kick` (event) on __KICK__
+  - `nick` (event) on __NICK__
   - `welcome` (nick) on __RPL_WELCOME__
 
 ## Writing Plugins
