@@ -67,6 +67,10 @@ Set the user's away message to `message`
 
 Set the channel topic to `topic`
 
+### .kick(channels, nicks, msg)
+
+Kick nick(s) from channel(s) with optional `msg`.
+
 ## Events
 
   - `data` (msg) parsed IRC message
