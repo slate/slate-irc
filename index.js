@@ -12,13 +12,13 @@ var replies = require('irc-replies');
  * Core plugins.
  */
 
-var nick = require('./lib/plugins/nick');
+var welcome = require('./lib/plugins/welcome');
 var privmsg = require('./lib/plugins/privmsg');
 var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
+var nick = require('./lib/plugins/nick');
 var quit = require('./lib/plugins/quit');
 var away = require('./lib/plugins/away');
-var welcome = require('./lib/plugins/welcome');
 var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
