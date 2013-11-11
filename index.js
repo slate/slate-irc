@@ -159,6 +159,23 @@ Client.prototype.part = function(channels, msg, fn){
 };
 
 /**
+ * Set topic with optional `msg`.
+ *
+ * @param {String} channel
+ * @param {String|Function} [topic or fn]
+ * @param {Function} [fn]
+ * @return {Type}
+ * @api public
+ */
+Client.prototype.topic = function(channel, topic, fn){
+  if ('function' == typeof topic) {
+    fn = topic;
+    topic = '';
+  }
+  this.write('TOPIC ' + channel + ' :' + topic, fn);
+};
+
+/**
  * Kick nick(s) from channel(s) with optional `msg`.
  *
  * @param {String|Array} channels
