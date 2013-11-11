@@ -12,12 +12,13 @@ var replies = require('irc-replies');
  * Core plugins.
  */
 
+var nick = require('./lib/plugins/nick');
 var privmsg = require('./lib/plugins/privmsg');
 var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
 var quit = require('./lib/plugins/quit');
 var away = require('./lib/plugins/away');
-var nick = require('./lib/plugins/nick');
+var welcome = require('./lib/plugins/welcome');
 var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
@@ -44,6 +45,7 @@ function Client(stream) {
   this.parser = new Parser;
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
+  this.use(nick());
   this.use(privmsg());
   this.use(topic());
   this.use(names());
@@ -53,7 +55,7 @@ function Client(stream) {
   this.use(part());
   this.use(kick());
   this.use(pong());
-  this.use(nick());
+  this.use(welcome());
 }
 
 /**

@@ -1,4 +1,3 @@
-
 # slate-irc
 
   General purpose IRC client with:
@@ -40,7 +39,33 @@ client.names('#express', function(err, names){
 
 ## API
 
-  todo
+## client
+
+Given a stream from `net` or `tls` or another network source, construct an IRC client.
+
+```js
+var client = irc(stream);
+```
+
+### .nick(nick)
+
+Specify an `string` irc nick for the user.
+
+### .join(room)
+
+Send a `JOIN` command for the user to join `room`.
+
+### .names(room, callback)
+
+List names of users in the room `room`, calling `callback` with `(error, names)`.
+
+### .away(message)
+
+Set the user's away message to `message`
+
+### .topic(topic)
+
+Set the channel topic to `topic`
 
 ## Events
 
@@ -53,7 +78,8 @@ client.names('#express', function(err, names){
   - `join` (event) on __JOIN__
   - `part` (event) on __PART__
   - `kick` (event) on __KICK__
-  - `nick` (nick) on welcome
+  - `nick` (event) on __NICK__
+  - `welcome` (nick) on __RPL_WELCOME__
 
 ## Writing Plugins
 

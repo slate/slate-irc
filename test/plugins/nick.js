@@ -3,24 +3,19 @@ var irc = require('../..');
 var Stream = require('stream').PassThrough;
 
 describe('nick()', function(){
-  describe('on RPL_WELCOME', function(){
-    it('should set client.me to the users nick', function(){
-      var stream = new Stream;
-      var client = irc(stream);
-      stream.write(':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n');
-      client.me.should.equal('tobi');
-    })
+  describe('on NICK', function(){
 
     it('should emit "nick"', function(done){
       var stream = new Stream;
       var client = irc(stream);
       
-      client.on('nick', function(nick){
-        nick.should.equal('tobi');
+      client.on('nick', function(e){
+        e.nick.should.eql('colinm');
+        e.new.should.equal('cmilhench');
         done();
       });
 
-      stream.write(':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n');
+      stream.write(':colinm!~colinm@host-92-17-247-88.as13285.net NICK :cmilhench\r\n');
     })
   })
 })
