@@ -159,6 +159,24 @@ Client.prototype.part = function(channels, msg, fn){
 };
 
 /**
+ * Kick nick(s) from channel(s) with optional `msg`.
+ *
+ * @param {String|Array} channels
+ * @param {String|Array} nicks
+ * @param {String|Function} [msg or fn]
+ * @param {Function} [fn]
+ * @return {Type}
+ * @api public
+ */
+Client.prototype.kick = function(channels, nicks, msg, fn){
+  if ('function' == typeof msg) {
+    fn = msg;
+    msg = '';
+  }
+  this.write('KICK ' + toArray(channels).join(',') + ' ' + toArray(nicks).join(',') + ' :' + msg, fn);
+};
+
+/**
  * Disconnect from the server with `msg`.
  *
  * @param {String} [msg]
