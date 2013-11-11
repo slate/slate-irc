@@ -61,11 +61,11 @@ List names of users in the room `room`, calling `callback` with `(error, names)`
 
 ### .away(message)
 
-Set the user's away message to `message`
+Set the user's away message to `message`.
 
 ### .topic(topic)
 
-Set the channel topic to `topic`
+Set the channel topic to `topic`.
 
 ### .kick(channels, nicks, msg)
 
