@@ -45,8 +45,9 @@ function Client(stream) {
   this.parser = new Parser;
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
-  this.use(nick());
+  this.use(welcome());
   this.use(privmsg());
+  this.use(nick());
   this.use(topic());
   this.use(names());
   this.use(away());
@@ -55,7 +56,6 @@ function Client(stream) {
   this.use(part());
   this.use(kick());
   this.use(pong());
-  this.use(welcome());
 }
 
 /**
