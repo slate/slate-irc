@@ -167,11 +167,13 @@ Client.prototype.part = function(channels, msg, fn){
  * @return {Type}
  * @api public
  */
+
 Client.prototype.topic = function(channel, topic, fn){
   if ('function' == typeof topic) {
     fn = topic;
     topic = '';
   }
+
   this.write('TOPIC ' + channel + ' :' + topic, fn);
 };
 
@@ -185,12 +187,16 @@ Client.prototype.topic = function(channel, topic, fn){
  * @return {Type}
  * @api public
  */
+
 Client.prototype.kick = function(channels, nicks, msg, fn){
   if ('function' == typeof msg) {
     fn = msg;
     msg = '';
   }
-  this.write('KICK ' + toArray(channels).join(',') + ' ' + toArray(nicks).join(',') + ' :' + msg, fn);
+
+  channels = toArray(channels).join(',');
+  nicks = toArray(nicks).join(',');
+  this.write('KICK ' + channels + ' ' + nicks + ' :' + msg, fn);
 };
 
 /**
