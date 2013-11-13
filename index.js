@@ -229,6 +229,28 @@ Client.prototype.oper = function(name, password, fn){
 };
 
 /**
+ * Used to set a user's mode or channel's mode for a user;
+ * 
+ * @param {String} [nick or channel]
+ * @param {String} flags
+ * @param {String} params [nick - if setting channel mode]
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.mode = function(target, flags, params, fn){
+  if ('function' === typeof params) {
+    fn = params;
+    params = '';
+  }
+  if (params) {
+    this.write('MODE ' + target + ' ' + flags + ' ' + params, fn);
+  } else {
+    this.write('MODE ' + target + ' ' + flags, fn);
+  }
+};
+
+/**
  * Use the given plugin `fn`.
  *
  * @param {Function} fn

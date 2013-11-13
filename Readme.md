@@ -75,6 +75,15 @@ Kick nick(s) from channel(s) with optional `msg`.
 
 Used to obtain operator privileges.  The combination of `name` and `password` are required to gain Operator privileges.  Upon success, a `'mode'` event will be emitted.
 
+### .mode(target, flags, params)
+
+Used to set a user's mode or channel's mode for a user.
+
+- `.mode('cmilhench', '-o');` 
+	- // cmilhench 'deopping' himself.
+- `.mode('#Node.js', '+o', 'isaacs');`
+	- // give 'chanop' privileges to isaacs on channel #Node.js.
+
 ## Events
 
   - `data` (msg) parsed IRC message
