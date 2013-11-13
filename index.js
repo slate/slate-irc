@@ -142,6 +142,20 @@ Client.prototype.send = function(target, msg, fn){
 };
 
 /**
+ * Send `msg` to `target` as a NOTICE, where `target`
+ * is a channel or user name.
+ *
+ * @param {String} target
+ * @param {String} msg
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.notice = function(target, msg, fn){
+  this.write('NOTICE ' + target + ' :' + msg, fn);
+};
+
+/**
  * Join channel(s).
  *
  * @param {String|Array} channels

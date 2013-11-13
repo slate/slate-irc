@@ -55,6 +55,10 @@ Specify an `string` irc nick for the user.
 
 Send an invite to `name`, for a `channel`.
 
+### .notice(target, msg)
+
+Send a NOTICE `msg` to the `target` user or channel.
+
 ### .join(room)
 
 Send a `JOIN` command for the user to join `room`.
