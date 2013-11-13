@@ -115,6 +115,19 @@ Client.prototype.user = function(username, realname, fn){
 };
 
 /**
+ * Send an invite to `name`, for a `channel`.
+ *
+ * @param {String} name
+ * @param {String} channel
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.invite = function(name, channel, fn){
+  this.write('INVITE ' + name + ' ' + channel, fn);
+};
+
+/**
  * Send `msg` to `target`, where `target`
  * is a channel or user name.
  *
@@ -126,6 +139,20 @@ Client.prototype.user = function(username, realname, fn){
 
 Client.prototype.send = function(target, msg, fn){
   this.write('PRIVMSG ' + target + ' :' + msg, fn);
+};
+
+/**
+ * Send `msg` to `target` as a NOTICE, where `target`
+ * is a channel or user name.
+ *
+ * @param {String} target
+ * @param {String} msg
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.notice = function(target, msg, fn){
+  this.write('NOTICE ' + target + ' :' + msg, fn);
 };
 
 /**
@@ -210,6 +237,44 @@ Client.prototype.kick = function(channels, nicks, msg, fn){
 Client.prototype.quit = function(msg, fn){
   msg = msg || 'Bye!';
   this.write('QUIT :' + msg, fn);
+};
+
+/**
+ * Used to obtain operator privileges. 
+ * The combination of `name` and `password` are required 
+ * to gain Operator privileges.  Upon success, a `'mode'` 
+ * event will be emitted.
+ * 
+ * @param {String} name
+ * @param {String} password
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.oper = function(name, password, fn){
+  this.write('OPER ' + name + ' ' + password, fn);
+};
+
+/**
+ * Used to set a user's mode or channel's mode for a user;
+ * 
+ * @param {String} [nick or channel]
+ * @param {String} flags
+ * @param {String} params [nick - if setting channel mode]
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.mode = function(target, flags, params, fn){
+  if ('function' === typeof params) {
+    fn = params;
+    params = '';
+  }
+  if (params) {
+    this.write('MODE ' + target + ' ' + flags + ' ' + params, fn);
+  } else {
+    this.write('MODE ' + target + ' ' + flags, fn);
+  }
 };
 
 /**
