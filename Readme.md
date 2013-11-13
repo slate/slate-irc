@@ -71,6 +71,10 @@ Set the channel topic to `topic`.
 
 Kick nick(s) from channel(s) with optional `msg`.
 
+### .oper(name, password)
+
+Used to obtain operator privileges.  The combination of `name` and `password` are required to gain Operator privileges.  Upon success, a `'mode'` event will be emitted.
+
 ## Events
 
   - `data` (msg) parsed IRC message

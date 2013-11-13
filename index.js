@@ -213,6 +213,22 @@ Client.prototype.quit = function(msg, fn){
 };
 
 /**
+ * Used to obtain operator privileges. 
+ * The combination of `name` and `password` are required 
+ * to gain Operator privileges.  Upon success, a `'mode'` 
+ * event will be emitted.
+ * 
+ * @param {String} name
+ * @param {String} password
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.oper = function(name, password, fn){
+  this.write('OPER ' + name + ' ' + password, fn);
+};
+
+/**
  * Use the given plugin `fn`.
  *
  * @param {Function} fn
