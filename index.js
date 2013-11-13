@@ -115,6 +115,19 @@ Client.prototype.user = function(username, realname, fn){
 };
 
 /**
+ * Send an invite to `name`, for a `channel`.
+ *
+ * @param {String} name
+ * @param {String} channel
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.invite = function(name, channel, fn){
+  this.write('INVITE ' + name + ' ' + channel, fn);
+};
+
+/**
  * Send `msg` to `target`, where `target`
  * is a channel or user name.
  *

@@ -51,6 +51,10 @@ var client = irc(stream);
 
 Specify an `string` irc nick for the user.
 
+### .invite(name, channel)
+
+Send an invite to `name`, for a `channel`.
+
 ### .join(room)
 
 Send a `JOIN` command for the user to join `room`.
