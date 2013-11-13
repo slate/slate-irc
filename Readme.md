@@ -47,13 +47,25 @@ Given a stream from `net` or `tls` or another network source, construct an IRC c
 var client = irc(stream);
 ```
 
+### .pass(pass)
+
+Used at the beginning of connection to specify a 'connection password' for servers requiring a auth.
+
 ### .nick(nick)
 
 Specify an `string` irc nick for the user.
 
+### .user(username, realname)
+
+Used at the beginning of connection to specify the username and realname of a new user.
+
 ### .invite(name, channel)
 
 Send an invite to `name`, for a `channel`.
+
+### .send(target, msg)
+
+Send a `msg` to the `target` user or channel.
 
 ### .notice(target, msg)
 
@@ -62,6 +74,10 @@ Send a NOTICE `msg` to the `target` user or channel.
 ### .join(room)
 
 Send a `JOIN` command for the user to join `room`.
+
+### .part(channel, msg)
+
+Send a `PART` command for the user to part `channel` with optional `msg`.
 
 ### .names(room, callback)
 
@@ -89,8 +105,12 @@ Used to set a user's mode or channel's mode for a user.
 
 - `.mode('cmilhench', '-o');` 
 	- // cmilhench 'deopping' himself.
-- `.mode('#Node.js', '+o', 'isaacs');`
-	- // give 'chanop' privileges to isaacs on channel #Node.js.
+- `.mode('#channel', '+o', 'name');`
+	- // give 'chanop' privileges to name on channel #channel.
+
+### .quit(msg)
+
+Disconnect from the server with optional `msg`.
 
 ## Events
 
