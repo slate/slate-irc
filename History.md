@@ -1,4 +1,18 @@
 
+0.3.0 / 2013-11-14 
+==================
+
+ * add notice function
+ * add invite function
+ * add mode function
+ * add oper function
+ * add topic function
+ * add kick function
+ * add nick plugin
+ * rename "nick" event to "welcome"
+ * fix nick() should set client.me test (on next event loop proccess)
+ * fix max listeners warning
+
 0.2.3 / 2013-10-20 
 ==================
 
