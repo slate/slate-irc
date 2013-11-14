@@ -45,6 +45,7 @@ function Client(stream) {
   this.parser = new Parser;
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
+  this.setMaxListeners(100);
   this.use(welcome());
   this.use(privmsg());
   this.use(nick());
