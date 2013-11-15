@@ -116,6 +116,7 @@ Disconnect from the server with optional `msg`.
 
   - `data` (msg) parsed IRC message
   - `message` (event) on __PRIVMSG__
+  - `notice` (event) on __NOTICE__
   - `names` (event) on __RPL_NAMREPLY__
   - `topic` (event) on __TOPIC__
   - `away` (event) on __RPL_AWAY__

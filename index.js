@@ -14,6 +14,7 @@ var replies = require('irc-replies');
 
 var welcome = require('./lib/plugins/welcome');
 var privmsg = require('./lib/plugins/privmsg');
+var notice = require('./lib/plugins/notice');
 var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
 var nick = require('./lib/plugins/nick');
@@ -48,6 +49,7 @@ function Client(stream) {
   this.setMaxListeners(100);
   this.use(welcome());
   this.use(privmsg());
+  this.use(notice());
   this.use(nick());
   this.use(topic());
   this.use(names());
