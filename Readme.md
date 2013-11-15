@@ -118,7 +118,7 @@ Disconnect from the server with optional `msg`.
   - `message` (event) on __PRIVMSG__
   - `names` (event) on __RPL_NAMREPLY__
   - `topic` (event) on __TOPIC__
-  - `away` (event) on __AWAY__
+  - `away` (event) on __RPL_AWAY__
   - `quit` (event) on __QUIT__
   - `join` (event) on __JOIN__
   - `part` (event) on __PART__
