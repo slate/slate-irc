@@ -14,7 +14,7 @@ describe('away()', function(){
         done();
       });
 
-      stream.write(':loki AWAY :brb food time\r\n');
+      stream.write(':loki 301 colinm cmilhench :brb food time\r\n');
     })
   })
 })

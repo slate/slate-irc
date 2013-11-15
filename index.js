@@ -14,6 +14,7 @@ var replies = require('irc-replies');
 
 var welcome = require('./lib/plugins/welcome');
 var privmsg = require('./lib/plugins/privmsg');
+var notice = require('./lib/plugins/notice');
 var topic = require('./lib/plugins/topic');
 var names = require('./lib/plugins/names');
 var nick = require('./lib/plugins/nick');
@@ -23,6 +24,7 @@ var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
 var kick = require('./lib/plugins/kick');
+var whois = require('./lib/plugins/whois');
 
 /**
  * Expose `Client.`
@@ -48,6 +50,7 @@ function Client(stream) {
   this.setMaxListeners(100);
   this.use(welcome());
   this.use(privmsg());
+  this.use(notice());
   this.use(nick());
   this.use(topic());
   this.use(names());
@@ -57,6 +60,7 @@ function Client(stream) {
   this.use(part());
   this.use(kick());
   this.use(pong());
+  this.use(whois());
 }
 
 /**
