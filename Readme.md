@@ -112,6 +112,10 @@ Used to set a user's mode or channel's mode for a user.
 
 Disconnect from the server with optional `msg`.
 
+### .whois(target, mask, callback)
+
+Used to query information about particular user.
+
 ## Events
 
   - `data` (msg) parsed IRC message
@@ -126,6 +130,7 @@ Disconnect from the server with optional `msg`.
   - `kick` (event) on __KICK__
   - `nick` (event) on __NICK__
   - `welcome` (nick) on __RPL_WELCOME__
+  - `whois` (event) on __RPL_ENDOFWHOIS__
 
 ## Writing Plugins
 

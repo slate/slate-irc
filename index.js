@@ -24,6 +24,7 @@ var pong = require('./lib/plugins/pong');
 var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
 var kick = require('./lib/plugins/kick');
+var whois = require('./lib/plugins/whois');
 
 /**
  * Expose `Client.`
@@ -59,6 +60,7 @@ function Client(stream) {
   this.use(part());
   this.use(kick());
   this.use(pong());
+  this.use(whois());
 }
 
 /**
