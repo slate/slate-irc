@@ -3,7 +3,7 @@ var irc = require('../..');
 var Stream = require('stream').PassThrough;
 
 describe('away()', function(){
-  describe('on AWAY', function(){
+  describe('on RPL_AWAY', function(){
     it('should emit "away"', function(done){
       var stream = new Stream;
       var client = irc(stream);
