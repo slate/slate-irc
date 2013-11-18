@@ -19,6 +19,7 @@ describe('whois()', function(){
         e.channels.should.include('#express');
         e.channels.should.include('#some');
         e.channels.should.include('#more');
+        e.away.should.equal('brb');
         e.sign.should.equal('1384330635');
         e.idle.should.equal('10543');
         done();
@@ -28,6 +29,7 @@ describe('whois()', function(){
       stream.write(':irc.host.net 319 me colinm #Node.js #express\r\n');
       stream.write(':irc.host.net 319 me colinm #some #more\r\n');
       stream.write(':irc.host.net 312 me colinm other.host.net :Paris, FR\r\n');
+      stream.write(':irc.host.net 301 me colinm :brb\r\n');
       stream.write(':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n');
       stream.write(':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n');
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n');
@@ -114,6 +116,16 @@ describe('whois()', function(){
         done();
       });
       stream.write(':holmes.freenode.net 402 me nonick :No such server\r\n');
+    });
+
+    it('should err with Not enough parameters', function(done){
+      var stream = new Stream;
+      var client = irc(stream);
+      client.on('whois', function(err, e){
+        err.should.equal('Not enough parameters');
+        done();
+      });
+      stream.write(':irc.freenode.net 461 me WHOIS :Not enough parameters\r\n');
     });
 
   });
