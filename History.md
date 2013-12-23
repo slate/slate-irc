@@ -1,4 +1,14 @@
 
+0.4.0 / 2013-12-23
+==================
+
+ * add whois plugin
+ * add notice plugin
+ * update error handeling in whois to be consistant
+ * fix away test label
+ * fix handling away messages in whois
+ * fix away plugin
+
 0.3.0 / 2013-11-14 
 ==================
 
