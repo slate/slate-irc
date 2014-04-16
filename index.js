@@ -25,6 +25,8 @@ var join = require('./lib/plugins/join');
 var part = require('./lib/plugins/part');
 var kick = require('./lib/plugins/kick');
 var whois = require('./lib/plugins/whois');
+var motd = require('./lib/plugins/motd');
+var mode = require('./lib/plugins/mode');
 
 /**
  * Expose `Client.`
@@ -61,6 +63,8 @@ function Client(stream) {
   this.use(kick());
   this.use(pong());
   this.use(whois());
+  this.use(motd());
+  this.use(mode());
 }
 
 /**
