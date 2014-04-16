@@ -1,4 +1,13 @@
 
+0.5.0 / 2014-04-16
+==================
+
+ * add mode plugin
+ * add motd plugin
+ * add nickname to whois event
+ * fix topic plugin
+ * fix whois channels
+
 0.4.0 / 2013-12-23
 ==================
 
