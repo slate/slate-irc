@@ -151,6 +151,25 @@ Client.prototype.send = function(target, msg, fn){
 };
 
 /**
+ * Send `msg` to `target` as an ACTION, where `target`
+ * is a channel or user name.
+ *
+ * An action is a PRIVMSG with a syntax
+ * like this:
+ *
+ *    PRIVMSG <target> :\u0001ACTION <msg>\u0001
+ *
+ * @param {String} target
+ * @param {String} msg
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.action = function(target, msg, fn){
+  this.send(target, '\u0001' + 'ACTION ' + msg + '\u0001', fn);
+};
+
+/**
  * Send `msg` to `target` as a NOTICE, where `target`
  * is a channel or user name.
  *
