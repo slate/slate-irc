@@ -67,6 +67,11 @@ Send an invite to `name`, for a `channel`.
 
 Send a `msg` to the `target` user or channel.
 
+### .action(target, msg)
+
+Send an ACTION `msg` to the `target` user or channel.  
+Example output: `* erming slaps tj around a bit with a large trout`
+
 ### .notice(target, msg)
 
 Send a NOTICE `msg` to the `target` user or channel.
