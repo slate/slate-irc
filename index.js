@@ -27,6 +27,7 @@ var kick = require('./lib/plugins/kick');
 var whois = require('./lib/plugins/whois');
 var motd = require('./lib/plugins/motd');
 var mode = require('./lib/plugins/mode');
+var errors = require('./lib/plugins/errors');
 
 /**
  * Expose `Client.`
@@ -65,6 +66,7 @@ function Client(stream) {
   this.use(whois());
   this.use(motd());
   this.use(mode());
+  this.use(errors());
 }
 
 /**

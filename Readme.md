@@ -133,6 +133,7 @@ Used to query information about particular user.
   - `nick` (event) on __NICK__
   - `welcome` (nick) on __RPL_WELCOME__
   - `whois` (event) on __RPL_ENDOFWHOIS__
+  - `errors` (event) on __ERR_*__
 
 ## Writing Plugins
 
