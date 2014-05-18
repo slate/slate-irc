@@ -142,14 +142,14 @@ Client.prototype.invite = function(name, channel, fn){
  * Send `msg` to `target`, where `target`
  * is a channel or user name.
  *
- * @param {String} target
+ * @param {String|Array} target
  * @param {String} msg
  * @param {Function} [fn]
  * @api public
  */
 
 Client.prototype.send = function(target, msg, fn){
-  this.write('PRIVMSG ' + target + ' :' + msg, fn);
+  this.write('PRIVMSG ' + toArray(target).join(',') + ' :' + msg, fn);
 };
 
 /**
