@@ -76,9 +76,9 @@ Example output: `* erming slaps tj around a bit with a large trout`
 
 Send a NOTICE `msg` to the `target` user or channel.
 
-### .join(room)
+### .join(room, key)
 
-Send a `JOIN` command for the user to join `room`.
+Send a `JOIN` command for the user to join `room` with optional `key`.
 
 ### .part(channel, msg)
 

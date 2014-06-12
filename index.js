@@ -189,11 +189,18 @@ Client.prototype.notice = function(target, msg, fn){
  * Join channel(s).
  *
  * @param {String|Array} channels
+ * @param {String|Array|Function} [keys or fn]
+ * @param {Function} [fn]
  * @api public
  */
 
-Client.prototype.join = function(channels, fn){
-  this.write('JOIN ' + toArray(channels).join(','), fn);
+Client.prototype.join = function(channels, keys, fn){
+  if ('function' == typeof keys) {
+    fn = keys;
+    keys = '';
+  }
+
+  this.write('JOIN ' + toArray(channels).join(',') + ' ' + toArray(keys).join(','), fn);
 };
 
 /**
