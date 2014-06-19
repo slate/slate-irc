@@ -108,7 +108,6 @@ Client.prototype.pass = function(pass, fn){
  */
 
 Client.prototype.nick = function(nick, fn){
-  this.me = nick;
   this.write('NICK ' + nick, fn);
 };
 
