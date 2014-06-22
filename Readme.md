@@ -67,13 +67,18 @@ Send an invite to `name`, for a `channel`.
 
 Send a `msg` to the `target` user or channel.
 
+### .action(target, msg)
+
+Send an ACTION `msg` to the `target` user or channel.  
+Example output: `* erming slaps tj around a bit with a large trout`
+
 ### .notice(target, msg)
 
 Send a NOTICE `msg` to the `target` user or channel.
 
-### .join(room)
+### .join(room, key)
 
-Send a `JOIN` command for the user to join `room`.
+Send a `JOIN` command for the user to join `room` with optional `key`.
 
 ### .part(channel, msg)
 
@@ -133,6 +138,7 @@ Used to query information about particular user.
   - `nick` (event) on __NICK__
   - `welcome` (nick) on __RPL_WELCOME__
   - `whois` (event) on __RPL_ENDOFWHOIS__
+  - `errors` (event) on __ERR_*__
 
 ## Writing Plugins
 

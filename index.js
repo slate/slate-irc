@@ -27,6 +27,7 @@ var kick = require('./lib/plugins/kick');
 var whois = require('./lib/plugins/whois');
 var motd = require('./lib/plugins/motd');
 var mode = require('./lib/plugins/mode');
+var errors = require('./lib/plugins/errors');
 
 /**
  * Expose `Client.`
@@ -65,6 +66,7 @@ function Client(stream) {
   this.use(whois());
   this.use(motd());
   this.use(mode());
+  this.use(errors());
 }
 
 /**
@@ -106,7 +108,6 @@ Client.prototype.pass = function(pass, fn){
  */
 
 Client.prototype.nick = function(nick, fn){
-  this.me = nick;
   this.write('NICK ' + nick, fn);
 };
 
@@ -140,14 +141,33 @@ Client.prototype.invite = function(name, channel, fn){
  * Send `msg` to `target`, where `target`
  * is a channel or user name.
  *
- * @param {String} target
+ * @param {String|Array} target
  * @param {String} msg
  * @param {Function} [fn]
  * @api public
  */
 
 Client.prototype.send = function(target, msg, fn){
-  this.write('PRIVMSG ' + target + ' :' + msg, fn);
+  this.write('PRIVMSG ' + toArray(target).join(',') + ' :' + msg, fn);
+};
+
+/**
+ * Send `msg` to `target` as an ACTION, where `target`
+ * is a channel or user name.
+ *
+ * An action is a PRIVMSG with a syntax
+ * like this:
+ *
+ *    PRIVMSG <target> :\u0001ACTION <msg>\u0001
+ *
+ * @param {String} target
+ * @param {String} msg
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.action = function(target, msg, fn){
+  this.send(target, '\u0001' + 'ACTION ' + msg + '\u0001', fn);
 };
 
 /**
@@ -168,11 +188,18 @@ Client.prototype.notice = function(target, msg, fn){
  * Join channel(s).
  *
  * @param {String|Array} channels
+ * @param {String|Array|Function} [keys or fn]
+ * @param {Function} [fn]
  * @api public
  */
 
-Client.prototype.join = function(channels, fn){
-  this.write('JOIN ' + toArray(channels).join(','), fn);
+Client.prototype.join = function(channels, keys, fn){
+  if ('function' == typeof keys) {
+    fn = keys;
+    keys = '';
+  }
+
+  this.write('JOIN ' + toArray(channels).join(',') + ' ' + toArray(keys).join(','), fn);
 };
 
 /**
