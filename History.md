@@ -1,4 +1,15 @@
 
+0.6.0 / 2014-06-22
+==================
+
+ * add: emit 'pong' event
+ * add: retain ~ and % modes
+ * add: send() now accept array as argument
+ * add errors plugin
+ * add optional keys argument to join.
+ * add action function
+ * fix join. use trailing as fallback
+
 0.5.0 / 2014-04-16
 ==================
 
@@ -18,7 +29,7 @@
  * fix handling away messages in whois
  * fix away plugin
 
-0.3.0 / 2013-11-14 
+0.3.0 / 2013-11-14
 ==================
 
  * add notice function
@@ -32,42 +43,42 @@
  * fix nick() should set client.me test (on next event loop proccess)
  * fix max listeners warning
 
-0.2.3 / 2013-10-20 
+0.2.3 / 2013-10-20
 ==================
 
  * fix casing of privmsg target
 
-0.2.2 / 2013-10-20 
+0.2.2 / 2013-10-20
 ==================
 
  * fix missing case normalization causing names to provide undefined
 
-0.2.1 / 2013-10-20 
+0.2.1 / 2013-10-20
 ==================
 
  * fix casing normalization in names plugin method
  * fix casing normalization in names plugin
 
-0.2.0 / 2013-10-20 
+0.2.0 / 2013-10-20
 ==================
 
  * add utils and lowercasing of channel names
  * add quit plugin
  * use dot reporter
 
-0.1.2 / 2013-10-20 
+0.1.2 / 2013-10-20
 ==================
 
  * add ignoring of @ / + in names plugin for now
  * refactor `.names(channel, fn)` so that it does not collide with "names" events
 
-0.1.1 / 2013-10-20 
+0.1.1 / 2013-10-20
 ==================
 
  * add test for emitting "names"
  * change "names" event to pass an object
 
-0.1.0 / 2013-10-19 
+0.1.0 / 2013-10-19
 ==================
 
  * add away plugin
@@ -80,7 +91,7 @@
  * rename .leave() to .part()
  * rename .say() to .send()
 
-0.0.2 / 2013-10-18 
+0.0.2 / 2013-10-18
 ==================
 
  * fix missing slate-irc-parser dep
