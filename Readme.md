@@ -76,25 +76,25 @@ Example output: `* erming slaps tj around a bit with a large trout`
 
 Send a NOTICE `msg` to the `target` user or channel.
 
-### .join(room, key)
+### .join(channel, key)
 
-Send a `JOIN` command for the user to join `room` with optional `key`.
+Send a `JOIN` command for the user to join `channel` with optional `key`.
 
 ### .part(channel, msg)
 
 Send a `PART` command for the user to part `channel` with optional `msg`.
 
-### .names(room, callback)
+### .names(channel, callback)
 
-List names of users in the room `room`, calling `callback` with `(error, names)`.
+List names of users in `channel`, calling `callback` with `(error, names)`.
 
 ### .away(message)
 
 Set the user's away message to `message`.
 
-### .topic(topic)
+### .topic(channel, topic)
 
-Set the channel topic to `topic`.
+Get channel topic or set the topic to `topic`.
 
 ### .kick(channels, nicks, msg)
 

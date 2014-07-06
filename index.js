@@ -208,7 +208,6 @@ Client.prototype.join = function(channels, keys, fn){
  * @param {String|Array} channels
  * @param {String|Function} [msg or fn]
  * @param {Function} [fn]
- * @return {Type}
  * @api public
  */
 
@@ -222,12 +221,11 @@ Client.prototype.part = function(channels, msg, fn){
 };
 
 /**
- * Get or set the channel topic.
+ * Get channel topic or set the topic to `topic`.
  *
  * @param {String} channel
  * @param {String|Function} [topic or fn]
  * @param {Function} [fn]
- * @return {Type}
  * @api public
  */
 
@@ -251,7 +249,6 @@ Client.prototype.topic = function(channel, topic, fn){
  * @param {String|Array} nicks
  * @param {String|Function} [msg or fn]
  * @param {Function} [fn]
- * @return {Type}
  * @api public
  */
 
