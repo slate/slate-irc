@@ -222,7 +222,7 @@ Client.prototype.part = function(channels, msg, fn){
 };
 
 /**
- * Set topic with optional `msg`.
+ * Get or set the channel topic.
  *
  * @param {String} channel
  * @param {String|Function} [topic or fn]
@@ -237,7 +237,11 @@ Client.prototype.topic = function(channel, topic, fn){
     topic = '';
   }
 
-  this.write('TOPIC ' + channel + ' :' + topic, fn);
+  if (topic) {
+    topic = ' :' + topic;
+  }
+
+  this.write('TOPIC ' + channel + topic, fn);
 };
 
 /**
