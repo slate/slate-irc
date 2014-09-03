@@ -76,6 +76,10 @@ Example output: `* erming slaps tj around a bit with a large trout`
 
 Send a NOTICE `msg` to the `target` user or channel.
 
+### .ctcp(target, msg)
+
+Send a CTCP notice to the `target` user.
+
 ### .join(channel, key)
 
 Send a `JOIN` command for the user to join `channel` with optional `key`.

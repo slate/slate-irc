@@ -185,6 +185,20 @@ Client.prototype.notice = function(target, msg, fn){
 };
 
 /**
+ * Send `msg` to `target` as a CTCP notice, where `target`
+ * is a user name.
+ *
+ * @param {String} target
+ * @param {String} msg
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.ctcp = function(target, msg, fn){
+  this.notice(target, '\001' + msg + '\001', fn);
+}
+
+/**
  * Join channel(s).
  *
  * @param {String|Array} channels
@@ -277,11 +291,11 @@ Client.prototype.quit = function(msg, fn){
 };
 
 /**
- * Used to obtain operator privileges. 
- * The combination of `name` and `password` are required 
- * to gain Operator privileges.  Upon success, a `'mode'` 
+ * Used to obtain operator privileges.
+ * The combination of `name` and `password` are required
+ * to gain Operator privileges.  Upon success, a `'mode'`
  * event will be emitted.
- * 
+ *
  * @param {String} name
  * @param {String} password
  * @param {Function} [fn]
@@ -294,7 +308,7 @@ Client.prototype.oper = function(name, password, fn){
 
 /**
  * Used to set a user's mode or channel's mode for a user;
- * 
+ *
  * @param {String} [nick or channel]
  * @param {String} flags
  * @param {String} params [nick - if setting channel mode]
@@ -329,9 +343,9 @@ Client.prototype.use = function(fn){
 
 /**
  * Handle messages.
- * 
+ *
  * Emit "message" (msg).
- * 
+ *
  * @api private
  */
 
