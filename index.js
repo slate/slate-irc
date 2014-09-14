@@ -43,11 +43,11 @@ module.exports = Client;
  * @api public
  */
 
-function Client(stream) {
-  if (!(this instanceof Client)) return new Client(stream);
+function Client(stream, parser) {
+  if (!(this instanceof Client)) return new Client(stream, parser);
   stream.setEncoding('utf8');
   this.stream = stream;
-  this.parser = new Parser;
+  this.parser = parser || new Parser;
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
   this.setMaxListeners(100);
