@@ -1,6 +1,6 @@
 {
   "name": "slate-irc",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "repository": "slate/slate-irc",
   "description": "General purpose IRC client",
   "keywords": [
