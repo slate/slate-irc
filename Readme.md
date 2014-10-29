@@ -69,7 +69,7 @@ Send a `msg` to the `target` user or channel.
 
 ### .action(target, msg)
 
-Send an ACTION `msg` to the `target` user or channel.  
+Send an ACTION `msg` to the `target` user or channel.
 Example output: `* erming slaps tj around a bit with a large trout`
 
 ### .notice(target, msg)
@@ -112,7 +112,7 @@ Used to obtain operator privileges.  The combination of `name` and `password` ar
 
 Used to set a user's mode or channel's mode for a user.
 
-- `.mode('cmilhench', '-o');` 
+- `.mode('cmilhench', '-o');`
 	- // cmilhench 'deopping' himself.
 - `.mode('#channel', '+o', 'name');`
 	- // give 'chanop' privileges to name on channel #channel.
@@ -130,6 +130,7 @@ Used to query information about particular user.
   - `data` (msg) parsed IRC message
   - `message` (event) on __PRIVMSG__
   - `notice` (event) on __NOTICE__
+  - `invite` (event) on __INVITE__
   - `names` (event) on __RPL_NAMREPLY__
   - `topic` (event) on __TOPIC__
   - `away` (event) on __RPL_AWAY__
