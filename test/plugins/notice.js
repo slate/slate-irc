@@ -13,6 +13,11 @@ describe('notice()', function(){
         e.from.should.equal('NickServ');
         e.to.should.equal('cmilhench');
 
+        e.hostmask.nick.should.equal('NickServ');
+        e.hostmask.username.should.equal('NickServ');
+        e.hostmask.hostname.should.equal('services.');
+        e.hostmask.string.should.equal('NickServ!NickServ@services.');
+
         switch (++n) {
           case 1:
             e.message.should.equal([
