@@ -1,4 +1,13 @@
 
+0.8.0 / 2014-12-22 
+==================
+
+ * add 'npm test' script
+ * add hostmask to events
+ * fix whois test
+ * add "invite" event
+ * add kick message to event
+
 0.7.3 / 2014-10-10
 ==================
 
