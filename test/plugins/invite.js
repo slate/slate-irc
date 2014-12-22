@@ -12,6 +12,11 @@ describe('invite()', function(){
         e.from.should.equal('test');
         e.to.should.equal('astranger');
         e.channel.should.equal('#something');
+
+        e.hostmask.nick.should.equal('test');
+        e.hostmask.username.should.equal('~user');
+        e.hostmask.hostname.should.equal('example.com');
+        e.hostmask.string.should.equal('test!~user@example.com');
         done();
       });
 
