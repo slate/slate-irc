@@ -39,7 +39,28 @@ client.names('#express', function(err, names){
 
 ## API
 
-## client
+## Events
+
+  - `data` (msg) parsed IRC message
+  - `message` (event) on __PRIVMSG__
+  - `notice` (event) on __NOTICE__
+  - `invite` (event) on __INVITE__
+  - `names` (event) on __RPL_NAMREPLY__
+  - `topic` (event) on __TOPIC__
+  - `away` (event) on __RPL_AWAY__
+  - `quit` (event) on __QUIT__
+  - `join` (event) on __JOIN__
+  - `part` (event) on __PART__
+  - `kick` (event) on __KICK__
+  - `mode` (event) on __MODE__
+  - `motd` (event) on __RPL_ENDOFMOTD__
+  - `nick` (event) on __NICK__
+  - `welcome` (nick) on __RPL_WELCOME__
+  - `whois` (event) on __RPL_ENDOFWHOIS__
+  - `errors` (event) on __ERR_*__
+  - `pong` (event) on __PONG__
+
+## Client
 
 Given a stream from `net` or `tls` or another network source, construct an IRC client.
 
@@ -113,9 +134,9 @@ Used to obtain operator privileges.  The combination of `name` and `password` ar
 Used to set a user's mode or channel's mode for a user.
 
 - `.mode('cmilhench', '-o');`
-	- // cmilhench 'deopping' himself.
+  - // cmilhench 'deopping' himself.
 - `.mode('#channel', '+o', 'name');`
-	- // give 'chanop' privileges to name on channel #channel.
+  - // give 'chanop' privileges to name on channel #channel.
 
 ### .quit(msg)
 
@@ -124,26 +145,6 @@ Disconnect from the server with optional `msg`.
 ### .whois(target, mask, callback)
 
 Used to query information about particular user.
-
-## Events
-
-  - `data` (msg) parsed IRC message
-  - `message` (event) on __PRIVMSG__
-  - `notice` (event) on __NOTICE__
-  - `invite` (event) on __INVITE__
-  - `names` (event) on __RPL_NAMREPLY__
-  - `topic` (event) on __TOPIC__
-  - `away` (event) on __RPL_AWAY__
-  - `quit` (event) on __QUIT__
-  - `join` (event) on __JOIN__
-  - `part` (event) on __PART__
-  - `kick` (event) on __KICK__
-  - `mode` (event) on __MODE__
-  - `motd` (event) on __RPL_ENDOFMOTD__
-  - `nick` (event) on __NICK__
-  - `welcome` (nick) on __RPL_WELCOME__
-  - `whois` (event) on __RPL_ENDOFWHOIS__
-  - `errors` (event) on __ERR_*__
 
 ## Writing Plugins
 
