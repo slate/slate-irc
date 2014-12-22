@@ -3,6 +3,9 @@
   "version": "0.7.3",
   "repository": "slate/slate-irc",
   "description": "General purpose IRC client",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/plugins --require should"
+  },
   "keywords": [
     "irc",
     "client",
