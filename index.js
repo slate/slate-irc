@@ -102,6 +102,23 @@ Client.prototype.pass = function(pass, fn){
 };
 
 /**
+ * WEBIRC <password> <username> <hostname> <ip>
+ * See http://irc-wiki.org/WebIRC
+ *
+ * @param {String} password
+ * @param {String} username
+ * @param {String} hostname
+ * @param {String} ip
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.webirc = function(password, username, hostname, ip, fn){
+  var message = [password, username, hostname, ip].join(" ");
+  this.write('WEBIRC ' + message, fn);
+};
+
+/**
  * NICK <nick>
  *
  * @param {String} nick
