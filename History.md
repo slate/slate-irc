@@ -1,8 +1,16 @@
+0.8.1 / 2015-01-22
+==================
+
+ * add optional stream encoding
+ * add optional kick/part message
+ * add webirc command
+ * fix empty names callback
+ * fix empty names array
 
 0.8.0 / 2014-12-22 
 ==================
 
- * add 'npm test' script
+ * add "npm test" script
  * add hostmask to events
  * fix whois test
  * add "invite" event
