@@ -250,7 +250,13 @@ Client.prototype.part = function(channels, msg, fn) {
     msg = '';
   }
 
-  this.write('PART ' + toArray(channels).join(',') + ' :' + msg, fn);
+  var part = 'PART ' + toArray(channels).join(',');
+
+  if (msg) {
+    part += ' :' + msg;
+  }
+
+  this.write(part, fn);
 };
 
 /**
@@ -291,9 +297,13 @@ Client.prototype.kick = function(channels, nicks, msg, fn) {
     msg = '';
   }
 
-  channels = toArray(channels).join(',');
-  nicks = toArray(nicks).join(',');
-  this.write('KICK ' + channels + ' ' + nicks + ' :' + msg, fn);
+  var kick = 'KICK ' + toArray(channels).join(',') + ' ' + toArray(nicks).join(',');
+
+  if (msg) {
+    kick += ' :' + msg;
+  }
+
+  this.write(kick, fn);
 };
 
 /**
