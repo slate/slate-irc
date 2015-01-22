@@ -4,7 +4,7 @@
   "repository": "slate/slate-irc",
   "description": "General purpose IRC client",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/plugins --require should"
+    "test": "./node_modules/.bin/mocha test/ --require should"
   },
   "keywords": [
     "irc",

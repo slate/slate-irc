@@ -1,15 +1,13 @@
-
-var irc = require('../..');
+var irc = require('..');
 var Stream = require('stream').PassThrough;
 
-describe('whois()', function(){
-  describe('client.whois(target, mask, fn)', function(){
-
-    it('should respond with user info', function(done){
+describe('whois()', function() {
+  describe('client.whois(target, mask, fn)', function() {
+    it('should respond with user info', function(done) {
       var stream = new Stream;
       var client = irc(stream);
 
-      client.whois('colinm', function(err, e){
+      client.whois('colinm', function(err, e) {
         if (err) return done(err);e.hostname.should.equal('client.host.net');
         e.username.should.equal('~colinm');
         e.realname.should.equal('Colin Milhench');
@@ -36,11 +34,11 @@ describe('whois()', function(){
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n');
     });
 
-    it('should emit "info"', function(done){
+    it('should emit "info"', function(done) {
       var stream = new Stream;
       var client = irc(stream);
 
-      client.on('whois', function(err, e){
+      client.on('whois', function(err, e) {
         e.hostname.should.equal('client.host.net');
         e.username.should.equal('~colinm');
         e.realname.should.equal('Colin Milhench');
@@ -65,13 +63,13 @@ describe('whois()', function(){
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n');
     });
 
-    it('should emit "info"', function(done){
+    it('should emit "info"', function(done) {
       var stream = new Stream;
       var client = irc(stream);
 
       client.whois('colinm');
 
-      client.on('whois', function(err, e){
+      client.on('whois', function(err, e) {
         e.hostname.should.equal('client.host.net');
         e.username.should.equal('~colinm');
         e.realname.should.equal('Colin Milhench');
@@ -96,11 +94,11 @@ describe('whois()', function(){
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n');
     });
 
-    it('should err with No such nick/channel', function(done){
+    it('should err with No such nick/channel', function(done) {
       var stream = new Stream;
       var client = irc(stream);
       client.whois('nonick');
-      client.on('whois', function(err, e){
+      client.on('whois', function(err, e) {
         err.should.equal('No such nick/channel');
         done();
       });
@@ -108,25 +106,24 @@ describe('whois()', function(){
       stream.write(':irc.freenode.net 318 me nonick :End of /WHOIS list.\r\n');
     });
 
-    it('should err with No such server', function(done){
+    it('should err with No such server', function(done) {
       var stream = new Stream;
       var client = irc(stream);
-      client.whois('nonick', function(err, e){
+      client.whois('nonick', function(err, e) {
         err.should.equal('No such server');
         done();
       });
       stream.write(':holmes.freenode.net 402 me nonick :No such server\r\n');
     });
 
-    it('should err with Not enough parameters', function(done){
+    it('should err with Not enough parameters', function(done) {
       var stream = new Stream;
       var client = irc(stream);
-      client.on('whois', function(err, e){
+      client.on('whois', function(err, e) {
         err.should.equal('Not enough parameters');
         done();
       });
       stream.write(':irc.freenode.net 461 me WHOIS :Not enough parameters\r\n');
     });
-
   });
 });

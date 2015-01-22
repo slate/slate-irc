@@ -85,7 +85,7 @@ Client.prototype.__proto__ = Emitter.prototype;
  * @api public
  */
 
-Client.prototype.write = function(str, fn){
+Client.prototype.write = function(str, fn) {
   this.stream.write(str + '\r\n', fn);
 };
 
@@ -97,7 +97,7 @@ Client.prototype.write = function(str, fn){
  * @api public
  */
 
-Client.prototype.pass = function(pass, fn){
+Client.prototype.pass = function(pass, fn) {
   this.write('PASS ' + pass, fn);
 };
 
@@ -113,7 +113,7 @@ Client.prototype.pass = function(pass, fn){
  * @api public
  */
 
-Client.prototype.webirc = function(password, username, hostname, ip, fn){
+Client.prototype.webirc = function(password, username, hostname, ip, fn) {
   var message = [password, username, hostname, ip].join(" ");
   this.write('WEBIRC ' + message, fn);
 };
@@ -126,7 +126,7 @@ Client.prototype.webirc = function(password, username, hostname, ip, fn){
  * @api public
  */
 
-Client.prototype.nick = function(nick, fn){
+Client.prototype.nick = function(nick, fn) {
   this.write('NICK ' + nick, fn);
 };
 
@@ -139,7 +139,7 @@ Client.prototype.nick = function(nick, fn){
  * @api public
  */
 
-Client.prototype.user = function(username, realname, fn){
+Client.prototype.user = function(username, realname, fn) {
   this.write('USER ' + username + ' 0 * :' + realname, fn);
 };
 
@@ -152,7 +152,7 @@ Client.prototype.user = function(username, realname, fn){
  * @api public
  */
 
-Client.prototype.invite = function(name, channel, fn){
+Client.prototype.invite = function(name, channel, fn) {
   this.write('INVITE ' + name + ' ' + channel, fn);
 };
 
@@ -166,7 +166,7 @@ Client.prototype.invite = function(name, channel, fn){
  * @api public
  */
 
-Client.prototype.send = function(target, msg, fn){
+Client.prototype.send = function(target, msg, fn) {
   this.write('PRIVMSG ' + toArray(target).join(',') + ' :' + msg, fn);
 };
 
@@ -185,7 +185,7 @@ Client.prototype.send = function(target, msg, fn){
  * @api public
  */
 
-Client.prototype.action = function(target, msg, fn){
+Client.prototype.action = function(target, msg, fn) {
   this.send(target, '\u0001' + 'ACTION ' + msg + '\u0001', fn);
 };
 
@@ -199,7 +199,7 @@ Client.prototype.action = function(target, msg, fn){
  * @api public
  */
 
-Client.prototype.notice = function(target, msg, fn){
+Client.prototype.notice = function(target, msg, fn) {
   this.write('NOTICE ' + target + ' :' + msg, fn);
 };
 
@@ -213,7 +213,7 @@ Client.prototype.notice = function(target, msg, fn){
  * @api public
  */
 
-Client.prototype.ctcp = function(target, msg, fn){
+Client.prototype.ctcp = function(target, msg, fn) {
   this.notice(target, '\001' + msg + '\001', fn);
 }
 
@@ -226,7 +226,7 @@ Client.prototype.ctcp = function(target, msg, fn){
  * @api public
  */
 
-Client.prototype.join = function(channels, keys, fn){
+Client.prototype.join = function(channels, keys, fn) {
   if ('function' == typeof keys) {
     fn = keys;
     keys = '';
@@ -244,7 +244,7 @@ Client.prototype.join = function(channels, keys, fn){
  * @api public
  */
 
-Client.prototype.part = function(channels, msg, fn){
+Client.prototype.part = function(channels, msg, fn) {
   if ('function' == typeof msg) {
     fn = msg;
     msg = '';
@@ -262,7 +262,7 @@ Client.prototype.part = function(channels, msg, fn){
  * @api public
  */
 
-Client.prototype.topic = function(channel, topic, fn){
+Client.prototype.topic = function(channel, topic, fn) {
   if ('function' == typeof topic) {
     fn = topic;
     topic = '';
@@ -285,7 +285,7 @@ Client.prototype.topic = function(channel, topic, fn){
  * @api public
  */
 
-Client.prototype.kick = function(channels, nicks, msg, fn){
+Client.prototype.kick = function(channels, nicks, msg, fn) {
   if ('function' == typeof msg) {
     fn = msg;
     msg = '';
@@ -304,7 +304,7 @@ Client.prototype.kick = function(channels, nicks, msg, fn){
  * @api public
  */
 
-Client.prototype.quit = function(msg, fn){
+Client.prototype.quit = function(msg, fn) {
   msg = msg || 'Bye!';
   this.write('QUIT :' + msg, fn);
 };
@@ -321,7 +321,7 @@ Client.prototype.quit = function(msg, fn){
  * @api public
  */
 
-Client.prototype.oper = function(name, password, fn){
+Client.prototype.oper = function(name, password, fn) {
   this.write('OPER ' + name + ' ' + password, fn);
 };
 
@@ -335,7 +335,7 @@ Client.prototype.oper = function(name, password, fn){
  * @api public
  */
 
-Client.prototype.mode = function(target, flags, params, fn){
+Client.prototype.mode = function(target, flags, params, fn) {
   if ('function' === typeof params) {
     fn = params;
     params = '';
@@ -355,7 +355,7 @@ Client.prototype.mode = function(target, flags, params, fn){
  * @api public
  */
 
-Client.prototype.use = function(fn){
+Client.prototype.use = function(fn) {
   fn(this);
   return this;
 };
@@ -368,7 +368,7 @@ Client.prototype.use = function(fn){
  * @api private
  */
 
-Client.prototype.onmessage = function(msg){
+Client.prototype.onmessage = function(msg) {
   msg.command = replies[msg.command] || msg.command;
   debug('message %s %s', msg.command, msg.string);
   this.emit('data', msg);

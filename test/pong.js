@@ -1,17 +1,14 @@
-
-var irc = require('../..');
+var irc = require('..');
 var Stream = require('stream').PassThrough;
 
-describe('pong()', function(){
-  describe('on PING', function(){
-    it('should respond with PONG', function(done){
+describe('pong()', function() {
+  describe('on PING', function() {
+    it('should respond with PONG', function(done) {
       var stream = new Stream;
-      
       var client = irc(stream);
-
       var n = 0;
 
-      stream.on('data', function(chunk){
+      stream.on('data', function(chunk) {
         switch (n++) {
           case 0:
             chunk.should.equal('PING :rothfuss.freenode.net\r\n');
@@ -24,6 +21,6 @@ describe('pong()', function(){
       });
 
       stream.write('PING :rothfuss.freenode.net\r\n');
-    })
-  })
-})
+    });
+  });
+});
