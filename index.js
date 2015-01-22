@@ -41,12 +41,14 @@ module.exports = Client;
  * given duplex `stream`.
  *
  * @param {Stream} stream
+ * @param {Parser} [parser]
+ * @param {String} [encoding]
  * @api public
  */
 
-function Client(stream, parser) {
+function Client(stream, parser, encoding) {
   if (!(this instanceof Client)) return new Client(stream, parser);
-  stream.setEncoding('utf8');
+  stream.setEncoding(encoding || 'utf8');
   this.stream = stream;
   this.parser = parser || new Parser;
   this.parser.on('message', this.onmessage.bind(this));
