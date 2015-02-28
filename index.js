@@ -12,23 +12,23 @@ var replies = require('irc-replies');
  * Core plugins.
  */
 
-var welcome = require('./lib/plugins/welcome');
-var privmsg = require('./lib/plugins/privmsg');
-var notice = require('./lib/plugins/notice');
+var away = require('./lib/plugins/away');
+var errors = require('./lib/plugins/errors');
 var invite = require('./lib/plugins/invite');
-var topic = require('./lib/plugins/topic');
+var join = require('./lib/plugins/join');
+var kick = require('./lib/plugins/kick');
+var mode = require('./lib/plugins/mode');
+var motd = require('./lib/plugins/motd');
 var names = require('./lib/plugins/names');
 var nick = require('./lib/plugins/nick');
-var quit = require('./lib/plugins/quit');
-var away = require('./lib/plugins/away');
-var pong = require('./lib/plugins/pong');
-var join = require('./lib/plugins/join');
+var notice = require('./lib/plugins/notice');
 var part = require('./lib/plugins/part');
-var kick = require('./lib/plugins/kick');
+var pong = require('./lib/plugins/pong');
+var privmsg = require('./lib/plugins/privmsg');
+var quit = require('./lib/plugins/quit');
+var topic = require('./lib/plugins/topic');
+var welcome = require('./lib/plugins/welcome');
 var whois = require('./lib/plugins/whois');
-var motd = require('./lib/plugins/motd');
-var mode = require('./lib/plugins/mode');
-var errors = require('./lib/plugins/errors');
 
 /**
  * Expose `Client.`
@@ -54,23 +54,23 @@ function Client(stream, parser, encoding) {
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
   this.setMaxListeners(100);
-  this.use(welcome());
-  this.use(privmsg());
-  this.use(notice());
-  this.use(invite());
-  this.use(nick());
-  this.use(topic());
-  this.use(names());
   this.use(away());
-  this.use(quit());
-  this.use(join());
-  this.use(part());
-  this.use(kick());
-  this.use(pong());
-  this.use(whois());
-  this.use(motd());
-  this.use(mode());
   this.use(errors());
+  this.use(invite());
+  this.use(join());
+  this.use(kick());
+  this.use(mode());
+  this.use(motd());
+  this.use(names());
+  this.use(nick());
+  this.use(notice());
+  this.use(part());
+  this.use(pong());
+  this.use(privmsg());
+  this.use(quit());
+  this.use(topic());
+  this.use(welcome());
+  this.use(whois());
 }
 
 /**
