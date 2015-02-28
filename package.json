@@ -4,7 +4,7 @@
   "repository": "slate/slate-irc",
   "description": "Node.js IRC client library",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require should"
+    "test": "mocha --require should"
   },
   "keywords": [
     "irc",
