@@ -13,6 +13,7 @@ var replies = require('irc-replies');
  */
 
 var away = require('./lib/plugins/away');
+var disconnect = require('./lib/plugins/disconnect');
 var errors = require('./lib/plugins/errors');
 var invite = require('./lib/plugins/invite');
 var join = require('./lib/plugins/join');
@@ -55,6 +56,7 @@ function Client(stream, parser, encoding) {
   stream.pipe(this.parser);
   this.setMaxListeners(100);
   this.use(away());
+  this.use(disconnect());
   this.use(errors());
   this.use(invite());
   this.use(join());
