@@ -117,6 +117,10 @@ List names of users in `channel`, calling `callback` with `(error, names)`.
 
 Set the user's away message to `message`.
 
+### .back()
+
+Remove user's away message.
+
 ### .topic(channel, topic)
 
 Get channel topic or set the topic to `topic`.
