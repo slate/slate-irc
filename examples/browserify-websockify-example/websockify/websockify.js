@@ -195,7 +195,6 @@ function destroy() {
   console.log('CLEAN UP');
   // This code is wrong.
   webServer.close();
-  new_client.close();
   server.close();
   process.exit()
 }
