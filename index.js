@@ -12,7 +12,9 @@ var replies = require('irc-replies');
  * Core plugins.
  */
 
+var authenticate = require('./lib/plugins/authenticate');
 var away = require('./lib/plugins/away');
+var cap = require('./lib/plugins/cap');
 var disconnect = require('./lib/plugins/disconnect');
 var errors = require('./lib/plugins/errors');
 var invite = require('./lib/plugins/invite');
@@ -27,6 +29,8 @@ var part = require('./lib/plugins/part');
 var pong = require('./lib/plugins/pong');
 var privmsg = require('./lib/plugins/privmsg');
 var quit = require('./lib/plugins/quit');
+var rplloggedin = require('./lib/plugins/rplloggedin');
+var rplsaslsuccess = require('./lib/plugins/rplsaslsuccess');
 var topic = require('./lib/plugins/topic');
 var welcome = require('./lib/plugins/welcome');
 var whois = require('./lib/plugins/whois');
@@ -55,7 +59,9 @@ function Client(stream, parser, encoding) {
   this.parser.on('message', this.onmessage.bind(this));
   stream.pipe(this.parser);
   this.setMaxListeners(100);
+  this.use(authenticate());
   this.use(away());
+  this.use(cap());
   this.use(disconnect());
   this.use(errors());
   this.use(invite());
@@ -70,6 +76,8 @@ function Client(stream, parser, encoding) {
   this.use(pong());
   this.use(privmsg());
   this.use(quit());
+  this.use(rplloggedin());
+  this.use(rplsaslsuccess());
   this.use(topic());
   this.use(welcome());
   this.use(whois());
@@ -88,9 +96,51 @@ Client.prototype.__proto__ = Emitter.prototype;
  * @param {Function} [fn]
  * @api public
  */
-
 Client.prototype.write = function(str, fn) {
+  debug('write %s', str);
   this.stream.write(str + '\r\n', fn);
+};
+
+/**
+ * CAP REQ <reqs>
+ *
+ * @param {String} reqs
+ * @api public
+ */
+Client.prototype.cap_req = function(reqs) {
+    this.write('CAP REQ :' + reqs);
+};
+
+/**
+ * CAP END
+ *
+ * @api public
+ */
+Client.prototype.cap_end = function() {
+    this.write('CAP END');
+};
+
+/**
+ * AUTHENTICATE <msg>
+ *
+ * @param {String} msg
+ * @api public
+ */
+Client.prototype.authenticate = function(msg) {
+    this.write('AUTHENTICATE ' + msg)
+};
+
+/**
+ * AUTHENTICATE base64(<username>\0<username>\0<password>)
+ *
+ * @param {String} username
+ * @param {String} password
+ * @api public
+ */
+Client.prototype.authenticate64 = function(username, password) {
+    var b = new Buffer(username + "\0" + username + "\0" + password, 'utf8');
+    var b64 = b.toString('base64');
+    this.write('AUTHENTICATE ' + b64)
 };
 
 /**
