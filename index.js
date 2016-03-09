@@ -264,6 +264,30 @@ Client.prototype.part = function(channels, msg, fn) {
 };
 
 /**
+ * Set the user's away message
+ *
+ * @param {String} [msg = 'Talk to you later!']
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.away = function(msg, fn) {
+    msg = msg || 'Talk to you later!';
+    this.write('AWAY :' + msg, fn);
+};
+
+/**
+ * Remove user's away message
+ *
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.back = function(fn) {
+    this.write('AWAY', fn);
+};
+
+/**
  * Get channel topic or set the topic to `topic`.
  *
  * @param {String} channel
