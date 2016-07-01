@@ -2,7 +2,7 @@
   "name": "slate-irc",
   "version": "0.8.1",
   "repository": "slate/slate-irc",
-  "description": "Node.js IRC client library",
+  "description": "General purpose IRC client",
   "scripts": {
     "test": "mocha --require should"
   },
