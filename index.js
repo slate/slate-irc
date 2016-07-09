@@ -82,6 +82,18 @@ function Client(stream, parser, encoding) {
 Client.prototype.__proto__ = Emitter.prototype;
 
 /**
+ * Write `str` without checking for '\r' or '\n' and invoke `fn(err)`.
+ *
+ * @param {String} str
+ * @param {Function} [fn]
+ * @api public
+ */
+
+Client.prototype.writeUnsafe = function(str, fn) {
+  this.stream.write(str + '\r\n', fn);
+};
+
+/**
  * Write `str` and invoke `fn(err)`.
  *
  * @param {String} str
@@ -90,7 +102,11 @@ Client.prototype.__proto__ = Emitter.prototype;
  */
 
 Client.prototype.write = function(str, fn) {
-  this.stream.write(str + '\r\n', fn);
+  if (str.indexOf('\n') != -1 || str.indexOf('\r') != -1) {
+    fn && fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
+    return;
+  }
+  this.writeUnsafe(str, fn);
 };
 
 /**
