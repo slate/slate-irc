@@ -1,3 +1,11 @@
+0.9.0 / 2016-07-10
+========
+- New project maintainer, **[@simnalamburt](https://github.com/slate/slate-irc/issues/40)**
+- Fixed serious security issue; [cross IRC scripting vulnerability](https://github.com/slate/slate-irc/pull/43)
+- [Enabled Travis CI](https://github.com/slate/slate-irc/pull/41)
+- Updated dependnecies
+- Misc. project cleanup
+
 0.8.1 / 2015-01-22
 --------
 - add optional stream encoding
