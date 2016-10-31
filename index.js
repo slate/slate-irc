@@ -48,7 +48,7 @@ module.exports = Client;
  */
 
 function Client(stream, parser, encoding) {
-  if (!(this instanceof Client)) return new Client(stream, parser);
+  if (!(this instanceof Client)) return new Client(stream, parser, encoding);
   stream.setEncoding(encoding || 'utf8');
   this.stream = stream;
   this.parser = parser || new Parser;
