@@ -123,7 +123,7 @@ Client.prototype.pass = function(pass, fn) {
 
 /**
  * WEBIRC <password> <username> <hostname> <ip>
- * See http://irc-wiki.org/WebIRC
+ * See https://www.irc.wiki/WebIRC
  *
  * @param {String} password
  * @param {String} username
