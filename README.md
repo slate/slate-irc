@@ -7,31 +7,25 @@ General purpose IRC client for nodejs. See [documentation] for the details.
 - Arbitrary input stream
 - **[DEBUG]** support for easy debugging
 
-[DEBUG]: https://github.com/visionmedia/debug
-[documentation]: docs.md
-
-```bash
-$ npm install --save slate-irc
-```
 ```js
-var irc = require('slate-irc');
-var net = require('net');
+const irc = require('slate-irc')
+const net = require('net')
 
-var stream = net.connect({
+const stream = net.connect({
   port: 6667,
   host: 'irc.freenode.org'
-});
+})
 
-var client = irc(stream);
+const client = irc(stream)
 
-client.pass('pass');
-client.nick('tobi');
-client.user('tobi', 'Tobi Ferret');
+client.pass('pass')
+client.nick('tobi')
+client.user('tobi', 'Tobi Ferret')
 
-client.join('#express');
-client.names('#express', function(err, names){
-  console.log(names);
-});
+client.join('#express')
+client.names('#express', (err, names) => {
+  console.log(names)
+})
 ```
 
 --------
@@ -43,3 +37,6 @@ MIT License
 
 [npm]: https://npmjs.org/package/slate-irc
 [travis]: https://travis-ci.org/slate/slate-irc
+
+[DEBUG]: https://github.com/visionmedia/debug
+[documentation]: docs.md
