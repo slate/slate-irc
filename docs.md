@@ -18,7 +18,7 @@ Documentation
 - `invite` (event) on __INVITE__
 - `names` (event) on __RPL_NAMREPLY__
 - `topic` (event) on __TOPIC__
-- `away` (event) on __RPL_AWAY__
+- `away` (event) on __RPL_AWAY__, __RPL_NOWAWAY__, __RPL_UNAWAY__
 - `quit` (event) on __QUIT__
 - `join` (event) on __JOIN__
 - `part` (event) on __PART__
@@ -73,6 +73,9 @@ List names of users in `channel`, calling `callback` with `(error, names)`.
 
 #### .away(message)
 Set the user's away message to `message`.
+
+#### .back()
+Remove user's away message.
 
 #### .topic(channel, topic)
 Get channel topic or set the topic to `topic`.
