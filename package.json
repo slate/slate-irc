@@ -7,8 +7,16 @@
     "client",
     "chat"
   ],
-  "repository": "slate/slate-irc",
+  "homepage": "https://github.com/slate/slate-irc",
+  "bugs": {
+    "url": "https://github.com/slate/slate-irc/issues"
+  },
   "license": "MIT",
+  "contributors": [
+    "TJ Holowaychuk <tj@apex.sh>",
+    "Hyeon Kim <simnalamburt@gmail.com> (https://hyeon.me)"
+  ],
+  "repository": "slate/slate-irc",
   "dependencies": {
     "debug": "^4.2.0",
     "slate-irc-parser": "^0.1.2"
