@@ -238,7 +238,7 @@ Client.prototype.notice = function (target, msg, fn) {
  */
 
 Client.prototype.ctcp = function (target, msg, fn) {
-  this.notice(target, '\001' + msg + '\001', fn)
+  this.notice(target, '\x01' + msg + '\x01', fn)
 }
 
 /**
