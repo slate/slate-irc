@@ -1,27 +1,27 @@
-var irc = require('slate-irc');
-var net = require('net');
+var irc = require('slate-irc')
+var net = require('net')
 
 var stream = net.connect({
   port: 6667,
-  host: 'irc.freenode.org'
-});
+  host: 'irc.freenode.org',
+})
 
-var client = irc(stream);
+var client = irc(stream)
 
-client.use(logger());
+client.use(logger())
 
-client.pass('pass');
-client.nick('tobi');
-client.user('tobi', 'Tobi Ferret');
+client.pass('pass')
+client.nick('tobi')
+client.user('tobi', 'Tobi Ferret')
 
-client.join('#luna-lang');
-client.names('#luna-lang', function(err, names){
-  if (err) throw err;
-  console.log(names);
-});
+client.join('#luna-lang')
+client.names('#luna-lang', function (err, names) {
+  if (err) throw err
+  console.log(names)
+})
 
 function logger() {
-  return function(irc){
-    irc.stream.pipe(process.stdout);
+  return function (irc) {
+    irc.stream.pipe(process.stdout)
   }
 }

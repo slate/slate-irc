@@ -1,41 +1,40 @@
-
 /**
  * Module dependencies.
  */
 
-var Emitter = require('events').EventEmitter;
-var debug = require('debug')('slate-irc');
-var Parser = require('slate-irc-parser');
-var replies = require('irc-replies');
+var Emitter = require('events').EventEmitter
+var debug = require('debug')('slate-irc')
+var Parser = require('slate-irc-parser')
+var replies = require('irc-replies')
 
 /**
  * Core plugins.
  */
 
-var away = require('./lib/plugins/away');
-var disconnect = require('./lib/plugins/disconnect');
-var errors = require('./lib/plugins/errors');
-var invite = require('./lib/plugins/invite');
-var join = require('./lib/plugins/join');
-var kick = require('./lib/plugins/kick');
-var mode = require('./lib/plugins/mode');
-var motd = require('./lib/plugins/motd');
-var names = require('./lib/plugins/names');
-var nick = require('./lib/plugins/nick');
-var notice = require('./lib/plugins/notice');
-var part = require('./lib/plugins/part');
-var pong = require('./lib/plugins/pong');
-var privmsg = require('./lib/plugins/privmsg');
-var quit = require('./lib/plugins/quit');
-var topic = require('./lib/plugins/topic');
-var welcome = require('./lib/plugins/welcome');
-var whois = require('./lib/plugins/whois');
+var away = require('./lib/plugins/away')
+var disconnect = require('./lib/plugins/disconnect')
+var errors = require('./lib/plugins/errors')
+var invite = require('./lib/plugins/invite')
+var join = require('./lib/plugins/join')
+var kick = require('./lib/plugins/kick')
+var mode = require('./lib/plugins/mode')
+var motd = require('./lib/plugins/motd')
+var names = require('./lib/plugins/names')
+var nick = require('./lib/plugins/nick')
+var notice = require('./lib/plugins/notice')
+var part = require('./lib/plugins/part')
+var pong = require('./lib/plugins/pong')
+var privmsg = require('./lib/plugins/privmsg')
+var quit = require('./lib/plugins/quit')
+var topic = require('./lib/plugins/topic')
+var welcome = require('./lib/plugins/welcome')
+var whois = require('./lib/plugins/whois')
 
 /**
  * Expose `Client.`
  */
 
-module.exports = Client;
+module.exports = Client
 
 /**
  * Initialize a new IRC client with the
@@ -48,38 +47,38 @@ module.exports = Client;
  */
 
 function Client(stream, parser, encoding) {
-  if (!(this instanceof Client)) return new Client(stream, parser, encoding);
-  stream.setEncoding(encoding || 'utf8');
-  this.stream = stream;
-  this.parser = parser || new Parser;
-  this.parser.on('message', this.onmessage.bind(this));
-  stream.pipe(this.parser);
-  this.setMaxListeners(100);
-  this.use(away());
-  this.use(disconnect());
-  this.use(errors());
-  this.use(invite());
-  this.use(join());
-  this.use(kick());
-  this.use(mode());
-  this.use(motd());
-  this.use(names());
-  this.use(nick());
-  this.use(notice());
-  this.use(part());
-  this.use(pong());
-  this.use(privmsg());
-  this.use(quit());
-  this.use(topic());
-  this.use(welcome());
-  this.use(whois());
+  if (!(this instanceof Client)) return new Client(stream, parser, encoding)
+  stream.setEncoding(encoding || 'utf8')
+  this.stream = stream
+  this.parser = parser || new Parser()
+  this.parser.on('message', this.onmessage.bind(this))
+  stream.pipe(this.parser)
+  this.setMaxListeners(100)
+  this.use(away())
+  this.use(disconnect())
+  this.use(errors())
+  this.use(invite())
+  this.use(join())
+  this.use(kick())
+  this.use(mode())
+  this.use(motd())
+  this.use(names())
+  this.use(nick())
+  this.use(notice())
+  this.use(part())
+  this.use(pong())
+  this.use(privmsg())
+  this.use(quit())
+  this.use(topic())
+  this.use(welcome())
+  this.use(whois())
 }
 
 /**
  * Inherit from `Emitter.prototype`.
  */
 
-Client.prototype.__proto__ = Emitter.prototype;
+Client.prototype.__proto__ = Emitter.prototype
 
 /**
  * Write `str` without checking for '\r' or '\n' and invoke `fn(err)`.
@@ -89,9 +88,9 @@ Client.prototype.__proto__ = Emitter.prototype;
  * @api public
  */
 
-Client.prototype.writeUnsafe = function(str, fn) {
-  this.stream.write(str + '\r\n', fn);
-};
+Client.prototype.writeUnsafe = function (str, fn) {
+  this.stream.write(str + '\r\n', fn)
+}
 
 /**
  * Write `str` and invoke `fn(err)`.
@@ -101,13 +100,18 @@ Client.prototype.writeUnsafe = function(str, fn) {
  * @api public
  */
 
-Client.prototype.write = function(str, fn) {
+Client.prototype.write = function (str, fn) {
   if (str.indexOf('\n') != -1 || str.indexOf('\r') != -1) {
-    fn && fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
-    return;
+    fn &&
+      fn(
+        new Error(
+          "The parameter to write() must not contain any '\\n' or '\\r'."
+        )
+      )
+    return
   }
-  this.writeUnsafe(str, fn);
-};
+  this.writeUnsafe(str, fn)
+}
 
 /**
  * PASS <pass>
@@ -117,9 +121,9 @@ Client.prototype.write = function(str, fn) {
  * @api public
  */
 
-Client.prototype.pass = function(pass, fn) {
-  this.write('PASS ' + pass, fn);
-};
+Client.prototype.pass = function (pass, fn) {
+  this.write('PASS ' + pass, fn)
+}
 
 /**
  * WEBIRC <password> <username> <hostname> <ip>
@@ -133,10 +137,10 @@ Client.prototype.pass = function(pass, fn) {
  * @api public
  */
 
-Client.prototype.webirc = function(password, username, hostname, ip, fn) {
-  var message = [password, username, hostname, ip].join(" ");
-  this.write('WEBIRC ' + message, fn);
-};
+Client.prototype.webirc = function (password, username, hostname, ip, fn) {
+  var message = [password, username, hostname, ip].join(' ')
+  this.write('WEBIRC ' + message, fn)
+}
 
 /**
  * NICK <nick>
@@ -146,9 +150,9 @@ Client.prototype.webirc = function(password, username, hostname, ip, fn) {
  * @api public
  */
 
-Client.prototype.nick = function(nick, fn) {
-  this.write('NICK ' + nick, fn);
-};
+Client.prototype.nick = function (nick, fn) {
+  this.write('NICK ' + nick, fn)
+}
 
 /**
  * USER <username> <realname>
@@ -159,9 +163,9 @@ Client.prototype.nick = function(nick, fn) {
  * @api public
  */
 
-Client.prototype.user = function(username, realname, fn) {
-  this.write('USER ' + username + ' 0 * :' + realname, fn);
-};
+Client.prototype.user = function (username, realname, fn) {
+  this.write('USER ' + username + ' 0 * :' + realname, fn)
+}
 
 /**
  * Send an invite to `name`, for a `channel`.
@@ -172,9 +176,9 @@ Client.prototype.user = function(username, realname, fn) {
  * @api public
  */
 
-Client.prototype.invite = function(name, channel, fn) {
-  this.write('INVITE ' + name + ' ' + channel, fn);
-};
+Client.prototype.invite = function (name, channel, fn) {
+  this.write('INVITE ' + name + ' ' + channel, fn)
+}
 
 /**
  * Send `msg` to `target`, where `target`
@@ -186,9 +190,9 @@ Client.prototype.invite = function(name, channel, fn) {
  * @api public
  */
 
-Client.prototype.send = function(target, msg, fn) {
-  this.write('PRIVMSG ' + toArray(target).join(',') + ' :' + msg, fn);
-};
+Client.prototype.send = function (target, msg, fn) {
+  this.write('PRIVMSG ' + toArray(target).join(',') + ' :' + msg, fn)
+}
 
 /**
  * Send `msg` to `target` as an ACTION, where `target`
@@ -205,9 +209,9 @@ Client.prototype.send = function(target, msg, fn) {
  * @api public
  */
 
-Client.prototype.action = function(target, msg, fn) {
-  this.send(target, '\u0001' + 'ACTION ' + msg + '\u0001', fn);
-};
+Client.prototype.action = function (target, msg, fn) {
+  this.send(target, '\u0001' + 'ACTION ' + msg + '\u0001', fn)
+}
 
 /**
  * Send `msg` to `target` as a NOTICE, where `target`
@@ -219,9 +223,9 @@ Client.prototype.action = function(target, msg, fn) {
  * @api public
  */
 
-Client.prototype.notice = function(target, msg, fn) {
-  this.write('NOTICE ' + target + ' :' + msg, fn);
-};
+Client.prototype.notice = function (target, msg, fn) {
+  this.write('NOTICE ' + target + ' :' + msg, fn)
+}
 
 /**
  * Send `msg` to `target` as a CTCP notice, where `target`
@@ -233,8 +237,8 @@ Client.prototype.notice = function(target, msg, fn) {
  * @api public
  */
 
-Client.prototype.ctcp = function(target, msg, fn) {
-  this.notice(target, '\001' + msg + '\001', fn);
+Client.prototype.ctcp = function (target, msg, fn) {
+  this.notice(target, '\001' + msg + '\001', fn)
 }
 
 /**
@@ -246,14 +250,17 @@ Client.prototype.ctcp = function(target, msg, fn) {
  * @api public
  */
 
-Client.prototype.join = function(channels, keys, fn) {
+Client.prototype.join = function (channels, keys, fn) {
   if ('function' == typeof keys) {
-    fn = keys;
-    keys = '';
+    fn = keys
+    keys = ''
   }
 
-  this.write('JOIN ' + toArray(channels).join(',') + ' ' + toArray(keys).join(','), fn);
-};
+  this.write(
+    'JOIN ' + toArray(channels).join(',') + ' ' + toArray(keys).join(','),
+    fn
+  )
+}
 
 /**
  * Leave channel(s) with optional `msg`.
@@ -264,20 +271,20 @@ Client.prototype.join = function(channels, keys, fn) {
  * @api public
  */
 
-Client.prototype.part = function(channels, msg, fn) {
+Client.prototype.part = function (channels, msg, fn) {
   if ('function' == typeof msg) {
-    fn = msg;
-    msg = '';
+    fn = msg
+    msg = ''
   }
 
-  var part = 'PART ' + toArray(channels).join(',');
+  var part = 'PART ' + toArray(channels).join(',')
 
   if (msg) {
-    part += ' :' + msg;
+    part += ' :' + msg
   }
 
-  this.write(part, fn);
-};
+  this.write(part, fn)
+}
 
 /**
  * Set the user's away message
@@ -287,10 +294,10 @@ Client.prototype.part = function(channels, msg, fn) {
  * @api public
  */
 
-Client.prototype.away = function(msg, fn) {
-    msg = msg || 'Talk to you later!';
-    this.write('AWAY :' + msg, fn);
-};
+Client.prototype.away = function (msg, fn) {
+  msg = msg || 'Talk to you later!'
+  this.write('AWAY :' + msg, fn)
+}
 
 /**
  * Remove user's away message
@@ -299,9 +306,9 @@ Client.prototype.away = function(msg, fn) {
  * @api public
  */
 
-Client.prototype.back = function(fn) {
-    this.write('AWAY', fn);
-};
+Client.prototype.back = function (fn) {
+  this.write('AWAY', fn)
+}
 
 /**
  * Get channel topic or set the topic to `topic`.
@@ -312,18 +319,18 @@ Client.prototype.back = function(fn) {
  * @api public
  */
 
-Client.prototype.topic = function(channel, topic, fn) {
+Client.prototype.topic = function (channel, topic, fn) {
   if ('function' == typeof topic) {
-    fn = topic;
-    topic = '';
+    fn = topic
+    topic = ''
   }
 
   if (topic) {
-    topic = ' :' + topic;
+    topic = ' :' + topic
   }
 
-  this.write('TOPIC ' + channel + topic, fn);
-};
+  this.write('TOPIC ' + channel + topic, fn)
+}
 
 /**
  * Kick nick(s) from channel(s) with optional `msg`.
@@ -335,20 +342,21 @@ Client.prototype.topic = function(channel, topic, fn) {
  * @api public
  */
 
-Client.prototype.kick = function(channels, nicks, msg, fn) {
+Client.prototype.kick = function (channels, nicks, msg, fn) {
   if ('function' == typeof msg) {
-    fn = msg;
-    msg = '';
+    fn = msg
+    msg = ''
   }
 
-  var kick = 'KICK ' + toArray(channels).join(',') + ' ' + toArray(nicks).join(',');
+  var kick =
+    'KICK ' + toArray(channels).join(',') + ' ' + toArray(nicks).join(',')
 
   if (msg) {
-    kick += ' :' + msg;
+    kick += ' :' + msg
   }
 
-  this.write(kick, fn);
-};
+  this.write(kick, fn)
+}
 
 /**
  * Disconnect from the server with `msg`.
@@ -358,10 +366,10 @@ Client.prototype.kick = function(channels, nicks, msg, fn) {
  * @api public
  */
 
-Client.prototype.quit = function(msg, fn) {
-  msg = msg || 'Bye!';
-  this.write('QUIT :' + msg, fn);
-};
+Client.prototype.quit = function (msg, fn) {
+  msg = msg || 'Bye!'
+  this.write('QUIT :' + msg, fn)
+}
 
 /**
  * Used to obtain operator privileges.
@@ -375,9 +383,9 @@ Client.prototype.quit = function(msg, fn) {
  * @api public
  */
 
-Client.prototype.oper = function(name, password, fn) {
-  this.write('OPER ' + name + ' ' + password, fn);
-};
+Client.prototype.oper = function (name, password, fn) {
+  this.write('OPER ' + name + ' ' + password, fn)
+}
 
 /**
  * Used to set a user's mode or channel's mode for a user;
@@ -389,17 +397,17 @@ Client.prototype.oper = function(name, password, fn) {
  * @api public
  */
 
-Client.prototype.mode = function(target, flags, params, fn) {
+Client.prototype.mode = function (target, flags, params, fn) {
   if ('function' === typeof params) {
-    fn = params;
-    params = '';
+    fn = params
+    params = ''
   }
   if (params) {
-    this.write('MODE ' + target + ' ' + flags + ' ' + params, fn);
+    this.write('MODE ' + target + ' ' + flags + ' ' + params, fn)
   } else {
-    this.write('MODE ' + target + ' ' + flags, fn);
+    this.write('MODE ' + target + ' ' + flags, fn)
   }
-};
+}
 
 /**
  * Use the given plugin `fn`.
@@ -409,10 +417,10 @@ Client.prototype.mode = function(target, flags, params, fn) {
  * @api public
  */
 
-Client.prototype.use = function(fn) {
-  fn(this);
-  return this;
-};
+Client.prototype.use = function (fn) {
+  fn(this)
+  return this
+}
 
 /**
  * Handle messages.
@@ -422,16 +430,16 @@ Client.prototype.use = function(fn) {
  * @api private
  */
 
-Client.prototype.onmessage = function(msg) {
-  msg.command = replies[msg.command] || msg.command;
-  debug('message %s %s', msg.command, msg.string);
-  this.emit('data', msg);
-};
+Client.prototype.onmessage = function (msg) {
+  msg.command = replies[msg.command] || msg.command
+  debug('message %s %s', msg.command, msg.string)
+  this.emit('data', msg)
+}
 
 /**
  * Array helper.
  */
 
 function toArray(val) {
-  return Array.isArray(val) ? val : [val];
+  return Array.isArray(val) ? val : [val]
 }
