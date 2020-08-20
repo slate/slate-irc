@@ -11,10 +11,10 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^4.2.0",
-    "irc-replies": "^2.0.1",
     "slate-irc-parser": "^0.1.2"
   },
   "devDependencies": {
+    "irc-replies": "^2.0.1",
     "microbundle": "^0.12.3",
     "mocha": "^8.1.1",
     "prettier": "^2.0.5",
