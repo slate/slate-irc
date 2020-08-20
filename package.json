@@ -12,9 +12,9 @@
     "chat"
   ],
   "dependencies": {
+    "debug": "^2.2.0",
     "irc-replies": "^2.0.1",
-    "slate-irc-parser": "^0.1.0",
-    "debug": "^2.2.0"
+    "slate-irc-parser": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
