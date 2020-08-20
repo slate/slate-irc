@@ -2,39 +2,35 @@
  * Module dependencies.
  */
 
-var Emitter = require('events').EventEmitter
-var debug = require('debug')('slate-irc')
-var Parser = require('slate-irc-parser')
-var replies = require('irc-replies')
+import { EventEmitter as Emitter } from 'events'
+import debugModule from 'debug'
+import Parser from 'slate-irc-parser'
+import replies from 'irc-replies'
+
+const debug = debugModule('slate-irc')
 
 /**
  * Core plugins.
  */
 
-var away = require('./lib/plugins/away')
-var disconnect = require('./lib/plugins/disconnect')
-var errors = require('./lib/plugins/errors')
-var invite = require('./lib/plugins/invite')
-var join = require('./lib/plugins/join')
-var kick = require('./lib/plugins/kick')
-var mode = require('./lib/plugins/mode')
-var motd = require('./lib/plugins/motd')
-var names = require('./lib/plugins/names')
-var nick = require('./lib/plugins/nick')
-var notice = require('./lib/plugins/notice')
-var part = require('./lib/plugins/part')
-var pong = require('./lib/plugins/pong')
-var privmsg = require('./lib/plugins/privmsg')
-var quit = require('./lib/plugins/quit')
-var topic = require('./lib/plugins/topic')
-var welcome = require('./lib/plugins/welcome')
-var whois = require('./lib/plugins/whois')
-
-/**
- * Expose `Client.`
- */
-
-module.exports = Client
+import away from './lib/plugins/away'
+import disconnect from './lib/plugins/disconnect'
+import errors from './lib/plugins/errors'
+import invite from './lib/plugins/invite'
+import join from './lib/plugins/join'
+import kick from './lib/plugins/kick'
+import mode from './lib/plugins/mode'
+import motd from './lib/plugins/motd'
+import names from './lib/plugins/names'
+import nick from './lib/plugins/nick'
+import notice from './lib/plugins/notice'
+import part from './lib/plugins/part'
+import pong from './lib/plugins/pong'
+import privmsg from './lib/plugins/privmsg'
+import quit from './lib/plugins/quit'
+import topic from './lib/plugins/topic'
+import welcome from './lib/plugins/welcome'
+import whois from './lib/plugins/whois'
 
 /**
  * Initialize a new IRC client with the
@@ -46,7 +42,7 @@ module.exports = Client
  * @api public
  */
 
-function Client(stream, parser, encoding) {
+export default function Client(stream, parser, encoding) {
   if (!(this instanceof Client)) return new Client(stream, parser, encoding)
   stream.setEncoding(encoding || 'utf8')
   this.stream = stream
