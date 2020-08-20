@@ -1,15 +1,19 @@
-slate-irc [![Version]][npm]
+slate-irc [![version] ![downloads]][npm]
 ========
-General purpose IRC client for nodejs. See [documentation] for the details.
+General purpose IRC client for nodejs. See **[documentation]** for the details.
 
 - Plugin system
 - Simple api
 - Arbitrary input stream
 - **[DEBUG]** support for easy debugging
 
+```bash
+npm install --save slate-irc-parser
+yarn add -D slate-irc-parser
+```
 ```js
-const irc = require('slate-irc')
-const net = require('net')
+import irc from 'slate-irc'
+import net from 'net'
 
 const stream = net.connect({
   port: 6667,
@@ -32,9 +36,9 @@ client.names('#express', (err, names) => {
 
 MIT License
 
-[Version]: https://img.shields.io/npm/v/slate-irc.svg
-
+[version]: https://badgen.net/npm/v/slate-irc
+[downloads]: https://badgen.net/npm/dt/slate-irc
 [npm]: https://npmjs.org/package/slate-irc
 
-[DEBUG]: https://github.com/visionmedia/debug
 [documentation]: docs.md
+[DEBUG]: https://github.com/visionmedia/debug
