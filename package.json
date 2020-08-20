@@ -13,14 +13,14 @@
     "chat"
   ],
   "dependencies": {
-    "debug": "^2.2.0",
+    "debug": "^4.2.0",
     "irc-replies": "^2.0.1",
-    "slate-irc-parser": "^0.1.0"
+    "slate-irc-parser": "^0.1.1"
   },
   "devDependencies": {
-    "mocha": "^2.4.5",
+    "mocha": "^8.1.1",
     "prettier": "^2.0.5",
-    "should": "^8.3.1"
+    "should": "^13.2.3"
   },
   "license": "MIT",
   "prettier": {
