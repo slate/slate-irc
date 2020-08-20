@@ -4,7 +4,8 @@
   "repository": "slate/slate-irc",
   "description": "General purpose IRC client",
   "scripts": {
-    "test": "mocha --require should"
+    "test": "mocha --require should && prettier --check .",
+    "fmt": "prettier --write ."
   },
   "keywords": [
     "irc",
@@ -18,7 +19,12 @@
   },
   "devDependencies": {
     "mocha": "^2.4.5",
+    "prettier": "^2.0.5",
     "should": "^8.3.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
 }

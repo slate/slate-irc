@@ -178,6 +178,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "prettier@npm:2.0.5"
+  bin:
+    prettier: bin-prettier.js
+  checksum: d249d89361870a29b20e8b268cb09e908490b8c9e21f70393d12a213701f29ba7e95b7f9ce0ad63929c16ce475176742481911737ae3da4a498873e4a3b90990
+  languageName: node
+  linkType: hard
+
 "should-equal@npm:0.8.0":
   version: 0.8.0
   resolution: "should-equal@npm:0.8.0"
@@ -238,6 +247,7 @@ __metadata:
     debug: ^2.2.0
     irc-replies: ^2.0.1
     mocha: ^2.4.5
+    prettier: ^2.0.5
     should: ^8.3.1
     slate-irc-parser: ^0.1.0
   languageName: unknown
