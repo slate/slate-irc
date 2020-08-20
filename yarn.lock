@@ -2231,7 +2231,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.2.0":
+"debug@npm:^4.1.0, debug@npm:^4.2.0":
   version: 4.2.0
   resolution: "debug@npm:4.2.0"
   dependencies:
@@ -5133,13 +5133,13 @@ resolve@1.12.0:
   languageName: node
   linkType: hard
 
-"slate-irc-parser@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "slate-irc-parser@npm:0.1.1"
+"slate-irc-parser@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "slate-irc-parser@npm:0.1.2"
   dependencies:
-    debug: ^4.1.1
+    debug: ^4.2.0
     linewise: 0.0.3
-  checksum: 691702c24d85336816ba95a6d76e62e9805fd9eb8e495716f0584c507fbac67f9b7caf9cf3950cbdc0624cc853f89c7cb615fb67635a7fa2d6310a4780df6b71
+  checksum: 8dd94231c89e38e68477e82396d9be4cf35f10410291172ee5c141697e91986c6152375cc8323b02e2637568f092571d2c108f702d829c007c43345fd3d41eb6
   languageName: node
   linkType: hard
 
@@ -5153,7 +5153,7 @@ resolve@1.12.0:
     mocha: ^8.1.1
     prettier: ^2.0.5
     should: ^13.2.3
-    slate-irc-parser: ^0.1.1
+    slate-irc-parser: ^0.1.2
   languageName: unknown
   linkType: soft
 
