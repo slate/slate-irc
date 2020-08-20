@@ -5,3 +5,6 @@
 
 # Markdowns
 *.md
+
+# microbundle
+/dist/

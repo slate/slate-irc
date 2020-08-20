@@ -5,3 +5,6 @@
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# microbundle
+/dist/

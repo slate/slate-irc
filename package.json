@@ -1,28 +1,36 @@
 {
   "name": "slate-irc",
   "version": "0.9.0",
-  "repository": "slate/slate-irc",
   "description": "General purpose IRC client",
-  "scripts": {
-    "test": "mocha --require should && prettier --check .",
-    "fmt": "prettier --write ."
-  },
   "keywords": [
     "irc",
     "client",
     "chat"
   ],
+  "repository": "slate/slate-irc",
+  "license": "MIT",
   "dependencies": {
     "debug": "^4.2.0",
     "irc-replies": "^2.0.1",
     "slate-irc-parser": "^0.1.1"
   },
   "devDependencies": {
+    "microbundle": "^0.12.3",
     "mocha": "^8.1.1",
     "prettier": "^2.0.5",
     "should": "^13.2.3"
   },
-  "license": "MIT",
+  "scripts": {
+    "build": "microbundle -f cjs,modern --target node --compress",
+    "dev": "microbundle -f cjs,modern --target node --compress watch",
+    "test": "mocha --require should && prettier --check .",
+    "fmt": "prettier --write ."
+  },
+  "main": "dist/slate-irc.js",
+  "module": "dist/slate-irc.modern.js",
+  "files": [
+    "dist/*"
+  ],
   "prettier": {
     "semi": false,
     "singleQuote": true
