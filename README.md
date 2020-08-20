@@ -1,4 +1,4 @@
-slate-irc [![Build Status]][travis] [![Version]][npm]
+slate-irc [![Version]][npm]
 ========
 General purpose IRC client for nodejs. See [documentation] for the details.
 
@@ -33,10 +33,8 @@ client.names('#express', (err, names) => {
 MIT License
 
 [Version]: https://img.shields.io/npm/v/slate-irc.svg
-[Build Status]: https://travis-ci.org/slate/slate-irc.svg?branch=master
 
 [npm]: https://npmjs.org/package/slate-irc
-[travis]: https://travis-ci.org/slate/slate-irc
 
 [DEBUG]: https://github.com/visionmedia/debug
 [documentation]: docs.md
