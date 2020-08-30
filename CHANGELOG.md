@@ -1,5 +1,5 @@
 0.9.1 / 2020-08-21
-========
+--------
 - Build packages with [microbundle](https://github.com/developit/microbundle)
 - Refactored a few codes in modern js
 - Updated dependencies
