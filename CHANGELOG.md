@@ -1,3 +1,9 @@
+0.9.1 / 2020-08-21
+========
+- Build packages with [microbundle](https://github.com/developit/microbundle)
+- Refactored a few codes in modern js
+- Updated dependencies
+
 0.9.0 / 2016-07-10
 ========
 - New project maintainer, **[@simnalamburt](https://github.com/slate/slate-irc/issues/40)**
