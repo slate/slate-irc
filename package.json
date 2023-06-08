@@ -23,14 +23,13 @@
   },
   "devDependencies": {
     "irc-replies": "^2.0.1",
-    "microbundle": "^0.12.3",
-    "mocha": "^8.1.1",
+    "microbundle": "^0.15",
+    "mocha": "^10",
     "prettier": "^2.0.5",
     "should": "^13.2.3"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
-    "dev": "microbundle -f cjs,modern --target node --compress watch",
     "test": "mocha --require should && prettier --check .",
     "fmt": "prettier --write ."
   },
