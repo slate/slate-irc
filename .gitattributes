@@ -1,4 +1,4 @@
-/.yarn/releases/yarn-berry.js  binary linguist-generated
+/.yarn/releases/**             binary linguist-generated
 /.yarn/plugins/**              binary linguist-generated
 /.yarn/cache/**                linguist-vendored
 /.yarn/sdks/**                 binary linguist-generated
