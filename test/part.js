@@ -15,13 +15,13 @@ describe('part()', function () {
         e.hostmask.username.should.equal('~tjholoway')
         e.hostmask.hostname.should.equal('S01067cb21b2fd643.gv.shawcable.net')
         e.hostmask.string.should.equal(
-          'tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net'
+          'tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net',
         )
         done()
       })
 
       stream.write(
-        ':tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net PART #express :So long!\r\n'
+        ':tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net PART #express :So long!\r\n',
       )
     })
   })

@@ -101,8 +101,8 @@ Client.prototype.write = function (str, fn) {
     fn &&
       fn(
         new Error(
-          "The parameter to write() must not contain any '\\n' or '\\r'."
-        )
+          "The parameter to write() must not contain any '\\n' or '\\r'.",
+        ),
       )
     return
   }
@@ -254,7 +254,7 @@ Client.prototype.join = function (channels, keys, fn) {
 
   this.write(
     'JOIN ' + toArray(channels).join(',') + ' ' + toArray(keys).join(','),
-    fn
+    fn,
   )
 }
 

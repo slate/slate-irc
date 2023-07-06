@@ -14,13 +14,13 @@ describe('nick()', function () {
         e.hostmask.username.should.equal('~colinm')
         e.hostmask.hostname.should.equal('host-92-17-247-88.as13285.net')
         e.hostmask.string.should.equal(
-          'colinm!~colinm@host-92-17-247-88.as13285.net'
+          'colinm!~colinm@host-92-17-247-88.as13285.net',
         )
         done()
       })
 
       stream.write(
-        ':colinm!~colinm@host-92-17-247-88.as13285.net NICK :cmilhench\r\n'
+        ':colinm!~colinm@host-92-17-247-88.as13285.net NICK :cmilhench\r\n',
       )
     })
   })

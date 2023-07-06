@@ -162,7 +162,7 @@ try {
   }
 } catch (e) {
   console.error(
-    'websockify.js [--web web_dir] [--cert cert.pem [--key key.pem]] [source_addr:]source_port target_addr:target_port'
+    'websockify.js [--web web_dir] [--cert cert.pem [--key key.pem]] [source_addr:]source_port target_addr:target_port',
   )
   process.exit(2)
 }
@@ -176,7 +176,7 @@ console.log(
     ' to ' +
     target_host +
     ':' +
-    target_port
+    target_port,
 )
 if (argv.web) {
   console.log('    - Web server active. Serving: ' + argv.web)
@@ -190,7 +190,7 @@ if (argv.cert) {
     '    - Running in encrypted HTTPS (wss://) mode using: ' +
       argv.cert +
       ', ' +
-      argv.key
+      argv.key,
   )
   webServer = https.createServer({ cert: cert, key: key }, http_request)
 } else {

@@ -25,17 +25,17 @@ describe('whois()', function () {
       })
 
       stream.write(
-        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n'
+        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n',
       )
       stream.write(':irc.host.net 319 me colinm :#Node.js #express\r\n')
       stream.write(':irc.host.net 319 me colinm :#some #more\r\n')
       stream.write(':irc.host.net 312 me colinm other.host.net :Paris, FR\r\n')
       stream.write(':irc.host.net 301 me colinm :brb\r\n')
       stream.write(
-        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n'
+        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n',
       )
       stream.write(
-        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n'
+        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n',
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')
@@ -61,16 +61,16 @@ describe('whois()', function () {
       })
 
       stream.write(
-        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n'
+        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n',
       )
       stream.write(':irc.host.net 319 me colinm :#Node.js #express\r\n')
       stream.write(':irc.host.net 319 me colinm :#some #more\r\n')
       stream.write(':irc.host.net 312 me colinm other.host.net :Paris, FR\r\n')
       stream.write(
-        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n'
+        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n',
       )
       stream.write(
-        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n'
+        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n',
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')
@@ -98,16 +98,16 @@ describe('whois()', function () {
       })
 
       stream.write(
-        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n'
+        ':irc.host.net 311 me colinm ~colinm client.host.net * :Colin Milhench\r\n',
       )
       stream.write(':irc.host.net 319 me colinm :#Node.js #express\r\n')
       stream.write(':irc.host.net 319 me colinm :#some #more\r\n')
       stream.write(':irc.host.net 312 me colinm other.host.net :Paris, FR\r\n')
       stream.write(
-        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n'
+        ':irc.host.net 378 me colinm is connecting from *@client.host.net 127.0.0.1\r\n',
       )
       stream.write(
-        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n'
+        ':irc.host.net 317 me colinm 10543 1384330635 seconds idle, signon time\r\n',
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')

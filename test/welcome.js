@@ -7,7 +7,7 @@ describe('welcome()', function () {
       var stream = new Stream()
       var client = irc(stream)
       stream.write(
-        ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n'
+        ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
       )
       process.nextTick(function () {
         client.me.should.equal('tobi')
@@ -24,7 +24,7 @@ describe('welcome()', function () {
       })
 
       stream.write(
-        ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n'
+        ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
       )
     })
   })

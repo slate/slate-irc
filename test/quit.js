@@ -13,16 +13,16 @@ describe('quit()', function () {
         e.hostmask.nick.should.equal('tobi')
         e.hostmask.username.should.equal('~tobi')
         e.hostmask.hostname.should.equal(
-          '107-214-168-243.lightspeed.cicril.sbcglobal.net'
+          '107-214-168-243.lightspeed.cicril.sbcglobal.net',
         )
         e.hostmask.string.should.equal(
-          'tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net'
+          'tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net',
         )
         done()
       })
 
       stream.write(
-        ':tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net QUIT :Remote host closed the connection\r\n'
+        ':tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net QUIT :Remote host closed the connection\r\n',
       )
     })
   })

@@ -23,13 +23,13 @@ describe('names()', function () {
 
       setImmediate(function () {
         stream.write(
-          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :~owner @foo %halfop +bar baz\r\n'
+          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :~owner @foo %halfop +bar baz\r\n',
         )
         stream.write(
-          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :some more\r\n'
+          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :some more\r\n',
         )
         stream.write(
-          ':pratchett.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n'
+          ':pratchett.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
         )
       })
     })
@@ -54,13 +54,13 @@ describe('names()', function () {
 
     stream.write(':tobi!~tobi@184.151.231.170 JOIN #luna-lang\r\n')
     stream.write(
-      ':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :one ~two three\r\n'
+      ':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :one ~two three\r\n',
     )
     stream.write(
-      ':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :@foo @bar %baz\r\n'
+      ':rothfuss.freenode.net 353 tjholowaychuk = #luna-lang :@foo @bar %baz\r\n',
     )
     stream.write(
-      ':rothfuss.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n'
+      ':rothfuss.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
     )
   })
 
@@ -81,10 +81,10 @@ describe('names()', function () {
 
     stream.write(':tobi!~tobi@184.151.231.170 JOIN #luna-lang\r\n')
     stream.write(
-      ':rothfuss.freenode.net 353 tjholowaychuk @ ##luna-lang :~owner @tjholowaychuk %halfop +tobi\r\n'
+      ':rothfuss.freenode.net 353 tjholowaychuk @ ##luna-lang :~owner @tjholowaychuk %halfop +tobi\r\n',
     )
     stream.write(
-      ':rothfuss.freenode.net 366 tjholowaychuk ##luna-lang :End of /NAMES list.\r\n'
+      ':rothfuss.freenode.net 366 tjholowaychuk ##luna-lang :End of /NAMES list.\r\n',
     )
   })
 })

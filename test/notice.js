@@ -22,7 +22,7 @@ describe('notice()', function () {
                 'This nickname is registered. ',
                 'Please choose a different nickname, ',
                 'or identify via /msg NickServ identify <password>.',
-              ].join('')
+              ].join(''),
             )
             break
           case 2:
@@ -30,7 +30,7 @@ describe('notice()', function () {
               [
                 'You have 30 seconds to identify to your nickname ',
                 'before it is changed.',
-              ].join('')
+              ].join(''),
             )
             done()
             break
@@ -43,14 +43,14 @@ describe('notice()', function () {
           'This nickname is registered. ',
           'Please choose a different nickname, ',
           'or identify via /msg NickServ identify <password>.\r\n',
-        ].join('')
+        ].join(''),
       )
       stream.write(
         [
           ':NickServ!NickServ@services. NOTICE cmilhench :',
           'You have 30 seconds to identify to your nickname ',
           'before it is changed.\r\n',
-        ].join('')
+        ].join(''),
       )
     })
   })

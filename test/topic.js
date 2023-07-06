@@ -19,7 +19,7 @@ describe('topic()', function () {
       })
 
       stream.write(
-        ':tobi!~user@example.com TOPIC #slate :Slate 1.0 is out!\r\n'
+        ':tobi!~user@example.com TOPIC #slate :Slate 1.0 is out!\r\n',
       )
     })
   })
