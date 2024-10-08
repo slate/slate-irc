@@ -8,8 +8,7 @@ General purpose IRC client for nodejs. See **[documentation]** for the details.
 - **[DEBUG]** support for easy debugging
 
 ```bash
-npm install --save slate-irc-parser
-yarn add -D slate-irc-parser
+pnpm add -D slate-irc-parser
 ```
 ```js
 import irc from 'slate-irc'

@@ -41,5 +41,5 @@
     "semi": false,
     "singleQuote": true
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "pnpm@9.11.0"
 }

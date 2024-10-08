@@ -1,7 +1,5 @@
-# Yarn 2
-.yarnrc.yml
-.yarn/
-.pnp.*
+# pnpm
+pnpm-lock.yaml
 
 # Markdowns
 *.md
