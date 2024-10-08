@@ -1,20 +1,23 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('welcome()', function () {
-  describe('on RPL_WELCOME', function () {
-    it('should set client.me to the users nick', function () {
-      var stream = new Stream()
-      var client = irc(stream)
-      stream.write(
-        ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
-      )
-      process.nextTick(function () {
-        client.me.should.equal('tobi')
-      })
+describe('on RPL_WELCOME', function () {
+  it('should set client.me to the users nick', function () {
+    var stream = new Stream()
+    var client = irc(stream)
+    stream.write(
+      ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
+    )
+    process.nextTick(function () {
+      client.me.should.equal('tobi')
     })
+  })
 
-    it('should emit "welcome"', function (done) {
+  it('should emit "welcome"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -26,6 +29,5 @@ describe('welcome()', function () {
       stream.write(
         ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
       )
-    })
-  })
+    }))
 })

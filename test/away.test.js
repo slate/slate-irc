@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('away()', function () {
-  describe('on RPL_AWAY', function () {
-    it('should emit "away"', function (done) {
+describe('on RPL_AWAY', function () {
+  it('should emit "away"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -14,6 +17,5 @@ describe('away()', function () {
       })
 
       stream.write(':irc.host.net 301 me colinm :brb food time\r\n')
-    })
-  })
+    }))
 })

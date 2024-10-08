@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('pong()', function () {
-  describe('on PING', function () {
-    it('should respond with PONG', function (done) {
+describe('on PING', function () {
+  it('should respond with PONG', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
       var n = 0
@@ -21,6 +24,5 @@ describe('pong()', function () {
       })
 
       stream.write('PING :rothfuss.freenode.net\r\n')
-    })
-  })
+    }))
 })

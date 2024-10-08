@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('quit()', function () {
-  describe('on QUIT', function () {
-    it('should emit "quit"', function (done) {
+describe('on QUIT', function () {
+  it('should emit "quit"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -24,6 +27,5 @@ describe('quit()', function () {
       stream.write(
         ':tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net QUIT :Remote host closed the connection\r\n',
       )
-    })
-  })
+    }))
 })

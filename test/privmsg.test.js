@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('privmsg()', function () {
-  describe('on PRIVMSG', function () {
-    it('should emit "message"', function (done) {
+describe('on PRIVMSG', function () {
+  it('should emit "message"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -19,6 +22,5 @@ describe('privmsg()', function () {
       })
 
       stream.write(':tobi!~user@example.com PRIVMSG loki :Hello :)\r\n')
-    })
-  })
+    }))
 })

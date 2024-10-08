@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('part()', function () {
-  describe('on PART', function () {
-    it('should emit "part"', function (done) {
+describe('on PART', function () {
+  it('should emit "part"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -23,6 +26,5 @@ describe('part()', function () {
       stream.write(
         ':tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net PART #express :So long!\r\n',
       )
-    })
-  })
+    }))
 })

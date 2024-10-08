@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('whois()', function () {
-  describe('client.whois(target, mask, fn)', function () {
-    it('should respond with user info', function (done) {
+describe('client.whois(target, mask, fn)', function () {
+  it('should respond with user info', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -39,9 +42,10 @@ describe('whois()', function () {
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')
-    })
+    }))
 
-    it('should emit "info"', function (done) {
+  it('should emit "info"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -74,9 +78,10 @@ describe('whois()', function () {
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')
-    })
+    }))
 
-    it('should emit "info"', function (done) {
+  it('should emit "info"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -111,9 +116,10 @@ describe('whois()', function () {
       )
       stream.write(':irc.host.net 330 me colinm cmilhench :is logged in as\r\n')
       stream.write(':irc.host.net 318 me colinm :End of /WHOIS list.\r\n')
-    })
+    }))
 
-    it('should err with No such nick/channel', function (done) {
+  it('should err with No such nick/channel', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
       client.whois('nonick')
@@ -123,9 +129,10 @@ describe('whois()', function () {
       })
       stream.write(':irc.freenode.net 401 me nonick :No such nick/channel\r\n')
       stream.write(':irc.freenode.net 318 me nonick :End of /WHOIS list.\r\n')
-    })
+    }))
 
-    it('should err with No such server', function (done) {
+  it('should err with No such server', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
       client.whois('nonick', function (err, e) {
@@ -133,9 +140,10 @@ describe('whois()', function () {
         done()
       })
       stream.write(':holmes.freenode.net 402 me nonick :No such server\r\n')
-    })
+    }))
 
-    it('should err with Not enough parameters', function (done) {
+  it('should err with Not enough parameters', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
       client.on('whois', function (err, e) {
@@ -143,6 +151,5 @@ describe('whois()', function () {
         done()
       })
       stream.write(':irc.freenode.net 461 me WHOIS :Not enough parameters\r\n')
-    })
-  })
+    }))
 })

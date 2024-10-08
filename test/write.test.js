@@ -1,9 +1,11 @@
+import { it } from 'vitest'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 var should = require('should')
 
-describe('client.write()', function () {
-  it('should err when newline characters are given', function (done) {
+it('should err when newline characters are given', () =>
+  new Promise((done) => {
     var stream = new Stream()
     var client = irc(stream)
 
@@ -20,5 +22,4 @@ describe('client.write()', function () {
         if (cnt >= tests.length) done()
       })
     })
-  })
-})
+  }))

@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('topic()', function () {
-  describe('on TOPIC', function () {
-    it('should emit "topic"', function (done) {
+describe('on TOPIC', function () {
+  it('should emit "topic"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -21,6 +24,5 @@ describe('topic()', function () {
       stream.write(
         ':tobi!~user@example.com TOPIC #slate :Slate 1.0 is out!\r\n',
       )
-    })
-  })
+    }))
 })

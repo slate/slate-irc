@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('nick()', function () {
-  describe('on NICK', function () {
-    it('should emit "nick"', function (done) {
+describe('on NICK', function () {
+  it('should emit "nick"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -22,6 +25,5 @@ describe('nick()', function () {
       stream.write(
         ':colinm!~colinm@host-92-17-247-88.as13285.net NICK :cmilhench\r\n',
       )
-    })
-  })
+    }))
 })

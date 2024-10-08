@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('notice()', function () {
-  describe('on NOTICE', function () {
-    it('should emit "notice"', function (done) {
+describe('on NOTICE', function () {
+  it('should emit "notice"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
       var n = 0
@@ -52,6 +55,5 @@ describe('notice()', function () {
           'before it is changed.\r\n',
         ].join(''),
       )
-    })
-  })
+    }))
 })

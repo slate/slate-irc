@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('join()', function () {
-  describe('on JOIN', function () {
-    it('should emit "join"', function (done) {
+describe('on JOIN', function () {
+  it('should emit "join"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -22,6 +25,5 @@ describe('join()', function () {
       stream.write(
         ':tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net JOIN #express\r\n',
       )
-    })
-  })
+    }))
 })

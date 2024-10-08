@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('names()', function () {
-  describe('client.names(chan, fn)', function () {
-    it('should respond with user names', function (done) {
+describe('client.names(chan, fn)', function () {
+  it('should respond with user names', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -32,10 +35,11 @@ describe('names()', function () {
           ':pratchett.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
         )
       })
-    })
-  })
+    }))
+})
 
-  it('should emit "names"', function (done) {
+it('should emit "names"', () =>
+  new Promise((done) => {
     var stream = new Stream()
     var client = irc(stream)
 
@@ -62,9 +66,10 @@ describe('names()', function () {
     stream.write(
       ':rothfuss.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
     )
-  })
+  }))
 
-  it('should retain ~ / @ / % / +', function (done) {
+it('should retain ~ / @ / % / +', () =>
+  new Promise((done) => {
     var stream = new Stream()
     var client = irc(stream)
 
@@ -86,5 +91,4 @@ describe('names()', function () {
     stream.write(
       ':rothfuss.freenode.net 366 tjholowaychuk ##luna-lang :End of /NAMES list.\r\n',
     )
-  })
-})
+  }))

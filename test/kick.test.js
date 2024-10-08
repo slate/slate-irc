@@ -1,9 +1,12 @@
+import { describe, it } from 'vitest'
+import 'should'
+
 var irc = require('..')
 var Stream = require('stream').PassThrough
 
-describe('kick()', function () {
-  describe('on KICK', function () {
-    it('should emit "kick"', function (done) {
+describe('on KICK', function () {
+  it('should emit "kick"', () =>
+    new Promise((done) => {
       var stream = new Stream()
       var client = irc(stream)
 
@@ -23,6 +26,5 @@ describe('kick()', function () {
       stream.write(
         ':tjholowaychuk!~tjholoway@S01067cb21b2fd643.gv.shawcable.net KICK #express tobi :Too ferrety\r\n',
       )
-    })
-  })
+    }))
 })

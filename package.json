@@ -24,13 +24,13 @@
   "devDependencies": {
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15",
-    "mocha": "^10",
     "prettier": "^3",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "vitest": "^2.1.2"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
-    "test": "mocha --require should && prettier --check .",
+    "test": "vitest --run && prettier --check .",
     "fmt": "prettier --write ."
   },
   "main": "dist/slate-irc.js",
