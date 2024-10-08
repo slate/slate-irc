@@ -12,8 +12,8 @@ importers:
         specifier: ^4.3.7
         version: 4.3.7
       slate-irc-parser:
-        specifier: ^0.1.5
-        version: 0.1.5
+        specifier: ^0.1.6
+        version: 0.1.6
     devDependencies:
       irc-replies:
         specifier: ^2.0.1
@@ -2219,8 +2219,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  slate-irc-parser@0.1.5:
-    resolution: {integrity: sha512-LxudH7suSeBjdiZ0IAviAzvsyFaIMhXxkLIQj3kO+Z6idKZ5iokW+xojo94wssIj+EClUs/BWFT4qmrFdzqENw==}
+  slate-irc-parser@0.1.6:
+    resolution: {integrity: sha512-pk3uhWbtQfXKSzvNt1/6HJtDJbAlIyfR8vsXTluULGtpdFBzOfstTJyLI7NA0aATJk6s0Rzz+1BnHPyCNDuQAg==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -4941,7 +4941,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  slate-irc-parser@0.1.5:
+  slate-irc-parser@0.1.6:
     dependencies:
       debug: 4.3.7
       linewise: 0.0.3
