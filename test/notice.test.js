@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -11,15 +10,15 @@ it('should emit "notice"', () =>
     var n = 0
 
     client.on('notice', function (e) {
-      e.from.should.equal('NickServ')
-      e.to.should.equal('cmilhench')
-      e.hostmask.nick.should.equal('NickServ')
-      e.hostmask.username.should.equal('NickServ')
-      e.hostmask.hostname.should.equal('services.')
-      e.hostmask.string.should.equal('NickServ!NickServ@services.')
+      expect(e.from).toStrictEqual('NickServ')
+      expect(e.to).toStrictEqual('cmilhench')
+      expect(e.hostmask.nick).toStrictEqual('NickServ')
+      expect(e.hostmask.username).toStrictEqual('NickServ')
+      expect(e.hostmask.hostname).toStrictEqual('services.')
+      expect(e.hostmask.string).toStrictEqual('NickServ!NickServ@services.')
       switch (++n) {
         case 1:
-          e.message.should.equal(
+          expect(e.message).toStrictEqual(
             [
               'This nickname is registered. ',
               'Please choose a different nickname, ',
@@ -28,7 +27,7 @@ it('should emit "notice"', () =>
           )
           break
         case 2:
-          e.message.should.equal(
+          expect(e.message).toStrictEqual(
             [
               'You have 30 seconds to identify to your nickname ',
               'before it is changed.',

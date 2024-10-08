@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -11,7 +10,7 @@ it('should respond with user names', () =>
 
     client.names('#luna-lang', function (err, names) {
       if (err) return done(err)
-      names.should.eql([
+      expect(names).toStrictEqual([
         { name: 'owner', mode: '~' },
         { name: 'foo', mode: '@' },
         { name: 'halfop', mode: '%' },
@@ -42,8 +41,8 @@ it('should emit "names"', () =>
     var client = irc(stream)
 
     client.on('names', function (e) {
-      e.channel.should.equal('#luna-lang')
-      e.names.should.eql([
+      expect(e.channel).toStrictEqual('#luna-lang')
+      expect(e.names).toStrictEqual([
         { name: 'one', mode: '' },
         { name: 'two', mode: '~' },
         { name: 'three', mode: '' },
@@ -72,8 +71,8 @@ it('should retain ~ / @ / % / +', () =>
     var client = irc(stream)
 
     client.on('names', function (e) {
-      e.channel.should.equal('##luna-lang')
-      e.names.should.eql([
+      expect(e.channel).toStrictEqual('##luna-lang')
+      expect(e.names).toStrictEqual([
         { name: 'owner', mode: '~' },
         { name: 'tjholowaychuk', mode: '@' },
         { name: 'halfop', mode: '%' },

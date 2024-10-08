@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import should from 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -17,7 +16,7 @@ it('should err when newline characters are given', () =>
     ]
     tests.forEach(function (msg) {
       client.write(msg, function (err) {
-        should(err).not.null()
+        expect(err).not.toBeNull()
         cnt++
         if (cnt >= tests.length) done()
       })

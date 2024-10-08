@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -10,13 +9,13 @@ it('should emit "message"', () =>
     var client = irc(stream)
 
     client.on('message', function (e) {
-      e.from.should.equal('tobi')
-      e.to.should.equal('loki')
-      e.message.should.equal('Hello :)')
-      e.hostmask.nick.should.equal('tobi')
-      e.hostmask.username.should.equal('~user')
-      e.hostmask.hostname.should.equal('example.com')
-      e.hostmask.string.should.equal('tobi!~user@example.com')
+      expect(e.from).toStrictEqual('tobi')
+      expect(e.to).toStrictEqual('loki')
+      expect(e.message).toStrictEqual('Hello :)')
+      expect(e.hostmask.nick).toStrictEqual('tobi')
+      expect(e.hostmask.username).toStrictEqual('~user')
+      expect(e.hostmask.hostname).toStrictEqual('example.com')
+      expect(e.hostmask.string).toStrictEqual('tobi!~user@example.com')
       done()
     })
 

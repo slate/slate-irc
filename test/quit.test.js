@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -10,14 +9,14 @@ it('should emit "quit"', () =>
     var client = irc(stream)
 
     client.on('quit', function (e) {
-      e.nick.should.equal('tobi')
-      e.message.should.eql('Remote host closed the connection')
-      e.hostmask.nick.should.equal('tobi')
-      e.hostmask.username.should.equal('~tobi')
-      e.hostmask.hostname.should.equal(
+      expect(e.nick).toStrictEqual('tobi')
+      expect(e.message).toStrictEqual('Remote host closed the connection')
+      expect(e.hostmask.nick).toStrictEqual('tobi')
+      expect(e.hostmask.username).toStrictEqual('~tobi')
+      expect(e.hostmask.hostname).toStrictEqual(
         '107-214-168-243.lightspeed.cicril.sbcglobal.net',
       )
-      e.hostmask.string.should.equal(
+      expect(e.hostmask.string).toStrictEqual(
         'tobi!~tobi@107-214-168-243.lightspeed.cicril.sbcglobal.net',
       )
       done()

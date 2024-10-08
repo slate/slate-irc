@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -13,10 +12,10 @@ it('should respond with PONG', () =>
     stream.on('data', function (chunk) {
       switch (n++) {
         case 0:
-          chunk.should.equal('PING :rothfuss.freenode.net\r\n')
+          expect(chunk).toStrictEqual('PING :rothfuss.freenode.net\r\n')
           break
         case 1:
-          chunk.should.equal('PONG :rothfuss.freenode.net\r\n')
+          expect(chunk).toStrictEqual('PONG :rothfuss.freenode.net\r\n')
           done()
           break
       }

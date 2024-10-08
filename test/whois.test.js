@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -11,18 +10,18 @@ it('should respond with user info', () =>
 
     client.whois('colinm', function (err, e) {
       if (err) return done(err)
-      e.hostname.should.equal('client.host.net')
-      e.username.should.equal('~colinm')
-      e.realname.should.equal('Colin Milhench')
-      e.server.should.equal('other.host.net')
-      e.channels.should.be.instanceof(Array).and.have.lengthOf(4)
-      e.channels.should.containEql('#Node.js')
-      e.channels.should.containEql('#express')
-      e.channels.should.containEql('#some')
-      e.channels.should.containEql('#more')
-      e.away.should.equal('brb')
-      e.sign.should.equal('1384330635')
-      e.idle.should.equal('10543')
+      expect(e.hostname).toStrictEqual('client.host.net')
+      expect(e.username).toStrictEqual('~colinm')
+      expect(e.realname).toStrictEqual('Colin Milhench')
+      expect(e.server).toStrictEqual('other.host.net')
+      expect(e.channels).toBeInstanceOf(Array).toHaveLength(4)
+      expect(e.channels).toContainEqual('#Node.js')
+      expect(e.channels).toContainEqual('#express')
+      expect(e.channels).toContainEqual('#some')
+      expect(e.channels).toContainEqual('#more')
+      expect(e.away).toStrictEqual('brb')
+      expect(e.sign).toStrictEqual('1384330635')
+      expect(e.idle).toStrictEqual('10543')
       done()
     })
 
@@ -49,17 +48,17 @@ it('should emit "info"', () =>
     var client = irc(stream)
 
     client.on('whois', function (err, e) {
-      e.hostname.should.equal('client.host.net')
-      e.username.should.equal('~colinm')
-      e.realname.should.equal('Colin Milhench')
-      e.server.should.equal('other.host.net')
-      e.channels.should.be.instanceof(Array).and.have.lengthOf(4)
-      e.channels.should.containEql('#Node.js')
-      e.channels.should.containEql('#express')
-      e.channels.should.containEql('#some')
-      e.channels.should.containEql('#more')
-      e.sign.should.equal('1384330635')
-      e.idle.should.equal('10543')
+      expect(e.hostname).toStrictEqual('client.host.net')
+      expect(e.username).toStrictEqual('~colinm')
+      expect(e.realname).toStrictEqual('Colin Milhench')
+      expect(e.server).toStrictEqual('other.host.net')
+      expect(e.channels).toBeInstanceOf(Array).toHaveLength(4)
+      expect(e.channels).toContainEqual('#Node.js')
+      expect(e.channels).toContainEqual('#express')
+      expect(e.channels).toContainEqual('#some')
+      expect(e.channels).toContainEqual('#more')
+      expect(e.sign).toStrictEqual('1384330635')
+      expect(e.idle).toStrictEqual('10543')
       done()
     })
 
@@ -87,17 +86,17 @@ it('should emit "info"', () =>
     client.whois('colinm')
 
     client.on('whois', function (err, e) {
-      e.hostname.should.equal('client.host.net')
-      e.username.should.equal('~colinm')
-      e.realname.should.equal('Colin Milhench')
-      e.server.should.equal('other.host.net')
-      e.channels.should.be.instanceof(Array).and.have.lengthOf(4)
-      e.channels.should.containEql('#Node.js')
-      e.channels.should.containEql('#express')
-      e.channels.should.containEql('#some')
-      e.channels.should.containEql('#more')
-      e.sign.should.equal('1384330635')
-      e.idle.should.equal('10543')
+      expect(e.hostname).toStrictEqual('client.host.net')
+      expect(e.username).toStrictEqual('~colinm')
+      expect(e.realname).toStrictEqual('Colin Milhench')
+      expect(e.server).toStrictEqual('other.host.net')
+      expect(e.channels).toBeInstanceOf(Array).toHaveLength(4)
+      expect(e.channels).toContainEqual('#Node.js')
+      expect(e.channels).toContainEqual('#express')
+      expect(e.channels).toContainEqual('#some')
+      expect(e.channels).toContainEqual('#more')
+      expect(e.sign).toStrictEqual('1384330635')
+      expect(e.idle).toStrictEqual('10543')
       done()
     })
 
@@ -123,7 +122,7 @@ it('should err with No such nick/channel', () =>
     var client = irc(stream)
     client.whois('nonick')
     client.on('whois', function (err, e) {
-      err.should.equal('No such nick/channel')
+      expect(err).toStrictEqual('No such nick/channel')
       done()
     })
     stream.write(':irc.freenode.net 401 me nonick :No such nick/channel\r\n')
@@ -135,7 +134,7 @@ it('should err with No such server', () =>
     var stream = new Stream()
     var client = irc(stream)
     client.whois('nonick', function (err, e) {
-      err.should.equal('No such server')
+      expect(err).toStrictEqual('No such server')
       done()
     })
     stream.write(':holmes.freenode.net 402 me nonick :No such server\r\n')
@@ -146,7 +145,7 @@ it('should err with Not enough parameters', () =>
     var stream = new Stream()
     var client = irc(stream)
     client.on('whois', function (err, e) {
-      err.should.equal('Not enough parameters')
+      expect(err).toStrictEqual('Not enough parameters')
       done()
     })
     stream.write(':irc.freenode.net 461 me WHOIS :Not enough parameters\r\n')

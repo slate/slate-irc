@@ -1,5 +1,4 @@
-import { it } from 'vitest'
-import 'should'
+import { expect, it } from 'vitest'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
@@ -11,7 +10,7 @@ it('should set client.me to the users nick', () => {
     ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
   )
   process.nextTick(() => {
-    client.me.should.equal('tobi')
+    expect(client.me).toStrictEqual('tobi')
   })
 })
 
@@ -21,7 +20,7 @@ it('should emit "welcome"', () =>
     var client = irc(stream)
 
     client.on('welcome', function (nick) {
-      nick.should.equal('tobi')
+      expect(nick).toStrictEqual('tobi')
       done()
     })
 
