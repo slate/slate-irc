@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest'
 import 'should'
 
-var irc = require('..')
-var Stream = require('stream').PassThrough
+import irc from '..'
+import { PassThrough as Stream } from 'stream'
 
-describe('client.names(chan, fn)', function () {
+describe('client.names(chan, fn)', () => {
   it('should respond with user names', () =>
     new Promise((done) => {
       var stream = new Stream()
@@ -24,7 +24,7 @@ describe('client.names(chan, fn)', function () {
         done()
       })
 
-      setImmediate(function () {
+      setImmediate(() => {
         stream.write(
           ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :~owner @foo %halfop +bar baz\r\n',
         )

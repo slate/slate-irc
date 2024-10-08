@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest'
 import 'should'
 
-var irc = require('..')
-var Stream = require('stream').PassThrough
+import irc from '..'
+import { PassThrough as Stream } from 'stream'
 
-describe('on RPL_AWAY', function () {
+describe('on RPL_AWAY', () => {
   it('should emit "away"', () =>
     new Promise((done) => {
       var stream = new Stream()

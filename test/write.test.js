@@ -1,8 +1,8 @@
 import { it } from 'vitest'
+import should from 'should'
 
-var irc = require('..')
-var Stream = require('stream').PassThrough
-var should = require('should')
+import irc from '..'
+import { PassThrough as Stream } from 'stream'
 
 it('should err when newline characters are given', () =>
   new Promise((done) => {

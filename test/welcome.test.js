@@ -1,17 +1,17 @@
 import { describe, it } from 'vitest'
 import 'should'
 
-var irc = require('..')
-var Stream = require('stream').PassThrough
+import irc from '..'
+import { PassThrough as Stream } from 'stream'
 
-describe('on RPL_WELCOME', function () {
-  it('should set client.me to the users nick', function () {
+describe('on RPL_WELCOME', () => {
+  it('should set client.me to the users nick', () => {
     var stream = new Stream()
     var client = irc(stream)
     stream.write(
       ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
     )
-    process.nextTick(function () {
+    process.nextTick(() => {
       client.me.should.equal('tobi')
     })
   })
