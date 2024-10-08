@@ -1,42 +1,40 @@
-import { describe, it } from 'vitest'
+import { it } from 'vitest'
 import 'should'
 
 import irc from '..'
 import { PassThrough as Stream } from 'stream'
 
-describe('client.names(chan, fn)', () => {
-  it('should respond with user names', () =>
-    new Promise((done) => {
-      var stream = new Stream()
-      var client = irc(stream)
+it('should respond with user names', () =>
+  new Promise((done) => {
+    var stream = new Stream()
+    var client = irc(stream)
 
-      client.names('#luna-lang', function (err, names) {
-        if (err) return done(err)
-        names.should.eql([
-          { name: 'owner', mode: '~' },
-          { name: 'foo', mode: '@' },
-          { name: 'halfop', mode: '%' },
-          { name: 'bar', mode: '+' },
-          { name: 'baz', mode: '' },
-          { name: 'some', mode: '' },
-          { name: 'more', mode: '' },
-        ])
-        done()
-      })
+    client.names('#luna-lang', function (err, names) {
+      if (err) return done(err)
+      names.should.eql([
+        { name: 'owner', mode: '~' },
+        { name: 'foo', mode: '@' },
+        { name: 'halfop', mode: '%' },
+        { name: 'bar', mode: '+' },
+        { name: 'baz', mode: '' },
+        { name: 'some', mode: '' },
+        { name: 'more', mode: '' },
+      ])
+      done()
+    })
 
-      setImmediate(() => {
-        stream.write(
-          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :~owner @foo %halfop +bar baz\r\n',
-        )
-        stream.write(
-          ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :some more\r\n',
-        )
-        stream.write(
-          ':pratchett.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
-        )
-      })
-    }))
-})
+    setImmediate(() => {
+      stream.write(
+        ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :~owner @foo %halfop +bar baz\r\n',
+      )
+      stream.write(
+        ':pratchett.freenode.net 353 tjholowaychuk = #luna-lang :some more\r\n',
+      )
+      stream.write(
+        ':pratchett.freenode.net 366 tjholowaychuk #luna-lang :End of /NAMES list.\r\n',
+      )
+    })
+  }))
 
 it('should emit "names"', () =>
   new Promise((done) => {
