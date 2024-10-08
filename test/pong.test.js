@@ -9,7 +9,7 @@ it('should respond with PONG', () =>
     irc(stream)
     var n = 0
 
-    stream.on('data', function (chunk) {
+    stream.on('data', (chunk) => {
       switch (n++) {
         case 0:
           expect(chunk).toStrictEqual('PING :rothfuss.freenode.net\r\n')

@@ -9,7 +9,7 @@ it('should emit "notice"', () =>
     var client = irc(stream)
     var n = 0
 
-    client.on('notice', function (e) {
+    client.on('notice', (e) => {
       expect(e.from).toStrictEqual('NickServ')
       expect(e.to).toStrictEqual('cmilhench')
       expect(e.hostmask.nick).toStrictEqual('NickServ')

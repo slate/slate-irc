@@ -8,7 +8,7 @@ it('should respond with user names', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.names('#luna-lang', function (err, names) {
+    client.names('#luna-lang', (err, names) => {
       if (err) return done(err)
       expect(names).toStrictEqual([
         { name: 'owner', mode: '~' },
@@ -40,7 +40,7 @@ it('should emit "names"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('names', function (e) {
+    client.on('names', (e) => {
       expect(e.channel).toStrictEqual('#luna-lang')
       expect(e.names).toStrictEqual([
         { name: 'one', mode: '' },
@@ -70,7 +70,7 @@ it('should retain ~ / @ / % / +', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('names', function (e) {
+    client.on('names', (e) => {
       expect(e.channel).toStrictEqual('##luna-lang')
       expect(e.names).toStrictEqual([
         { name: 'owner', mode: '~' },

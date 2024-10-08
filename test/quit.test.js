@@ -8,7 +8,7 @@ it('should emit "quit"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('quit', function (e) {
+    client.on('quit', (e) => {
       expect(e.nick).toStrictEqual('tobi')
       expect(e.message).toStrictEqual('Remote host closed the connection')
       expect(e.hostmask.nick).toStrictEqual('tobi')

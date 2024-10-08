@@ -8,7 +8,7 @@ it('should emit "away"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('away', function (e) {
+    client.on('away', (e) => {
       expect(e.nick).toStrictEqual('colinm')
       expect(e.message).toStrictEqual('brb food time')
       done()

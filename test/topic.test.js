@@ -8,7 +8,7 @@ it('should emit "topic"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('topic', function (e) {
+    client.on('topic', (e) => {
       expect(e.nick).toStrictEqual('tobi')
       expect(e.channel).toStrictEqual('#slate')
       expect(e.topic).toStrictEqual('Slate 1.0 is out!')

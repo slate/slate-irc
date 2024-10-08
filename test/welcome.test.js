@@ -19,7 +19,7 @@ it('should emit "welcome"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('welcome', function (nick) {
+    client.on('welcome', (nick) => {
       expect(nick).toStrictEqual('tobi')
       done()
     })

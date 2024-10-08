@@ -8,7 +8,7 @@ it('should emit "join"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('join', function (e) {
+    client.on('join', (e) => {
       expect(e.nick).toStrictEqual('tjholowaychuk')
       expect(e.channel).toStrictEqual('#express')
       expect(e.hostmask.nick).toStrictEqual('tjholowaychuk')

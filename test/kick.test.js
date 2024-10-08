@@ -8,7 +8,7 @@ it('should emit "kick"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('kick', function (e) {
+    client.on('kick', (e) => {
       expect(e.nick).toStrictEqual('tjholowaychuk')
       expect(e.client).toStrictEqual('tobi')
       expect(e.channel).toStrictEqual('#express')

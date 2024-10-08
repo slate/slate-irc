@@ -8,7 +8,7 @@ it('should emit "nick"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('nick', function (e) {
+    client.on('nick', (e) => {
       expect(e.nick).toStrictEqual('colinm')
       expect(e.new).toStrictEqual('cmilhench')
       expect(e.hostmask.nick).toStrictEqual('colinm')

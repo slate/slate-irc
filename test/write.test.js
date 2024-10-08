@@ -14,8 +14,8 @@ it('should err when newline characters are given', () =>
       'PRIVMSG #loki :Hello :)\r\nNewline :(',
       'PRIVMSG #lock :Some servers accept \r as a line delimiter',
     ]
-    tests.forEach(function (msg) {
-      client.write(msg, function (err) {
+    tests.forEach((msg) => {
+      client.write(msg, (err) => {
         expect(err).not.toBeNull()
         cnt++
         if (cnt >= tests.length) done()

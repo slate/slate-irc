@@ -8,7 +8,7 @@ it('should respond with user info', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.whois('colinm', function (err, e) {
+    client.whois('colinm', (err, e) => {
       if (err) return done(err)
       expect(e.hostname).toStrictEqual('client.host.net')
       expect(e.username).toStrictEqual('~colinm')
@@ -47,7 +47,7 @@ it('should emit "info"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('whois', function (err, e) {
+    client.on('whois', (err, e) => {
       expect(e.hostname).toStrictEqual('client.host.net')
       expect(e.username).toStrictEqual('~colinm')
       expect(e.realname).toStrictEqual('Colin Milhench')
@@ -85,7 +85,7 @@ it('should emit "info"', () =>
 
     client.whois('colinm')
 
-    client.on('whois', function (err, e) {
+    client.on('whois', (err, e) => {
       expect(e.hostname).toStrictEqual('client.host.net')
       expect(e.username).toStrictEqual('~colinm')
       expect(e.realname).toStrictEqual('Colin Milhench')
@@ -121,7 +121,7 @@ it('should err with No such nick/channel', () =>
     var stream = new Stream()
     var client = irc(stream)
     client.whois('nonick')
-    client.on('whois', function (err, e) {
+    client.on('whois', (err, e) => {
       expect(err).toStrictEqual('No such nick/channel')
       done()
     })
@@ -133,7 +133,7 @@ it('should err with No such server', () =>
   new Promise((done) => {
     var stream = new Stream()
     var client = irc(stream)
-    client.whois('nonick', function (err, e) {
+    client.whois('nonick', (err, e) => {
       expect(err).toStrictEqual('No such server')
       done()
     })
@@ -144,7 +144,7 @@ it('should err with Not enough parameters', () =>
   new Promise((done) => {
     var stream = new Stream()
     var client = irc(stream)
-    client.on('whois', function (err, e) {
+    client.on('whois', (err, e) => {
       expect(err).toStrictEqual('Not enough parameters')
       done()
     })

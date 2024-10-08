@@ -8,7 +8,7 @@ it('should emit "message"', () =>
     var stream = new Stream()
     var client = irc(stream)
 
-    client.on('message', function (e) {
+    client.on('message', (e) => {
       expect(e.from).toStrictEqual('tobi')
       expect(e.to).toStrictEqual('loki')
       expect(e.message).toStrictEqual('Hello :)')
