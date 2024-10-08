@@ -19,7 +19,7 @@
   "repository": "slate/slate-irc",
   "dependencies": {
     "debug": "^4.2.0",
-    "slate-irc-parser": "^0.1.3"
+    "slate-irc-parser": "^0.1.5"
   },
   "devDependencies": {
     "irc-replies": "^2.0.1",
