@@ -1,7 +1,0 @@
-/.yarn/releases/**             binary linguist-generated
-/.yarn/plugins/**              binary linguist-generated
-/.yarn/cache/**                linguist-vendored
-/.yarn/sdks/**                 binary linguist-generated
-/.yarn/pnpify/typescript/**    binary linguist-generated
-/.yarn/pnpify/eslint/**        binary linguist-generated
-/.pnp.js                       binary linguist-generated
