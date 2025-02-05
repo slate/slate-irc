@@ -2,11 +2,7 @@
   "name": "slate-irc",
   "version": "0.9.5",
   "description": "General purpose IRC client",
-  "keywords": [
-    "irc",
-    "client",
-    "chat"
-  ],
+  "keywords": ["irc", "client", "chat"],
   "homepage": "https://github.com/slate/slate-irc",
   "bugs": {
     "url": "https://github.com/slate/slate-irc/issues"
@@ -34,8 +30,6 @@
   },
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
-  "files": [
-    "dist/*"
-  ],
+  "files": ["dist/*"],
   "packageManager": "pnpm@10.2.0"
 }
