@@ -5,9 +5,9 @@ import { PassThrough as Stream } from 'stream'
 
 it('should respond with PONG', () =>
   new Promise((done) => {
-    var stream = new Stream()
+    const stream = new Stream()
     irc(stream)
-    var n = 0
+    let n = 0
 
     stream.on('data', (chunk) => {
       switch (n++) {

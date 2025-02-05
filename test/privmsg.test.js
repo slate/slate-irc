@@ -5,8 +5,8 @@ import { PassThrough as Stream } from 'stream'
 
 it('should emit "message"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.on('message', (e) => {
       expect(e.from).toStrictEqual('tobi')

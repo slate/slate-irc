@@ -4,8 +4,8 @@ import irc from '..'
 import { PassThrough as Stream } from 'stream'
 
 it('should set client.me to the users nick', () => {
-  var stream = new Stream()
-  var client = irc(stream)
+  const stream = new Stream()
+  const client = irc(stream)
   stream.write(
     ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
   )
@@ -16,8 +16,8 @@ it('should set client.me to the users nick', () => {
 
 it('should emit "welcome"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.on('welcome', (nick) => {
       expect(nick).toStrictEqual('tobi')

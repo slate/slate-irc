@@ -5,9 +5,9 @@ import { PassThrough as Stream } from 'stream'
 
 it('should emit "notice"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
-    var n = 0
+    const stream = new Stream()
+    const client = irc(stream)
+    let n = 0
 
     client.on('notice', (e) => {
       expect(e.from).toStrictEqual('NickServ')

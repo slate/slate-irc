@@ -5,8 +5,8 @@ import { PassThrough as Stream } from 'stream'
 
 it('should respond with user info', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.whois('colinm', (err, e) => {
       if (err) return done(err)
@@ -44,8 +44,8 @@ it('should respond with user info', () =>
 
 it('should emit "info"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.on('whois', (err, e) => {
       expect(e.hostname).toStrictEqual('client.host.net')
@@ -80,8 +80,8 @@ it('should emit "info"', () =>
 
 it('should emit "info"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.whois('colinm')
 
@@ -118,8 +118,8 @@ it('should emit "info"', () =>
 
 it('should err with No such nick/channel', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
     client.whois('nonick')
     client.on('whois', (err, e) => {
       expect(err).toStrictEqual('No such nick/channel')
@@ -131,8 +131,8 @@ it('should err with No such nick/channel', () =>
 
 it('should err with No such server', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
     client.whois('nonick', (err, e) => {
       expect(err).toStrictEqual('No such server')
       done()
@@ -142,8 +142,8 @@ it('should err with No such server', () =>
 
 it('should err with Not enough parameters', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
     client.on('whois', (err, e) => {
       expect(err).toStrictEqual('Not enough parameters')
       done()

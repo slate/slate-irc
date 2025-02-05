@@ -5,11 +5,11 @@ import { PassThrough as Stream } from 'stream'
 
 it('should err when newline characters are given', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
-    var cnt = 0
-    var tests = [
+    let cnt = 0
+    const tests = [
       'NICK tobi\nUSER user :example.com',
       'PRIVMSG #loki :Hello :)\r\nNewline :(',
       'PRIVMSG #lock :Some servers accept \r as a line delimiter',

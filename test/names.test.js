@@ -5,8 +5,8 @@ import { PassThrough as Stream } from 'stream'
 
 it('should respond with user names', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.names('#luna-lang', (err, names) => {
       if (err) return done(err)
@@ -37,8 +37,8 @@ it('should respond with user names', () =>
 
 it('should emit "names"', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.on('names', (e) => {
       expect(e.channel).toStrictEqual('#luna-lang')
@@ -67,8 +67,8 @@ it('should emit "names"', () =>
 
 it('should retain ~ / @ / % / +', () =>
   new Promise((done) => {
-    var stream = new Stream()
-    var client = irc(stream)
+    const stream = new Stream()
+    const client = irc(stream)
 
     client.on('names', (e) => {
       expect(e.channel).toStrictEqual('##luna-lang')
