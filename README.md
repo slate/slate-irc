@@ -12,24 +12,30 @@ pnpm add -D slate-irc-parser
 ```
 ```js
 import irc from 'slate-irc'
-import net from 'net'
+import { connect } from 'node:tls'
 
-const stream = net.connect({
-  port: 6667,
-  host: 'irc.freenode.org'
+const stream = connect({
+  port: 6697,
+  host: 'irc.libera.chat',
 })
 
 const client = irc(stream)
 
+// logger
+client.use((irc) => {
+  irc.stream.pipe(process.stdout)
+})
+
 client.pass('pass')
 client.nick('tobi')
 client.user('tobi', 'Tobi Ferret')
-
 client.join('#express')
-client.names('#express', (err, names) => {
+client.names('#express', (_err, names) => {
   console.log(names)
 })
 ```
+
+To see more examples, please check the [`examples`](examples) directory.
 
 --------
 
