@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest'
 
 import irc from '..'
-import { PassThrough as Stream } from 'stream'
+import { PassThrough as Stream } from 'node:stream'
 
 it('should emit "topic"', () => {
   const stream = new Stream()
