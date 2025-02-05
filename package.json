@@ -22,24 +22,20 @@
     "slate-irc-parser": "^0.1.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
-    "prettier": "^3.3.3",
     "vitest": "^3.0.5"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
-    "test": "vitest --run && prettier --check .",
-    "fmt": "prettier --write ."
+    "test": "vitest --run && biome format",
+    "fmt": "biome format --write"
   },
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
   "files": [
     "dist/*"
   ],
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  },
   "packageManager": "pnpm@10.2.0"
 }

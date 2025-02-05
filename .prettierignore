@@ -1,8 +1,0 @@
-# pnpm
-pnpm-lock.yaml
-
-# Markdowns
-*.md
-
-# microbundle
-/dist/
