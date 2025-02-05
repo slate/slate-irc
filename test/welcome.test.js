@@ -14,17 +14,15 @@ it('should set client.me to the users nick', () => {
   })
 })
 
-it('should emit "welcome"', () =>
-  new Promise((done) => {
-    const stream = new Stream()
-    const client = irc(stream)
+it('should emit "welcome"', () => {
+  const stream = new Stream()
+  const client = irc(stream)
 
-    client.on('welcome', (nick) => {
-      expect(nick).toStrictEqual('tobi')
-      done()
-    })
+  client.on('welcome', (nick) => {
+    expect(nick).toStrictEqual('tobi')
+  })
 
-    stream.write(
-      ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
-    )
-  }))
+  stream.write(
+    ':cameron.freenode.net 001 tobi :Welcome to the freenode Internet Relay Chat Network tobi\r\n',
+  )
+})
