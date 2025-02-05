@@ -34,7 +34,7 @@ Documentation
 ### Client
 Given a stream from `net` or `tls` or another network source, construct an IRC client.
 ```js
-var client = irc(stream);
+const client = irc(stream);
 ```
 
 #### .pass(pass)
@@ -115,7 +115,7 @@ function logger() {
 ```
 Then `.use()` it like so:
 ```js
-var client = irc(stream);
+const client = irc(stream);
 client.use(logger());
 ```
 Returning a function like `logger()` instead of `logger` is optional,
