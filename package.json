@@ -25,7 +25,7 @@
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
     "prettier": "^3.3.3",
-    "vitest": "^2.1.2"
+    "vitest": "^3.0.5"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
