@@ -41,5 +41,5 @@
     "semi": false,
     "singleQuote": true
   },
-  "packageManager": "pnpm@9.11.0"
+  "packageManager": "pnpm@10.2.0"
 }
