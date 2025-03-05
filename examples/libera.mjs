@@ -15,7 +15,7 @@ client.use((irc) => {
 })
 
 client.pass('pass')
-client.nick('slate-irc-test')
+client.nick(`slate-${Math.random() * 100000 | 0}`)
 client.user('username', 'realname')
 client.join('#test')
 client.names('#test', (_err, names) => {
