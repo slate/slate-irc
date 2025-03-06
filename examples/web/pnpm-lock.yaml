@@ -738,9 +738,6 @@ packages:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
 
-  policyfile@0.0.6:
-    resolution: {integrity: sha512-1/I52idR1lB9GdPVRLJp9waxsdsliTgf/oNNvzTF86GQd+zR2r+fbAdZjwiGBiCzLiBrwUdtn2Xx9sGQEB/9DA==}
-
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
@@ -1929,8 +1926,6 @@ snapshots:
       safe-buffer: 5.2.1
       sha.js: 2.4.11
 
-  policyfile@0.0.6: {}
-
   possible-typed-array-names@1.1.0: {}
 
   process-nextick-args@2.0.1: {}
@@ -2304,8 +2299,8 @@ snapshots:
 
   websockify@file:websockify:
     dependencies:
+      mime-types: 2.1.35
       optimist: 0.6.1
-      policyfile: 0.0.6
       ws: 0.4.32
     transitivePeerDependencies:
       - bufferutil
