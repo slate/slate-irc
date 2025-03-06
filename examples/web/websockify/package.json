@@ -16,7 +16,7 @@
     "node": ">=0.8.9"
   },
   "dependencies": {
-    "ws": "^0.4.27",
+    "ws": "^1.1.5",
     "optimist": "latest",
     "mime-types": "latest"
   }

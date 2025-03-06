@@ -62,8 +62,8 @@ importers:
         specifier: latest
         version: 0.6.1
       ws:
-        specifier: ^0.4.27
-        version: 0.4.32
+        specifier: ^1.1.5
+        version: 1.1.5
 
 packages:
 
@@ -1366,10 +1366,6 @@ packages:
   colord@2.9.3:
     resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
 
-  commander@2.1.0:
-    resolution: {integrity: sha512-J2wnb6TKniXNOtoHS8TSrG9IOQluPrsmyAJ8oCUJOBmv+uLBCyPYAZkD2jFvw2DCzIXNnISIM01NIvr35TkBMQ==}
-    engines: {node: '>= 0.6.x'}
-
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
@@ -2118,9 +2114,6 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  nan@1.0.0:
-    resolution: {integrity: sha512-Wm2/nFOm2y9HtJfgOLnctGbfvF23FcQZeyUZqDD8JQG3zO5kXh3MkQKiUaA68mJiVWrOzLFkAV1u6bC8P52DJA==}
-
   nan@1.8.4:
     resolution: {integrity: sha512-609zQ1h3ApgH/94qmbbEklSrjcYYXCHnsWk4MAojq4OUk3tidhDYhPaMasMFKsZPZ96r4eQA1hbR2W4H7/77XA==}
 
@@ -2868,10 +2861,6 @@ packages:
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
 
-  tinycolor@0.0.1:
-    resolution: {integrity: sha512-+CorETse1kl98xg0WAzii8DTT4ABF4R3nquhrkIbVGcw1T8JYs5Gfx9xEfGINPUZGDj9C4BmOtuKeaTtuuRolg==}
-    engines: {node: '>=0.4.0'}
-
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
@@ -3078,10 +3067,11 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  ws@0.4.32:
-    resolution: {integrity: sha512-htqsS0U9Z9lb3ITjidQkRvkLdVhQePrMeu475yEfOWkAYvJ6dSjQp1tOH6ugaddzX5b7sQjMPNtY71eTzrV/kA==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
+  ws@0.7.2:
+    resolution: {integrity: sha512-8mJ1Ku743qD/PKmO9Dg+y7BXTwzUgKdXguecfIyOVHFmez4JMqMF+V+M684btmQXHlwzyrJqRl3NYDltGDf6CQ==}
+
+  ws@1.1.5:
+    resolution: {integrity: sha512-o3KqipXNUdS7wpQzBHSe180lBGO60SoK0yVo3CYJgb2MkobuWuBX6dhkYP5ORCLd55y+SaflMOV5fqAB53ux4w==}
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2
@@ -3090,9 +3080,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-
-  ws@0.7.2:
-    resolution: {integrity: sha512-8mJ1Ku743qD/PKmO9Dg+y7BXTwzUgKdXguecfIyOVHFmez4JMqMF+V+M684btmQXHlwzyrJqRl3NYDltGDf6CQ==}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -4541,8 +4528,6 @@ snapshots:
 
   colord@2.9.3: {}
 
-  commander@2.1.0: {}
-
   commander@2.20.3: {}
 
   commander@7.2.0: {}
@@ -5447,8 +5432,6 @@ snapshots:
 
   ms@2.1.3: {}
 
-  nan@1.0.0: {}
-
   nan@1.8.4:
     optional: true
 
@@ -6290,8 +6273,6 @@ snapshots:
 
   tinybench@2.9.0: {}
 
-  tinycolor@0.0.1: {}
-
   tinyexec@0.3.2: {}
 
   tinypool@1.0.2: {}
@@ -6527,13 +6508,6 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@0.4.32:
-    dependencies:
-      commander: 2.1.0
-      nan: 1.0.0
-      options: 0.0.6
-      tinycolor: 0.0.1
-
   ws@0.7.2:
     dependencies:
       options: 0.0.6
@@ -6541,6 +6515,11 @@ snapshots:
     optionalDependencies:
       bufferutil: 1.1.0
       utf-8-validate: 1.1.0
+
+  ws@1.1.5:
+    dependencies:
+      options: 0.0.6
+      ultron: 1.0.2
 
   xtend@4.0.2: {}
 
