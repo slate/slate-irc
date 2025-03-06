@@ -1,19 +1,21 @@
 {
-  "name": "slate-irc-frombrowser",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
   "scripts": {
-    "prestart": "npm install & browserify index.js -o bundle.js",
-    "start": "echo Launch ./run_ws_server.sh and open ./index.html",
-    "build": "browserify index.js -o bundle.js"
+    "start": "browserify index.js -o bundle.js && concurrently 'serve' 'websockify 80 irc.libera.chat:6665'"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "browser-stdout": "^1.2.0",
     "slate-irc": "^0.8.1",
     "websocket-stream": "^1.5.1",
     "websockify": "file:./websockify"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.1",
+    "concurrently": "^9.1.2",
+    "serve": "^14.2.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "ws"
+    ]
   }
 }

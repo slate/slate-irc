@@ -10,7 +10,7 @@ var client = irc(stream)
 client.use(logger())
 
 client.pass('pass')
-client.nick('tobi')
+client.nick(`slate-${Math.random() * 100000 | 0}`)
 client.user('tobi', 'Tobi Ferret')
 
 function logger() {
