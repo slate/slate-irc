@@ -1,4 +1,7 @@
 /node_modules/
+/examples/web/node_modules/
+/examples/web/websockify/node_modules/
 
 # microbundle
 /dist/
+/examples/web/bundle.js
