@@ -2,6 +2,6 @@
 /examples/web/node_modules/
 /examples/web/websockify/node_modules/
 
-# microbundle
+# build results
 /dist/
-/examples/web/bundle.js
+/examples/web/dist/

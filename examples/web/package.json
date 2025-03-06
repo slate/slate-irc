@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "browserify index.js -o bundle.js && concurrently 'serve' 'websockify 80 irc.libera.chat:6665'"
+    "start": "concurrently 'rsbuild dev' 'websockify 80 irc.libera.chat:6665'"
   },
   "dependencies": {
     "browser-stdout": "^1.2.0",
@@ -9,8 +9,8 @@
     "websockify": "workspace:*"
   },
   "devDependencies": {
-    "browserify": "^17.0.1",
-    "concurrently": "^9.1.2",
-    "serve": "^14.2.4"
+    "@rsbuild/core": "^1.2.15",
+    "@rsbuild/plugin-node-polyfill": "^1.3.0",
+    "concurrently": "^9.1.2"
   }
 }
