@@ -1,22 +1,12 @@
-var irc = require('slate-irc')
-var websocket = require('websocket-stream')
+const irc = require('slate-irc')
+const websocket = require('websocket-stream')
+const BrowserStdout = require('browser-stdout')
 
-var stream = new websocket('ws://localhost', 'binary')
-stream.on('error', function (error) {
-  throw error
-})
+const stream = new websocket('ws://localhost', 'binary')
+stream.on('error', error => { throw error })
 
-var client = irc(stream)
-client.use(logger())
-
+const client = irc(stream)
+client.use(irc => irc.stream.pipe(BrowserStdout())) // Pipe to browser log.
 client.pass('pass')
 client.nick(`slate-${Math.random() * 100000 | 0}`)
 client.user('tobi', 'Tobi Ferret')
-
-function logger() {
-  return function (irc) {
-    // Pipe to browser log.
-    var BrowserStdout = require('browser-stdout')()
-    irc.stream.pipe(BrowserStdout)
-  }
-}
