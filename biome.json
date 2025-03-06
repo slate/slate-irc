@@ -1,6 +1,6 @@
 {
   "files": {
-    "ignore": ["dist/"]
+    "ignore": ["dist/", "examples/web/"]
   },
   "formatter": {
     "indentStyle": "space"
