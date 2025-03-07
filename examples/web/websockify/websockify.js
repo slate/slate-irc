@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import fs from 'node:fs'
-import http from 'node:http'
-import https from 'node:https'
 import net from 'node:net'
 
 import optimist from 'optimist'
@@ -54,13 +51,6 @@ function new_client(client, req) {
   })
 }
 
-// Process an HTTP static file request
-function http_request(_request, response) {
-  response.writeHead(403, { 'Content-Type': 'text/plain' })
-  response.write('403 Permission Denied\n')
-  response.end()
-}
-
 // parse source and target arguments into parts
 let source_port
 let target_host
@@ -82,28 +72,13 @@ try {
     throw 'illegal port'
   }
 } catch (e) {
-  console.error(
-    'websockify.js [--cert cert.pem [--key key.pem]] source_port target_addr:target_port',
-  )
+  console.error('websockify.js source_port target_addr:target_port')
   process.exit(2)
 }
 
-console.log(`Proxying ${source_port} to ${target_host}:${target_port}`)
+console.log(
+  `Proxying ws://localhost:${source_port}/ to tcp://${target_host}:${target_port}`,
+)
 
-let webServer
-if (argv.cert) {
-  argv.key = argv.key || argv.cert
-  const cert = fs.readFileSync(argv.cert)
-  const key = fs.readFileSync(argv.key)
-  console.log(
-    `Running in encrypted HTTPS (wss://) mode using: ${argv.cert}, ${argv.key}`,
-  )
-  webServer = https.createServer({ cert: cert, key: key }, http_request)
-} else {
-  console.log('Running in unencrypted HTTP (ws://) mode')
-  webServer = http.createServer(http_request)
-}
-webServer.listen(source_port, () => {
-  const wsServer = new WebSocketServer({ server: webServer })
-  wsServer.on('connection', new_client)
-})
+const wsServer = new WebSocketServer({ port: source_port })
+wsServer.on('connection', new_client)
