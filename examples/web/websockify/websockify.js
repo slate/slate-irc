@@ -12,7 +12,6 @@ const argv = optimist.argv
 // Handle new WebSocket client
 function new_client(client, req) {
   const clientAddr = client._socket.remoteAddress
-  const start_time = new Date().getTime()
 
   console.log(req.url)
   const log = (msg) => {
@@ -21,24 +20,10 @@ function new_client(client, req) {
   log('WebSocket connection')
   log(`Version ${client.protocolVersion}, subprotocol: ${client.protocol}`)
 
-  let rs = null
-  if (argv.record) {
-    rs = fs.createWriteStream(
-      `${argv.record}/${new Date().toISOString().replace(/:/g, '_')}`,
-    )
-    rs.write('var VNC_frame_data = [\n')
-  }
-
   const target = net.createConnection(target_port, target_host, () => {
     log('connected to target')
   })
   target.on('data', (data) => {
-    if (rs) {
-      const tdelta = Math.floor(new Date().getTime()) - start_time
-      const rsdata = `'{${tdelta}{${decodeBuffer(data)}',\n`
-      rs.write(rsdata)
-    }
-
     try {
       client.send(data)
     } catch (e) {
@@ -49,26 +34,14 @@ function new_client(client, req) {
   target.on('end', () => {
     log('target disconnected')
     client.terminate()
-    if (rs) {
-      rs.end("'EOF'];\n")
-    }
   })
   target.on('error', () => {
     log('target connection error')
     target.end()
     client.terminate()
-    if (rs) {
-      rs.end("'EOF'];\n")
-    }
   })
 
   client.on('message', (msg, _isBinary) => {
-    if (rs) {
-      const rdelta = Math.floor(new Date().getTime()) - start_time
-      const rsdata = `'}${rdelta}}${decodeBuffer(msg)}',\n`
-      rs.write(rsdata)
-    }
-
     target.write(msg)
   })
   client.on('close', (code, reason) => {
@@ -79,29 +52,6 @@ function new_client(client, req) {
     log(`WebSocket client error: ${a}`)
     target.end()
   })
-}
-
-function decodeBuffer(buf) {
-  let returnString = ''
-  for (let i = 0; i < buf.length; i++) {
-    if (buf[i] >= 48 && buf[i] <= 90) {
-      returnString += String.fromCharCode(buf[i])
-    } else if (buf[i] === 95) {
-      returnString += String.fromCharCode(buf[i])
-    } else if (buf[i] >= 97 && buf[i] <= 122) {
-      returnString += String.fromCharCode(buf[i])
-    } else {
-      const charToConvert = buf[i].toString(16)
-      if (charToConvert.length === 0) {
-        returnString += '\\x00'
-      } else if (charToConvert.length === 1) {
-        returnString += `\\x0${charToConvert}`
-      } else {
-        returnString += `\\x${charToConvert}`
-      }
-    }
-  }
-  return returnString
 }
 
 // Process an HTTP static file request
@@ -142,7 +92,7 @@ try {
   }
 } catch (e) {
   console.error(
-    'websockify.js [--cert cert.pem [--key key.pem]] [--record dir] [source_addr:]source_port target_addr:target_port',
+    'websockify.js [--cert cert.pem [--key key.pem]] [source_addr:]source_port target_addr:target_port',
   )
   process.exit(2)
 }
