@@ -33,6 +33,6 @@
   "files": ["dist/*"],
   "packageManager": "pnpm@10.5.2",
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+    "onlyBuiltDependencies": ["@biomejs/biome", "bufferutil", "esbuild"]
   }
 }

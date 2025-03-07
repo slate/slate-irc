@@ -8,7 +8,7 @@ import url from 'node:url'
 
 import mime from 'mime-types'
 import optimist from 'optimist'
-import ws from 'ws'
+import { WebSocketServer } from 'ws'
 
 const argv = optimist.argv
 
@@ -17,7 +17,7 @@ function new_client(client, req) {
   const clientAddr = client._socket.remoteAddress
   const start_time = new Date().getTime()
 
-  console.log(req ? req.url : client.upgradeReq.url)
+  console.log(req.url)
   const log = (msg) => {
     console.log(` ${clientAddr}: ${msg}`)
   }
@@ -51,7 +51,7 @@ function new_client(client, req) {
   })
   target.on('end', () => {
     log('target disconnected')
-    client.close()
+    client.terminate()
     if (rs) {
       rs.end("'EOF'];\n")
     }
@@ -59,13 +59,13 @@ function new_client(client, req) {
   target.on('error', () => {
     log('target connection error')
     target.end()
-    client.close()
+    client.terminate()
     if (rs) {
       rs.end("'EOF'];\n")
     }
   })
 
-  client.on('message', (msg) => {
+  client.on('message', (msg, _isBinary) => {
     if (rs) {
       const rdelta = Math.floor(new Date().getTime()) - start_time
       const rsdata = `'}${rdelta}}${decodeBuffer(msg)}',\n`
@@ -208,6 +208,6 @@ if (argv.cert) {
   webServer = http.createServer(http_request)
 }
 webServer.listen(source_port, () => {
-  const wsServer = new ws.Server({ server: webServer })
+  const wsServer = new WebSocketServer({ server: webServer })
   wsServer.on('connection', new_client)
 })

@@ -6,8 +6,9 @@
     "websockify": "./websockify.js"
   },
   "dependencies": {
-    "ws": "^1.1.5",
+    "bufferutil": "^4.0.9",
+    "mime-types": "latest",
     "optimist": "latest",
-    "mime-types": "latest"
+    "ws": "^8.18.1"
   }
 }

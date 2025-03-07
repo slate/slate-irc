@@ -38,7 +38,7 @@ importers:
         version: link:../..
       websocket-stream:
         specifier: ^5.5.2
-        version: 5.5.2
+        version: 5.5.2(bufferutil@4.0.9)
       websockify:
         specifier: workspace:*
         version: link:websockify
@@ -55,6 +55,9 @@ importers:
 
   examples/web/websockify:
     dependencies:
+      bufferutil:
+        specifier: ^4.0.9
+        version: 4.0.9
       mime-types:
         specifier: latest
         version: 2.1.35
@@ -62,8 +65,8 @@ importers:
         specifier: latest
         version: 0.6.1
       ws:
-        specifier: ^1.1.5
-        version: 1.1.5
+        specifier: ^8.18.1
+        version: 8.18.1(bufferutil@4.0.9)
 
 packages:
 
@@ -1292,6 +1295,10 @@ packages:
   buffer@6.0.3:
     resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
 
+  bufferutil@4.0.9:
+    resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
+    engines: {node: '>=6.14.2'}
+
   builtin-modules@3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
@@ -2105,6 +2112,10 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -2152,10 +2163,6 @@ packages:
 
   optimist@0.6.1:
     resolution: {integrity: sha512-snN4O4TkigujZphWLN0E//nQmm7790RYaE53DdL7ZYwee2D8DDo9/EyYiKUfN3rneWUjhJnueija3G9I2i0h3g==}
-
-  options@0.0.6:
-    resolution: {integrity: sha512-bOj3L1ypm++N+n7CEbbe473A414AB7z+amKYshRb//iuL3MpdDCLhPnw6aVTdKB9g5ZRVHIEp8eUln6L2NUStg==}
-    engines: {node: '>=0.4.0'}
 
   os-browserify@0.3.0:
     resolution: {integrity: sha512-gjcpUc3clBf9+210TRaDWbf+rZZZEshZ+DlXMRCeAjp0xhTrnQsKHypIy1J3d5hKdUzj69t708EHtU8P6bUn0A==}
@@ -2875,9 +2882,6 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
 
-  ultron@1.0.2:
-    resolution: {integrity: sha512-QMpnpVtYaWEeY+MwKDN/UdKlE/LsFZXM5lO1u7GaZzNgmIbGixHEmVMIKT+vqYOALu3m5GYQy9kz4Xu4IVn7Ow==}
-
   ultron@1.1.1:
     resolution: {integrity: sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==}
 
@@ -3035,8 +3039,8 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  ws@1.1.5:
-    resolution: {integrity: sha512-o3KqipXNUdS7wpQzBHSe180lBGO60SoK0yVo3CYJgb2MkobuWuBX6dhkYP5ORCLd55y+SaflMOV5fqAB53ux4w==}
+  ws@3.3.3:
+    resolution: {integrity: sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==}
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2
@@ -3046,11 +3050,12 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@3.3.3:
-    resolution: {integrity: sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==}
+  ws@8.18.1:
+    resolution: {integrity: sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==}
+    engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
+      utf-8-validate: '>=5.0.2'
     peerDependenciesMeta:
       bufferutil:
         optional: true
@@ -4419,6 +4424,10 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
+  bufferutil@4.0.9:
+    dependencies:
+      node-gyp-build: 4.8.4
+
   builtin-modules@3.3.0: {}
 
   builtin-status-codes@3.0.0: {}
@@ -5399,6 +5408,8 @@ snapshots:
 
   nanoid@3.3.8: {}
 
+  node-gyp-build@4.8.4: {}
+
   node-releases@2.0.19: {}
 
   normalize-range@0.1.2: {}
@@ -5445,8 +5456,6 @@ snapshots:
     dependencies:
       minimist: 0.0.10
       wordwrap: 0.0.3
-
-  options@0.0.6: {}
 
   os-browserify@0.3.0: {}
 
@@ -6255,8 +6264,6 @@ snapshots:
 
   typescript@4.9.5: {}
 
-  ultron@1.0.2: {}
-
   ultron@1.1.1: {}
 
   unbox-primitive@1.1.0:
@@ -6374,13 +6381,13 @@ snapshots:
 
   vm-browserify@1.1.2: {}
 
-  websocket-stream@5.5.2:
+  websocket-stream@5.5.2(bufferutil@4.0.9):
     dependencies:
       duplexify: 3.7.1
       inherits: 2.0.4
       readable-stream: 2.3.8
       safe-buffer: 5.2.1
-      ws: 3.3.3
+      ws: 3.3.3(bufferutil@4.0.9)
       xtend: 4.0.2
     transitivePeerDependencies:
       - bufferutil
@@ -6441,16 +6448,17 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@1.1.5:
-    dependencies:
-      options: 0.0.6
-      ultron: 1.0.2
-
-  ws@3.3.3:
+  ws@3.3.3(bufferutil@4.0.9):
     dependencies:
       async-limiter: 1.0.1
       safe-buffer: 5.1.2
       ultron: 1.1.1
+    optionalDependencies:
+      bufferutil: 4.0.9
+
+  ws@8.18.1(bufferutil@4.0.9):
+    optionalDependencies:
+      bufferutil: 4.0.9
 
   xtend@4.0.2: {}
 
