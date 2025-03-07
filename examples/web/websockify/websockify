@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { createConnection } from 'node:net'
+import { connect } from 'node:tls'
 import { argv } from 'node:process'
 
 import { WebSocketServer } from 'ws'
@@ -20,7 +20,7 @@ if (Number.isNaN(source_port) || Number.isNaN(target_port)) {
 }
 
 console.log(
-  `Proxying ws://localhost:${source_port}/ to tcp://${target_host}:${target_port}`,
+  `Proxying ws://localhost:${source_port}/ to tls://${target_host}:${target_port}`,
 )
 
 const wss = new WebSocketServer({ port: source_port })
@@ -32,7 +32,7 @@ wss.on('connection', (client, req) => {
   log('WebSocket connection')
   log(`Version ${client.protocolVersion}, subprotocol: ${client.protocol}`)
 
-  const target = createConnection(target_port, target_host, () =>
+  const target = connect(target_port, target_host, () =>
     log('connected to target'),
   )
   target.on('data', (data) => {

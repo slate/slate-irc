@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently 'rsbuild dev' 'websockify 80 irc.libera.chat 6665'"
+    "start": "concurrently 'rsbuild dev' 'websockify 80 irc.libera.chat 6697'"
   },
   "dependencies": {
     "browser-stdout": "^1.3.1",
