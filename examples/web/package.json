@@ -3,7 +3,6 @@
     "start": "concurrently 'rsbuild dev' 'websockify 80 irc.libera.chat 6697'"
   },
   "dependencies": {
-    "browser-stdout": "^1.3.1",
     "slate-irc": "workspace:*",
     "websocket-stream": "^5.5.2",
     "websockify": "workspace:*"
