@@ -37,9 +37,11 @@ client.names('#express', (_err, names) => {
 
 To see more examples, please check the [`examples`](examples) directory.
 
---------
+&nbsp;
 
-MIT License
+--------
+*slate-irc* is primarily distributed under the terms of the [MIT license]. See
+[COPYRIGHT] for details.
 
 [version]: https://badgen.net/npm/v/slate-irc
 [downloads]: https://badgen.net/npm/dt/slate-irc
@@ -47,3 +49,6 @@ MIT License
 
 [documentation]: docs.md
 [DEBUG]: https://github.com/visionmedia/debug
+
+[MIT license]: LICENSE
+[COPYRIGHT]: COPYRIGHT
