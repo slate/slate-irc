@@ -1,6 +1,6 @@
+import BrowserStdout from 'browser-stdout'
 import irc from 'slate-irc'
 import websocket from 'websocket-stream'
-import BrowserStdout from 'browser-stdout'
 
 const stream = new websocket('ws://localhost', 'binary')
 stream.on('error', (error) => {
