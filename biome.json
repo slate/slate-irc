@@ -1,6 +1,6 @@
 {
   "files": {
-    "ignore": ["dist/", "examples/web/websockify"]
+    "ignore": ["dist/"]
   },
   "formatter": {
     "indentStyle": "space"
