@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "bufferutil": "^4.0.9",
-    "mime-types": "latest",
     "optimist": "latest",
     "ws": "^8.18.1"
   }

@@ -3,10 +3,7 @@ import fs from 'node:fs'
 import http from 'node:http'
 import https from 'node:https'
 import net from 'node:net'
-import path from 'node:path'
-import url from 'node:url'
 
-import mime from 'mime-types'
 import optimist from 'optimist'
 import { WebSocketServer } from 'ws'
 
@@ -107,48 +104,11 @@ function decodeBuffer(buf) {
   return returnString
 }
 
-// Send an HTTP error response
-function http_error(response, code, msg) {
-  response.writeHead(code, { 'Content-Type': 'text/plain' })
-  response.write(`${msg}\n`)
-  response.end()
-  return
-}
-
 // Process an HTTP static file request
-function http_request(request, response) {
-  if (!argv.web) {
-    return http_error(response, 403, '403 Permission Denied')
-  }
-
-  const uri = url.parse(request.url).pathname
-  let filename = path.join(argv.web, uri)
-
-  fs.exists(filename, (exists) => {
-    if (!exists) {
-      return http_error(response, 404, '404 Not Found')
-    }
-
-    if (fs.statSync(filename).isDirectory()) {
-      filename += '/index.html'
-    }
-
-    fs.readFile(filename, 'binary', (err, file) => {
-      if (err) {
-        return http_error(response, 500, err)
-      }
-
-      const headers = {}
-      const contentType = mime.contentType(path.extname(filename))
-      if (contentType !== false) {
-        headers['Content-Type'] = contentType
-      }
-
-      response.writeHead(200, headers)
-      response.write(file, 'binary')
-      response.end()
-    })
-  })
+function http_request(_request, response) {
+  response.writeHead(403, { 'Content-Type': 'text/plain' })
+  response.write('403 Permission Denied\n')
+  response.end()
 }
 
 // parse source and target arguments into parts
@@ -182,7 +142,7 @@ try {
   }
 } catch (e) {
   console.error(
-    'websockify.js [--web web_dir] [--cert cert.pem [--key key.pem]] [--record dir] [source_addr:]source_port target_addr:target_port',
+    'websockify.js [--cert cert.pem [--key key.pem]] [--record dir] [source_addr:]source_port target_addr:target_port',
   )
   process.exit(2)
 }
@@ -190,9 +150,6 @@ try {
 console.log(`\
 WebSocket settings:
     - proxying from ${source_host}:${source_port} to ${target_host}:${target_port}`)
-if (argv.web) {
-  console.log(`    - Web server active. Serving: ${argv.web}`)
-}
 
 let webServer
 if (argv.cert) {
