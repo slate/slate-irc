@@ -62,7 +62,6 @@ function http_request(_request, response) {
 }
 
 // parse source and target arguments into parts
-let source_host
 let source_port
 let target_host
 let target_port
@@ -70,17 +69,9 @@ try {
   const source_arg = argv._[0].toString()
   const target_arg = argv._[1].toString()
 
-  let idx
-  idx = source_arg.indexOf(':')
-  if (idx >= 0) {
-    source_host = source_arg.slice(0, idx)
-    source_port = Number.parseInt(source_arg.slice(idx + 1), 10)
-  } else {
-    source_host = ''
-    source_port = Number.parseInt(source_arg, 10)
-  }
+  source_port = Number.parseInt(source_arg, 10)
 
-  idx = target_arg.indexOf(':')
+  const idx = target_arg.indexOf(':')
   if (idx < 0) {
     throw 'target must be host:port'
   }
@@ -92,14 +83,12 @@ try {
   }
 } catch (e) {
   console.error(
-    'websockify.js [--cert cert.pem [--key key.pem]] [source_addr:]source_port target_addr:target_port',
+    'websockify.js [--cert cert.pem [--key key.pem]] source_port target_addr:target_port',
   )
   process.exit(2)
 }
 
-console.log(`\
-WebSocket settings:
-    - proxying from ${source_host}:${source_port} to ${target_host}:${target_port}`)
+console.log(`Proxying ${source_port} to ${target_host}:${target_port}`)
 
 let webServer
 if (argv.cert) {
@@ -107,11 +96,11 @@ if (argv.cert) {
   const cert = fs.readFileSync(argv.cert)
   const key = fs.readFileSync(argv.key)
   console.log(
-    `    - Running in encrypted HTTPS (wss://) mode using: ${argv.cert}, ${argv.key}`,
+    `Running in encrypted HTTPS (wss://) mode using: ${argv.cert}, ${argv.key}`,
   )
   webServer = https.createServer({ cert: cert, key: key }, http_request)
 } else {
-  console.log('    - Running in unencrypted HTTP (ws://) mode')
+  console.log('Running in unencrypted HTTP (ws://) mode')
   webServer = http.createServer(http_request)
 }
 webServer.listen(source_port, () => {
