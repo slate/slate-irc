@@ -1,10 +1,7 @@
 {
   "name": "websockify",
   "type": "module",
-  "files": ["websockify.js"],
-  "bin": {
-    "websockify": "./websockify.js"
-  },
+  "bin": "./websockify",
   "dependencies": {
     "bufferutil": "^4.0.9",
     "ws": "^8.18.1"
