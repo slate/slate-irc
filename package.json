@@ -33,7 +33,6 @@
   "files": ["dist/*"],
   "packageManager": "pnpm@10.8.1",
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "bufferutil", "esbuild"],
     "overrides": {
       "websocket-stream@5.5.2>ws": "-"
     }
