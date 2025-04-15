@@ -2,3 +2,6 @@ packages:
   - "."
   - "examples/web"
   - "examples/web/websockify"
+
+overrides:
+  "websocket-stream@5.5.2>ws": "-"
