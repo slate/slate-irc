@@ -31,7 +31,7 @@
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
   "files": ["dist/*"],
-  "packageManager": "pnpm@10.5.2",
+  "packageManager": "pnpm@10.8.1",
   "pnpm": {
     "onlyBuiltDependencies": ["@biomejs/biome", "bufferutil", "esbuild"],
     "overrides": {
