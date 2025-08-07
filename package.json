@@ -31,5 +31,5 @@
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
   "files": ["dist/*"],
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.14.0"
 }
