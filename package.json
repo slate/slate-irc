@@ -21,7 +21,7 @@
     "@biomejs/biome": "^1.9.4",
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
-    "vitest": "^3.1.4"
+    "vitest": "^4.0.17"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
