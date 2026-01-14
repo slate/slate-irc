@@ -14,8 +14,8 @@
   ],
   "repository": "slate/slate-irc",
   "dependencies": {
-    "debug": "^4.4.1",
-    "slate-irc-parser": "^0.1.6"
+    "debug": "^4.4.3",
+    "slate-irc-parser": "^0.1.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
