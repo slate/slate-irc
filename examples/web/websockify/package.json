@@ -3,7 +3,7 @@
   "type": "module",
   "bin": "./websockify",
   "dependencies": {
-    "bufferutil": "^4.0.9",
-    "ws": "^8.18.1"
+    "bufferutil": "^4.1.0",
+    "ws": "^8.19.0"
   }
 }

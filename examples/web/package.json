@@ -8,8 +8,8 @@
     "websockify": "workspace:*"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.2.15",
-    "@rsbuild/plugin-node-polyfill": "^1.3.0",
-    "concurrently": "^9.1.2"
+    "@rsbuild/core": "^1.7.2",
+    "@rsbuild/plugin-node-polyfill": "^1.4.2",
+    "concurrently": "^9.2.1"
   }
 }
