@@ -1,7 +1,12 @@
 packages:
-  - "."
-  - "examples/web"
-  - "examples/web/websockify"
+  - .
+  - examples/web
+  - examples/web/websockify
+
+ignoredBuiltDependencies:
+  - bufferutil
+  - core-js
+  - esbuild
 
 overrides:
-  "websocket-stream@5.5.2>ws": "-"
+  websocket-stream@5.5.2>ws: '-'
