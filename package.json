@@ -2,7 +2,11 @@
   "name": "slate-irc",
   "version": "0.9.5",
   "description": "General purpose IRC client",
-  "keywords": ["irc", "client", "chat"],
+  "keywords": [
+    "irc",
+    "client",
+    "chat"
+  ],
   "homepage": "https://github.com/slate/slate-irc",
   "bugs": {
     "url": "https://github.com/slate/slate-irc/issues"
@@ -18,7 +22,7 @@
     "slate-irc-parser": "^0.1.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.11",
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
     "vitest": "^4.0.17"
@@ -30,6 +34,8 @@
   },
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "packageManager": "pnpm@10.28.0"
 }
