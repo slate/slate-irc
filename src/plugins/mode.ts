@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, ModeEvent, Plugin } from "../types";
 import * as utils from "../utils";
 
 /**
@@ -16,11 +16,12 @@ export default function mode(): Plugin {
     irc.on("data", function (msg: IrcMessage) {
       if ("MODE" != msg.command) return;
       var params = msg.params.split(" ");
-      var e: Record<string, any> = {};
-      e.nick = utils.nick(msg);
-      e.target = params[0];
-      e.mode = params[1] || msg.trailing;
-      e.client = params[2];
+      var e: ModeEvent = {
+        nick: utils.nick(msg),
+        target: params[0],
+        mode: params[1] || msg.trailing,
+        client: params[2],
+      };
       irc.emit("mode", e);
     });
   };

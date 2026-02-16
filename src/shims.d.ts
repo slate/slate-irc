@@ -1,6 +1,6 @@
 declare module "debug" {
   type Debugger = {
-    (...args: any[]): void;
+    (...args: unknown[]): void;
     enabled: boolean;
     extend(namespace: string, delimiter?: string): Debugger;
   };
@@ -28,7 +28,14 @@ declare module "websocket-stream" {
 declare module "slate-irc" {
   import type Parser from "slate-irc-parser";
 
-  import type { IrcClient, IrcStream } from "./types";
+  import type {
+    IrcClient,
+    IrcMessage,
+    IrcStream,
+    Plugin,
+    PluginFactory,
+    WriteCallback,
+  } from "./types";
 
   type ClientFactory = {
     (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
@@ -37,4 +44,5 @@ declare module "slate-irc" {
 
   const createClient: ClientFactory;
   export default createClient;
+  export type { IrcClient, IrcMessage, IrcStream, Plugin, PluginFactory, WriteCallback };
 }

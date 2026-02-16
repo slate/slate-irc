@@ -1,4 +1,4 @@
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { AwayEvent, IrcClient, IrcMessage, Plugin } from "../types";
 
 /**
  * AWAY plugin to emit "away" events.
@@ -12,13 +12,14 @@ export default function away(): Plugin {
       if ("RPL_AWAY" != msg.command && "RPL_NOWAWAY" != msg.command && "RPL_UNAWAY" != msg.command)
         return;
       var params = msg.params.split(" ");
-      var e: Record<string, any> = {};
+      var e: AwayEvent = {
+        message: msg.trailing,
+      };
       if ("RPL_NOWAWAY" == msg.command || "RPL_UNAWAY" == msg.command) {
         e.nick = params[0];
       } else {
         e.nick = params[1];
       }
-      e.message = msg.trailing;
       irc.emit("away", e);
     });
   };

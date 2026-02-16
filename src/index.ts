@@ -10,14 +10,31 @@ import Parser from "slate-irc-parser";
 
 import type { IrcClient, IrcMessage, IrcStream, Plugin, WriteCallback } from "./types";
 export type {
+  AwayEvent,
   AnyFn,
+  ErrorEvent,
   Hostmask,
   IrcClient,
   IrcMessage,
   IrcStream,
+  InviteEvent,
+  JoinEvent,
+  KickEvent,
+  ModeEvent,
+  MotdEvent,
+  NamesEvent,
+  NamesQueryCallback,
+  NamesUser,
+  NickEvent,
+  NoticeEvent,
+  PartEvent,
   Plugin,
   PluginFactory,
+  PrivmsgEvent,
+  QuitEvent,
+  TopicEvent,
   WhoisData,
+  WhoisQueryCallback,
   WriteCallback,
 } from "./types";
 

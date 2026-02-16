@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, KickEvent, Plugin } from "../types";
 import * as utils from "../utils";
 
 /**
@@ -15,13 +15,14 @@ export default function kick(): Plugin {
   return function (irc: IrcClient): void {
     irc.on("data", function (msg: IrcMessage) {
       if ("KICK" != msg.command) return;
-      var e: Record<string, any> = {};
       var params = msg.params.split(" ");
-      e.nick = utils.nick(msg);
-      e.hostmask = utils.hostmask(msg);
-      e.channel = params[0]!.toLowerCase();
-      e.client = params[1]!;
-      e.message = msg.trailing;
+      var e: KickEvent = {
+        nick: utils.nick(msg),
+        hostmask: utils.hostmask(msg),
+        channel: params[0]!.toLowerCase(),
+        client: params[1]!,
+        message: msg.trailing,
+      };
       irc.emit("kick", e);
     });
   };

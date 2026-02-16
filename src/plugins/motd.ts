@@ -1,4 +1,4 @@
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, MotdEvent, Plugin } from "../types";
 
 /**
  * MOTD plugin to emit "motd" events.
@@ -8,8 +8,9 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
 
 export default function motd(): Plugin {
   return function (irc: IrcClient): void {
-    var e: Record<string, any> = {};
-    e.motd = [];
+    var e: MotdEvent = {
+      motd: [],
+    };
 
     irc.on("data", function (msg: IrcMessage) {
       switch (msg.command) {

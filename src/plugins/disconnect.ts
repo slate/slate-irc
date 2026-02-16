@@ -28,7 +28,7 @@ export default function disconnect(): Plugin {
 
       irc.write("PING :" + time);
 
-      irc.once("pong", function (res: any) {
+      irc.once("pong", function (res: string | number) {
         if (res == time) {
           timeout = false;
         }

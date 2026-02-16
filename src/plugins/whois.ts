@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-import type { AnyFn, IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, Plugin, WhoisData, WhoisQueryCallback } from "../types";
 
 /**
  * WHOIS plugin to emit "whois" events.
@@ -11,7 +11,7 @@ import type { AnyFn, IrcClient, IrcMessage, Plugin } from "../types";
 
 export default function whoisPlugin(): Plugin {
   return function (irc: IrcClient): void {
-    var map: Record<string, Record<string, any>> = {};
+    var map: Record<string, WhoisData> = {};
     var err: string | undefined;
     irc.whois = whois;
     irc.whoisCallbacks = {};
@@ -21,7 +21,7 @@ export default function whoisPlugin(): Plugin {
         case "RPL_WHOISUSER":
           var params = msg.params.split(" ");
           var target = params[1]!.toLowerCase();
-          map[target] = map[target] || {};
+          map[target] = map[target] || { channels: [], oper: false };
           map[target]!.nickname = params[1];
           map[target]!.username = params[2];
           map[target]!.hostname = params[3];
@@ -62,8 +62,8 @@ export default function whoisPlugin(): Plugin {
           var target = params[1]!.toLowerCase();
           if (!map[target]) return;
           var cb = irc.whoisCallbacks[target];
-          if (cb) cb(err, map[target]);
-          else irc.emit("whois", null, map[target]);
+          if (cb) cb(err, map[target]!);
+          else irc.emit("whois", null, map[target]!);
           map = {};
           break;
         case "ERR_NEEDMOREPARAMS":
@@ -104,7 +104,12 @@ export default function whoisPlugin(): Plugin {
  * @param {Function} fn
  */
 
-function whois(this: IrcClient, target: string, mask?: string | AnyFn, fn?: AnyFn): void {
+function whois(
+  this: IrcClient,
+  target: string,
+  mask?: string | WhoisQueryCallback,
+  fn?: WhoisQueryCallback,
+): void {
   if ("function" == typeof mask) {
     fn = mask;
     mask = "";
@@ -113,7 +118,7 @@ function whois(this: IrcClient, target: string, mask?: string | AnyFn, fn?: AnyF
   target = target.toLowerCase();
 
   if (fn) {
-    this.whoisCallbacks[target] = (err: string, data: any) => {
+    this.whoisCallbacks[target] = (err: string | null | undefined, data: WhoisData | null) => {
       delete this.whoisCallbacks[target];
       fn(err, data);
     };

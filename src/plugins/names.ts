@@ -4,7 +4,14 @@
 
 import debugModule from "debug";
 
-import type { AnyFn, IrcClient, IrcMessage, Plugin } from "../types";
+import type {
+  IrcClient,
+  IrcMessage,
+  NamesEvent,
+  NamesQueryCallback,
+  NamesUser,
+  Plugin,
+} from "../types";
 
 const debug = debugModule("slate-irc:names");
 
@@ -16,7 +23,7 @@ const debug = debugModule("slate-irc:names");
 
 export default function namesPlugin(): Plugin {
   return function (irc: IrcClient): void {
-    var map: Record<string, Array<{ name: string; mode: string }>> = {};
+    var map: Record<string, NamesUser[]> = {};
     irc.names = names;
     irc.nameCallbacks = {};
 
@@ -25,7 +32,7 @@ export default function namesPlugin(): Plugin {
         case "RPL_NAMREPLY":
           var chan = msg.params.split(/ [=@*] /)[1]!.toLowerCase();
           var names = msg.trailing.split(" ");
-          var users: Array<{ name: string; mode: string }> = [];
+          var users: NamesUser[] = [];
 
           names.forEach(function (n: string) {
             var user = n.split(/([~&@%+])/);
@@ -41,7 +48,7 @@ export default function namesPlugin(): Plugin {
         case "RPL_ENDOFNAMES":
           var chan = msg.params.split(" ")[1]!.toLowerCase();
           debug('emit "names" for %s', chan);
-          var e = { channel: chan, names: map[chan] || [] };
+          var e: NamesEvent = { channel: chan, names: map[chan] || [] };
           var cb = irc.nameCallbacks[chan];
 
           if (cb) cb(e);
@@ -61,11 +68,11 @@ export default function namesPlugin(): Plugin {
  * @param {Function} fn
  */
 
-function names(this: IrcClient, channel: string, fn?: AnyFn): void {
+function names(this: IrcClient, channel: string, fn?: NamesQueryCallback): void {
   channel = channel.toLowerCase();
 
   if (fn) {
-    this.nameCallbacks[channel] = (e: { names: any[] }) => {
+    this.nameCallbacks[channel] = (e: NamesEvent) => {
       delete this.nameCallbacks[channel];
       fn(null, e.names);
     };

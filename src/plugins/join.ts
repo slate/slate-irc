@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, JoinEvent, Plugin } from "../types";
 import * as utils from "../utils";
 
 /**
@@ -15,10 +15,11 @@ export default function join(): Plugin {
   return function (irc: IrcClient): void {
     irc.on("data", function (msg: IrcMessage) {
       if ("JOIN" != msg.command) return;
-      var e: Record<string, any> = {};
-      e.nick = utils.nick(msg);
-      e.hostmask = utils.hostmask(msg);
-      e.channel = (msg.params || msg.trailing).toLowerCase();
+      var e: JoinEvent = {
+        nick: utils.nick(msg),
+        hostmask: utils.hostmask(msg),
+        channel: (msg.params || msg.trailing).toLowerCase(),
+      };
       irc.emit("join", e);
     });
   };

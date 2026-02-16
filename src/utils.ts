@@ -58,12 +58,12 @@ export function hostmask(msg: IrcMessage): Hostmask {
  * @return {Object}
  */
 
-export function extend<A extends Record<string, any>, B extends Record<string, any>>(
+export function extend<A extends Record<string, unknown>, B extends Record<string, unknown>>(
   a: A,
   b: B,
 ): A & B {
   for (var prop in b) {
-    (a as Record<string, any>)[prop] = b[prop];
+    (a as Record<string, unknown>)[prop] = b[prop];
   }
   return a as A & B;
 }

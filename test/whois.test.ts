@@ -10,6 +10,8 @@ it("should respond with user info", () => {
 
   client.whois("colinm", (err, e) => {
     expect(err).toBeUndefined();
+    expect(e).not.toBeNull();
+    if (!e) return;
     expect(e.hostname).toStrictEqual("client.host.net");
     expect(e.username).toStrictEqual("~colinm");
     expect(e.realname).toStrictEqual("Colin Milhench");
@@ -42,6 +44,8 @@ it('should emit "info"', () => {
 
   client.on("whois", (err, e) => {
     expect(err).toBeNull();
+    expect(e).not.toBeNull();
+    if (!e) return;
     expect(e.hostname).toStrictEqual("client.host.net");
     expect(e.username).toStrictEqual("~colinm");
     expect(e.realname).toStrictEqual("Colin Milhench");
@@ -74,6 +78,8 @@ it('should emit "info"', () => {
 
   client.on("whois", (err, e) => {
     expect(err).toBeNull();
+    expect(e).not.toBeNull();
+    if (!e) return;
     expect(e.hostname).toStrictEqual("client.host.net");
     expect(e.username).toStrictEqual("~colinm");
     expect(e.realname).toStrictEqual("Colin Milhench");

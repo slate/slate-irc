@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-import type { IrcClient, IrcMessage, Plugin } from "../types";
+import type { IrcClient, IrcMessage, Plugin, TopicEvent } from "../types";
 import * as utils from "../utils";
 
 /**
@@ -29,11 +29,12 @@ export default function topic(): Plugin {
           return;
       }
 
-      var e: Record<string, any> = {};
+      var e: TopicEvent = {
+        hostmask: utils.hostmask(msg),
+        channel: channel!.toLowerCase(),
+        topic: msg.trailing,
+      };
       if ("TOPIC" == msg.command) e.nick = utils.nick(msg);
-      e.hostmask = utils.hostmask(msg);
-      e.channel = channel!.toLowerCase();
-      e.topic = msg.trailing;
       irc.emit("topic", e);
     });
   };
