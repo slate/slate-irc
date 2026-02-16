@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsdown",
     "ci": "tsc && vitest --run && oxlint && oxfmt --check",
+    "doc": "typedoc",
     "fix": "oxlint --fix",
     "fmt": "oxfmt"
   },
@@ -39,6 +40,7 @@
     "oxfmt": "^0.33.0",
     "oxlint": "^1.48.0",
     "tsdown": "^0.20.3",
+    "typedoc": "^0.28.17",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },

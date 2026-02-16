@@ -15,4 +15,5 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm build
+      - run: pnpm doc
       - run: pnpm run ci
