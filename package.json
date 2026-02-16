@@ -24,7 +24,7 @@
   "exports": "./dist/index.mjs",
   "scripts": {
     "build": "tsdown",
-    "ci": "vitest --run && oxlint && oxfmt --check",
+    "ci": "tsc && vitest --run && oxlint && oxfmt --check",
     "fix": "oxlint --fix",
     "fmt": "oxfmt"
   },
@@ -37,6 +37,7 @@
     "oxfmt": "^0.33.0",
     "oxlint": "^1.48.0",
     "tsdown": "^0.20.3",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },
   "packageManager": "pnpm@10.29.3"

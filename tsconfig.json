@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    // Strict Typecheck
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    // Module
+    "module": "preserve",
+    "verbatimModuleSyntax": true,
+
+    // Advanced
+    "declaration": true,
+    "isolatedDeclarations": true
+  },
+  "exclude": ["dist", "docs"],
+  "typedocOptions": {
+    "entryPoints": ["./src/index.ts"],
+    "out": "docs"
+  }
+}
