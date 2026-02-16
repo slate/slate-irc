@@ -37,12 +37,17 @@ declare module "slate-irc" {
     WriteCallback,
   } from "./types";
 
-  type ClientFactory = {
-    (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
-    new (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
-  };
+  type ClientFactory = (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding) => IrcClient;
 
   const createClient: ClientFactory;
   export default createClient;
-  export type { IrcClient, IrcMessage, IrcStream, Plugin, PluginFactory, WriteCallback };
+  export type {
+    ClientFactory,
+    IrcClient,
+    IrcMessage,
+    IrcStream,
+    Plugin,
+    PluginFactory,
+    WriteCallback,
+  };
 }

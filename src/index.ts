@@ -72,449 +72,209 @@ import whois from "./plugins/whois";
  * @param {String} [encoding]
  */
 
-export type ClientConstructor = {
-  new (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
-  (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
-  prototype: IrcClient;
-};
-
-const Client = function (
-  this: IrcClient | undefined,
+export type ClientFactory = (
   stream: IrcStream,
   parser?: Parser,
   encoding?: BufferEncoding,
-): IrcClient {
-  if (!(this instanceof Client)) return new Client(stream, parser, encoding);
-  const irc = this as IrcClient;
-  stream.setEncoding(encoding || "utf8");
-  irc.stream = stream;
-  irc.parser = parser || new Parser();
-  irc.parser.on("message", irc.onmessage.bind(irc));
-  stream.pipe(irc.parser as unknown as NodeJS.WritableStream);
-  irc.setMaxListeners(100);
-  irc.use(away());
-  irc.use(disconnect());
-  irc.use(errors());
-  irc.use(invite());
-  irc.use(join());
-  irc.use(kick());
-  irc.use(mode());
-  irc.use(motd());
-  irc.use(names());
-  irc.use(nick());
-  irc.use(notice());
-  irc.use(part());
-  irc.use(pong());
-  irc.use(privmsg());
-  irc.use(quit());
-  irc.use(topic());
-  irc.use(welcome());
-  irc.use(whois());
-  return irc;
-} as ClientConstructor;
+) => IrcClient;
+
+class ClientImpl extends Emitter {
+  stream!: IrcStream;
+  parser!: Parser;
+  me?: string;
+  names!: IrcClient["names"];
+  whois!: IrcClient["whois"];
+  nameCallbacks!: IrcClient["nameCallbacks"];
+  whoisCallbacks!: IrcClient["whoisCallbacks"];
+
+  constructor(stream: IrcStream, parser?: Parser, encoding?: BufferEncoding) {
+    super();
+    stream.setEncoding(encoding || "utf8");
+    this.stream = stream;
+    this.parser = parser || new Parser();
+    this.parser.on("message", this.onmessage.bind(this));
+    stream.pipe(this.parser as unknown as NodeJS.WritableStream);
+    this.setMaxListeners(100);
+    this.use(away());
+    this.use(disconnect());
+    this.use(errors());
+    this.use(invite());
+    this.use(join());
+    this.use(kick());
+    this.use(mode());
+    this.use(motd());
+    this.use(names());
+    this.use(nick());
+    this.use(notice());
+    this.use(part());
+    this.use(pong());
+    this.use(privmsg());
+    this.use(quit());
+    this.use(topic());
+    this.use(welcome());
+    this.use(whois());
+  }
+
+  writeUnsafe(str: string, fn?: WriteCallback): void {
+    this.stream.write(`${str}\r\n`, fn);
+  }
+
+  write(str: string, fn?: WriteCallback): void {
+    if (str.includes("\n") || str.includes("\r")) {
+      if (fn) fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
+      return;
+    }
+    this.writeUnsafe(str, fn);
+  }
+
+  pass(pass: string, fn?: WriteCallback): void {
+    this.write(`PASS ${pass}`, fn);
+  }
+
+  webirc(
+    password: string,
+    username: string,
+    hostname: string,
+    ip: string,
+    fn?: WriteCallback,
+  ): void {
+    const message = [password, username, hostname, ip].join(" ");
+    this.write(`WEBIRC ${message}`, fn);
+  }
+
+  nick(nick: string, fn?: WriteCallback): void {
+    this.write(`NICK ${nick}`, fn);
+  }
+
+  user(username: string, realname: string, fn?: WriteCallback): void {
+    this.write(`USER ${username} 0 * :${realname}`, fn);
+  }
+
+  invite(name: string, channel: string, fn?: WriteCallback): void {
+    this.write(`INVITE ${name} ${channel}`, fn);
+  }
+
+  send(target: string | string[], msg: string, fn?: WriteCallback): void {
+    this.write(`PRIVMSG ${toArray(target).join(",")} :${msg}`, fn);
+  }
+
+  action(target: string, msg: string, fn?: WriteCallback): void {
+    this.send(target, `\u0001ACTION ${msg}\u0001`, fn);
+  }
+
+  notice(target: string, msg: string, fn?: WriteCallback): void {
+    this.write(`NOTICE ${target} :${msg}`, fn);
+  }
+
+  ctcp(target: string, msg: string, fn?: WriteCallback): void {
+    this.notice(target, `\x01${msg}\x01`, fn);
+  }
+
+  join(
+    channels: string | string[],
+    keys?: string | string[] | WriteCallback,
+    fn?: WriteCallback,
+  ): void {
+    if (typeof keys === "function") {
+      fn = keys;
+      keys = "";
+    }
+
+    this.write(`JOIN ${toArray(channels).join(",")} ${toArray(keys).join(",")}`, fn);
+  }
+
+  part(channels: string | string[], msg?: string | WriteCallback, fn?: WriteCallback): void {
+    if (typeof msg === "function") {
+      fn = msg;
+      msg = "";
+    }
+
+    let part = `PART ${toArray(channels).join(",")}`;
+    if (msg) {
+      part += ` :${msg}`;
+    }
+    this.write(part, fn);
+  }
+
+  away(msg?: string, fn?: WriteCallback): void {
+    const awayMessage = msg || "Talk to you later!";
+    this.write(`AWAY :${awayMessage}`, fn);
+  }
+
+  back(fn?: WriteCallback): void {
+    this.write("AWAY", fn);
+  }
+
+  topic(channel: string, topic?: string | WriteCallback, fn?: WriteCallback): void {
+    if (typeof topic === "function") {
+      fn = topic;
+      topic = "";
+    }
+
+    if (topic) {
+      topic = ` :${topic}`;
+    }
+
+    this.write(`TOPIC ${channel}${topic}`, fn);
+  }
+
+  kick(
+    channels: string | string[],
+    nicks: string | string[],
+    msg?: string | WriteCallback,
+    fn?: WriteCallback,
+  ): void {
+    if (typeof msg === "function") {
+      fn = msg;
+      msg = "";
+    }
+
+    let kick = `KICK ${toArray(channels).join(",")} ${toArray(nicks).join(",")}`;
+    if (msg) {
+      kick += ` :${msg}`;
+    }
+    this.write(kick, fn);
+  }
+
+  quit(msg?: string, fn?: WriteCallback): void {
+    const quitMessage = msg || "Bye!";
+    this.write(`QUIT :${quitMessage}`, fn);
+  }
+
+  oper(name: string, password: string, fn?: WriteCallback): void {
+    this.write(`OPER ${name} ${password}`, fn);
+  }
+
+  mode(target: string, flags: string, params?: string | WriteCallback, fn?: WriteCallback): void {
+    if (typeof params === "function") {
+      fn = params;
+      params = "";
+    }
+
+    if (params) {
+      this.write(`MODE ${target} ${flags} ${params}`, fn);
+    } else {
+      this.write(`MODE ${target} ${flags}`, fn);
+    }
+  }
+
+  use(fn: Plugin): IrcClient {
+    fn(this as unknown as IrcClient);
+    return this as unknown as IrcClient;
+  }
+
+  onmessage(msg: IrcMessage): void {
+    msg.command = replies[msg.command as keyof typeof replies] || msg.command;
+    debug("message %s %s", msg.command, msg.string);
+    this.emit("data", msg);
+  }
+}
+
+function Client(stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient {
+  return new ClientImpl(stream, parser, encoding) as unknown as IrcClient;
+}
 
 export default Client;
-
-/**
- * Inherit from `Emitter.prototype`.
- */
-
-Object.setPrototypeOf(Client.prototype, Emitter.prototype);
-
-/**
- * Write `str` without checking for '\r' or '\n' and invoke `fn(err)`.
- *
- * @param {String} str
- * @param {Function} [fn]
- */
-
-Client.prototype.writeUnsafe = function (this: IrcClient, str: string, fn?: WriteCallback): void {
-  this.stream.write(`${str}\r\n`, fn);
-};
-
-/**
- * Write `str` and invoke `fn(err)`.
- *
- * @param {String} str
- * @param {Function} [fn]
- */
-
-Client.prototype.write = function (this: IrcClient, str: string, fn?: WriteCallback): void {
-  if (str.includes("\n") || str.includes("\r")) {
-    if (fn) fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
-    return;
-  }
-  this.writeUnsafe(str, fn);
-};
-
-/**
- * PASS <pass>
- *
- * @param {String} pass
- * @param {Function} [fn]
- */
-
-Client.prototype.pass = function (this: IrcClient, pass: string, fn?: WriteCallback): void {
-  this.write(`PASS ${pass}`, fn);
-};
-
-/**
- * WEBIRC <password> <username> <hostname> <ip>
- * See https://www.irc.wiki/WebIRC
- *
- * @param {String} password
- * @param {String} username
- * @param {String} hostname
- * @param {String} ip
- * @param {Function} [fn]
- */
-
-Client.prototype.webirc = function (
-  this: IrcClient,
-  password: string,
-  username: string,
-  hostname: string,
-  ip: string,
-  fn?: WriteCallback,
-): void {
-  const message = [password, username, hostname, ip].join(" ");
-  this.write(`WEBIRC ${message}`, fn);
-};
-
-/**
- * NICK <nick>
- *
- * @param {String} nick
- * @param {Function} [fn]
- */
-
-Client.prototype.nick = function (this: IrcClient, nick: string, fn?: WriteCallback): void {
-  this.write(`NICK ${nick}`, fn);
-};
-
-/**
- * USER <username> <realname>
- *
- * @param {String} username
- * @param {String} realname
- * @param {Function} [fn]
- */
-
-Client.prototype.user = function (
-  this: IrcClient,
-  username: string,
-  realname: string,
-  fn?: WriteCallback,
-): void {
-  this.write(`USER ${username} 0 * :${realname}`, fn);
-};
-
-/**
- * Send an invite to `name`, for a `channel`.
- *
- * @param {String} name
- * @param {String} channel
- * @param {Function} [fn]
- */
-
-Client.prototype.invite = function (
-  this: IrcClient,
-  name: string,
-  channel: string,
-  fn?: WriteCallback,
-): void {
-  this.write(`INVITE ${name} ${channel}`, fn);
-};
-
-/**
- * Send `msg` to `target`, where `target`
- * is a channel or user name.
- *
- * @param {String|Array} target
- * @param {String} msg
- * @param {Function} [fn]
- */
-
-Client.prototype.send = function (
-  this: IrcClient,
-  target: string | string[],
-  msg: string,
-  fn?: WriteCallback,
-): void {
-  this.write(`PRIVMSG ${toArray(target).join(",")} :${msg}`, fn);
-};
-
-/**
- * Send `msg` to `target` as an ACTION, where `target`
- * is a channel or user name.
- *
- * An action is a PRIVMSG with a syntax
- * like this:
- *
- *    PRIVMSG <target> :\u0001ACTION <msg>\u0001
- *
- * @param {String} target
- * @param {String} msg
- * @param {Function} [fn]
- */
-
-Client.prototype.action = function (
-  this: IrcClient,
-  target: string,
-  msg: string,
-  fn?: WriteCallback,
-): void {
-  this.send(target, `\u0001ACTION ${msg}\u0001`, fn);
-};
-
-/**
- * Send `msg` to `target` as a NOTICE, where `target`
- * is a channel or user name.
- *
- * @param {String} target
- * @param {String} msg
- * @param {Function} [fn]
- */
-
-Client.prototype.notice = function (
-  this: IrcClient,
-  target: string,
-  msg: string,
-  fn?: WriteCallback,
-): void {
-  this.write(`NOTICE ${target} :${msg}`, fn);
-};
-
-/**
- * Send `msg` to `target` as a CTCP notice, where `target`
- * is a user name.
- *
- * @param {String} target
- * @param {String} msg
- * @param {Function} [fn]
- */
-
-Client.prototype.ctcp = function (
-  this: IrcClient,
-  target: string,
-  msg: string,
-  fn?: WriteCallback,
-): void {
-  this.notice(target, `\x01${msg}\x01`, fn);
-};
-
-/**
- * Join channel(s).
- *
- * @param {String|Array} channels
- * @param {String|Array|Function} [keys or fn]
- * @param {Function} [fn]
- */
-
-Client.prototype.join = function (
-  this: IrcClient,
-  channels: string | string[],
-  keys?: string | string[] | WriteCallback,
-  fn?: WriteCallback,
-): void {
-  if (typeof keys === "function") {
-    fn = keys;
-    keys = "";
-  }
-
-  this.write(`JOIN ${toArray(channels).join(",")} ${toArray(keys).join(",")}`, fn);
-};
-
-/**
- * Leave channel(s) with optional `msg`.
- *
- * @param {String|Array} channels
- * @param {String|Function} [msg or fn]
- * @param {Function} [fn]
- */
-
-Client.prototype.part = function (
-  this: IrcClient,
-  channels: string | string[],
-  msg?: string | WriteCallback,
-  fn?: WriteCallback,
-): void {
-  if (typeof msg === "function") {
-    fn = msg;
-    msg = "";
-  }
-
-  let part = `PART ${toArray(channels).join(",")}`;
-
-  if (msg) {
-    part += ` :${msg}`;
-  }
-
-  this.write(part, fn);
-};
-
-/**
- * Set the user's away message
- *
- * @param {String} [msg = 'Talk to you later!']
- * @param {Function} [fn]
- */
-
-Client.prototype.away = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
-  const awayMessage = msg || "Talk to you later!";
-  this.write(`AWAY :${awayMessage}`, fn);
-};
-
-/**
- * Remove user's away message
- *
- * @param {Function} [fn]
- */
-
-Client.prototype.back = function (this: IrcClient, fn?: WriteCallback): void {
-  this.write("AWAY", fn);
-};
-
-/**
- * Get channel topic or set the topic to `topic`.
- *
- * @param {String} channel
- * @param {String|Function} [topic or fn]
- * @param {Function} [fn]
- */
-
-Client.prototype.topic = function (
-  this: IrcClient,
-  channel: string,
-  topic?: string | WriteCallback,
-  fn?: WriteCallback,
-): void {
-  if (typeof topic === "function") {
-    fn = topic;
-    topic = "";
-  }
-
-  if (topic) {
-    topic = ` :${topic}`;
-  }
-
-  this.write(`TOPIC ${channel}${topic}`, fn);
-};
-
-/**
- * Kick nick(s) from channel(s) with optional `msg`.
- *
- * @param {String|Array} channels
- * @param {String|Array} nicks
- * @param {String|Function} [msg or fn]
- * @param {Function} [fn]
- */
-
-Client.prototype.kick = function (
-  this: IrcClient,
-  channels: string | string[],
-  nicks: string | string[],
-  msg?: string | WriteCallback,
-  fn?: WriteCallback,
-): void {
-  if (typeof msg === "function") {
-    fn = msg;
-    msg = "";
-  }
-
-  let kick = `KICK ${toArray(channels).join(",")} ${toArray(nicks).join(",")}`;
-
-  if (msg) {
-    kick += ` :${msg}`;
-  }
-
-  this.write(kick, fn);
-};
-
-/**
- * Disconnect from the server with `msg`.
- *
- * @param {String} [msg]
- * @param {Function} [fn]
- */
-
-Client.prototype.quit = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
-  const quitMessage = msg || "Bye!";
-  this.write(`QUIT :${quitMessage}`, fn);
-};
-
-/**
- * Used to obtain operator privileges.
- * The combination of `name` and `password` are required
- * to gain Operator privileges.  Upon success, a `'mode'`
- * event will be emitted.
- *
- * @param {String} name
- * @param {String} password
- * @param {Function} [fn]
- */
-
-Client.prototype.oper = function (
-  this: IrcClient,
-  name: string,
-  password: string,
-  fn?: WriteCallback,
-): void {
-  this.write(`OPER ${name} ${password}`, fn);
-};
-
-/**
- * Used to set a user's mode or channel's mode for a user;
- *
- * @param {String} [nick or channel]
- * @param {String} flags
- * @param {String} params [nick - if setting channel mode]
- * @param {Function} [fn]
- */
-
-Client.prototype.mode = function (
-  this: IrcClient,
-  target: string,
-  flags: string,
-  params?: string | WriteCallback,
-  fn?: WriteCallback,
-): void {
-  if (typeof params === "function") {
-    fn = params;
-    params = "";
-  }
-  if (params) {
-    this.write(`MODE ${target} ${flags} ${params}`, fn);
-  } else {
-    this.write(`MODE ${target} ${flags}`, fn);
-  }
-};
-
-/**
- * Use the given plugin `fn`.
- *
- * @param {Function} fn
- * @return {Client} self
- */
-
-Client.prototype.use = function (this: IrcClient, fn: Plugin): IrcClient {
-  fn(this);
-  return this;
-};
-
-/**
- * Handle messages.
- *
- * Emit "message" (msg).
- *
- * @private
- */
-
-Client.prototype.onmessage = function (this: IrcClient, msg: IrcMessage): void {
-  msg.command = replies[msg.command as keyof typeof replies] || msg.command;
-  debug("message %s %s", msg.command, msg.string);
-  this.emit("data", msg);
-};
 
 /**
  * Array helper.
