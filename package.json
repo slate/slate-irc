@@ -39,5 +39,5 @@
     "oxlint": "^1.48.0",
     "vitest": "^4.0.17"
   },
-  "packageManager": "pnpm@10.28.0"
+  "packageManager": "pnpm@10.29.3"
 }
