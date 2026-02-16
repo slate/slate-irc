@@ -8,4 +8,5 @@ ignoredBuiltDependencies:
   - esbuild
 
 overrides:
+  node-stdlib-browser>crypto-browserify: '-'
   websocket-stream@5.5.2>ws: '-'
