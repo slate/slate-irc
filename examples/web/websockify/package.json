@@ -1,7 +1,7 @@
 {
   "name": "websockify",
-  "type": "module",
   "bin": "./websockify",
+  "type": "module",
   "dependencies": {
     "bufferutil": "^4.1.0",
     "ws": "^8.19.0"

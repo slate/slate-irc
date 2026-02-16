@@ -3,9 +3,9 @@
   "version": "0.9.6",
   "description": "General purpose IRC client",
   "keywords": [
-    "irc",
+    "chat",
     "client",
-    "chat"
+    "irc"
   ],
   "homepage": "https://github.com/slate/slate-irc",
   "bugs": {
@@ -17,6 +17,17 @@
     "Hyeon Kim <simnalamburt@gmail.com> (https://hyeon.me)"
   ],
   "repository": "slate/slate-irc",
+  "files": [
+    "dist/*"
+  ],
+  "main": "dist/slate-irc.js",
+  "module": "dist/slate-irc.modern.mjs",
+  "scripts": {
+    "build": "microbundle -f cjs,modern --target node --compress",
+    "ci": "vitest --run && oxlint && oxfmt --check",
+    "fix": "oxlint --fix",
+    "fmt": "oxfmt"
+  },
   "dependencies": {
     "debug": "^4.4.3",
     "slate-irc-parser": "^0.1.9"
@@ -24,18 +35,9 @@
   "devDependencies": {
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
+    "oxfmt": "^0.33.0",
+    "oxlint": "^1.48.0",
     "vitest": "^4.0.17"
   },
-  "scripts": {
-    "build": "microbundle -f cjs,modern --target node --compress",
-    "ci": "vitest --run && echo 'TODO: Run linter & formatter'",
-    "fix": "echo 'TODO: Run linter'",
-    "fmt": "echo 'TODO: Run formatter'"
-  },
-  "main": "dist/slate-irc.js",
-  "module": "dist/slate-irc.modern.mjs",
-  "files": [
-    "dist/*"
-  ],
   "packageManager": "pnpm@10.28.0"
 }
