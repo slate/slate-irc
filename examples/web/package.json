@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently 'rsbuild dev' 'websockify 80 irc.libera.chat 6697'"
+    "start": "concurrently 'vite' 'websockify 80 irc.libera.chat 6697'"
   },
   "dependencies": {
     "slate-irc": "workspace:*",
@@ -8,8 +8,8 @@
     "websockify": "workspace:*"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.7.2",
-    "@rsbuild/plugin-node-polyfill": "^1.4.2",
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vite": "npm:rolldown-vite@latest",
+    "vite-plugin-node-polyfills": "^0.25.0"
   }
 }
