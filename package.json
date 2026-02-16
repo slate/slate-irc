@@ -30,14 +30,14 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
-    "slate-irc-parser": "^0.1.9"
+    "slate-irc-parser": "^0.1.10"
   },
   "devDependencies": {
     "irc-replies": "^2.0.1",
     "oxfmt": "^0.33.0",
     "oxlint": "^1.48.0",
     "tsdown": "^0.20.3",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.18"
   },
   "packageManager": "pnpm@10.29.3"
 }
