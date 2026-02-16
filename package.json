@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
-    "test": "vitest --run && biome format",
+    "ci": "vitest --run && biome format",
     "fmt": "biome format --write"
   },
   "main": "dist/slate-irc.js",
