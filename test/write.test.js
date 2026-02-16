@@ -20,4 +20,5 @@ it("should err when newline characters are given", () => {
       cnt++;
     });
   });
+  expect(cnt).toBe(tests.length);
 });

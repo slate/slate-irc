@@ -99,7 +99,7 @@ Client.prototype.writeUnsafe = function (str, fn) {
 
 Client.prototype.write = function (str, fn) {
   if (str.indexOf("\n") != -1 || str.indexOf("\r") != -1) {
-    fn && fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
+    if (fn) fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
     return;
   }
   this.writeUnsafe(str, fn);
