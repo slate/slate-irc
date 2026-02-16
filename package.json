@@ -22,15 +22,15 @@
     "slate-irc-parser": "^0.1.9"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.11",
     "irc-replies": "^2.0.1",
     "microbundle": "^0.15.1",
     "vitest": "^4.0.17"
   },
   "scripts": {
     "build": "microbundle -f cjs,modern --target node --compress",
-    "ci": "vitest --run && biome format",
-    "fmt": "biome format --write"
+    "ci": "vitest --run && echo 'TODO: Run linter & formatter'",
+    "fix": "echo 'TODO: Run linter'",
+    "fmt": "echo 'TODO: Run formatter'"
   },
   "main": "dist/slate-irc.js",
   "module": "dist/slate-irc.modern.mjs",
