@@ -18,7 +18,8 @@
   ],
   "repository": "slate/slate-irc",
   "files": [
-    "dist/*"
+    "src",
+    "dist"
   ],
   "type": "module",
   "exports": "./dist/index.mjs",
