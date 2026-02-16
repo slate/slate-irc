@@ -4,7 +4,6 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  * MOTD plugin to emit "motd" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function motd(): Plugin {

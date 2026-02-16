@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * MODE plugin to emit "mode" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function mode(): Plugin {

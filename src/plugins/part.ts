@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * PART plugin to emit "part" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function part(): Plugin {

@@ -12,7 +12,6 @@ const debug = debugModule("slate-irc:names");
  * NAMES plugin to emit `name event`.
  *
  * @return {Function}
- * @api public
  */
 
 export default function namesPlugin(): Plugin {
@@ -60,7 +59,6 @@ export default function namesPlugin(): Plugin {
  *
  * @param {String} channel
  * @param {Function} fn
- * @api public
  */
 
 function names(this: IrcClient, channel: string, fn?: AnyFn): void {

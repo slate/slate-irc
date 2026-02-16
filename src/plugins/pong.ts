@@ -4,7 +4,6 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  * PONG plugin to reply to PING events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function pong(): Plugin {

@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * NICK plugin to emit "nick" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function nick(): Plugin {

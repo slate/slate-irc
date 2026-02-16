@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * INVITE plugin to emit "invite" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function invite(): Plugin {

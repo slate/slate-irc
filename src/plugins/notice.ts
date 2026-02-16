@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * NOTICE plugin to emit "notice" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function notice(): Plugin {

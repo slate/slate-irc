@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * JOIN plugin to emit "join" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function join(): Plugin {

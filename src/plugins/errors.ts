@@ -7,7 +7,6 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  * https://github.com/williamwicks/irc-replies/blob/master/replies.json#L113-L170
  *
  * @return {Function}
- * @api public
  */
 
 export default function errors(): Plugin {

@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * PRIVMSG plugin to emit "message" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function privmsg(): Plugin {

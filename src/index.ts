@@ -9,6 +9,17 @@ import replies from "irc-replies";
 import Parser from "slate-irc-parser";
 
 import type { IrcClient, IrcMessage, IrcStream, Plugin, WriteCallback } from "./types";
+export type {
+  AnyFn,
+  Hostmask,
+  IrcClient,
+  IrcMessage,
+  IrcStream,
+  Plugin,
+  PluginFactory,
+  WhoisData,
+  WriteCallback,
+} from "./types";
 
 const debug = debugModule("slate-irc");
 
@@ -42,10 +53,9 @@ import whois from "./plugins/whois";
  * @param {Stream} stream
  * @param {Parser} [parser]
  * @param {String} [encoding]
- * @api public
  */
 
-type ClientConstructor = {
+export type ClientConstructor = {
   new (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
   (stream: IrcStream, parser?: Parser, encoding?: BufferEncoding): IrcClient;
   prototype: IrcClient;
@@ -100,7 +110,6 @@ export default Client;
  *
  * @param {String} str
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.writeUnsafe = function (this: IrcClient, str: string, fn?: WriteCallback): void {
@@ -112,7 +121,6 @@ Client.prototype.writeUnsafe = function (this: IrcClient, str: string, fn?: Writ
  *
  * @param {String} str
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.write = function (this: IrcClient, str: string, fn?: WriteCallback): void {
@@ -128,7 +136,6 @@ Client.prototype.write = function (this: IrcClient, str: string, fn?: WriteCallb
  *
  * @param {String} pass
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.pass = function (this: IrcClient, pass: string, fn?: WriteCallback): void {
@@ -144,7 +151,6 @@ Client.prototype.pass = function (this: IrcClient, pass: string, fn?: WriteCallb
  * @param {String} hostname
  * @param {String} ip
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.webirc = function (
@@ -164,7 +170,6 @@ Client.prototype.webirc = function (
  *
  * @param {String} nick
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.nick = function (this: IrcClient, nick: string, fn?: WriteCallback): void {
@@ -177,7 +182,6 @@ Client.prototype.nick = function (this: IrcClient, nick: string, fn?: WriteCallb
  * @param {String} username
  * @param {String} realname
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.user = function (
@@ -195,7 +199,6 @@ Client.prototype.user = function (
  * @param {String} name
  * @param {String} channel
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.invite = function (
@@ -214,7 +217,6 @@ Client.prototype.invite = function (
  * @param {String|Array} target
  * @param {String} msg
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.send = function (
@@ -238,7 +240,6 @@ Client.prototype.send = function (
  * @param {String} target
  * @param {String} msg
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.action = function (
@@ -257,7 +258,6 @@ Client.prototype.action = function (
  * @param {String} target
  * @param {String} msg
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.notice = function (
@@ -276,7 +276,6 @@ Client.prototype.notice = function (
  * @param {String} target
  * @param {String} msg
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.ctcp = function (
@@ -294,7 +293,6 @@ Client.prototype.ctcp = function (
  * @param {String|Array} channels
  * @param {String|Array|Function} [keys or fn]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.join = function (
@@ -317,7 +315,6 @@ Client.prototype.join = function (
  * @param {String|Array} channels
  * @param {String|Function} [msg or fn]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.part = function (
@@ -345,7 +342,6 @@ Client.prototype.part = function (
  *
  * @param {String} [msg = 'Talk to you later!']
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.away = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
@@ -357,7 +353,6 @@ Client.prototype.away = function (this: IrcClient, msg?: string, fn?: WriteCallb
  * Remove user's away message
  *
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.back = function (this: IrcClient, fn?: WriteCallback): void {
@@ -370,7 +365,6 @@ Client.prototype.back = function (this: IrcClient, fn?: WriteCallback): void {
  * @param {String} channel
  * @param {String|Function} [topic or fn]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.topic = function (
@@ -398,7 +392,6 @@ Client.prototype.topic = function (
  * @param {String|Array} nicks
  * @param {String|Function} [msg or fn]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.kick = function (
@@ -427,7 +420,6 @@ Client.prototype.kick = function (
  *
  * @param {String} [msg]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.quit = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
@@ -444,7 +436,6 @@ Client.prototype.quit = function (this: IrcClient, msg?: string, fn?: WriteCallb
  * @param {String} name
  * @param {String} password
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.oper = function (
@@ -463,7 +454,6 @@ Client.prototype.oper = function (
  * @param {String} flags
  * @param {String} params [nick - if setting channel mode]
  * @param {Function} [fn]
- * @api public
  */
 
 Client.prototype.mode = function (
@@ -489,7 +479,6 @@ Client.prototype.mode = function (
  *
  * @param {Function} fn
  * @return {Client} self
- * @api public
  */
 
 Client.prototype.use = function (this: IrcClient, fn: Plugin): IrcClient {
@@ -502,7 +491,7 @@ Client.prototype.use = function (this: IrcClient, fn: Plugin): IrcClient {
  *
  * Emit "message" (msg).
  *
- * @api private
+ * @private
  */
 
 Client.prototype.onmessage = function (this: IrcClient, msg: IrcMessage): void {

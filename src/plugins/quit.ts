@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * QUIT plugin to emit "quit" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function quit(): Plugin {

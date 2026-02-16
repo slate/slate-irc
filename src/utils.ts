@@ -5,7 +5,6 @@ import type { Hostmask, IrcMessage } from "./types";
  *
  * @param {String} str
  * @return {Array}
- * @api public
  */
 
 export function channelList(str: string): string[] {
@@ -19,7 +18,6 @@ export function channelList(str: string): string[] {
  *
  * @param {Object} msg
  * @return {String}
- * @api public
  */
 
 export function nick(msg: IrcMessage): string {
@@ -31,7 +29,6 @@ export function nick(msg: IrcMessage): string {
  *
  * @param {Object} msg
  * @return {Object}
- * @api public
  */
 
 export function hostmask(msg: IrcMessage): Hostmask {
@@ -59,7 +56,6 @@ export function hostmask(msg: IrcMessage): Hostmask {
  * @param {Object} a
  * @param {Object} b
  * @return {Object}
- * @api public
  */
 
 export function extend<A extends Record<string, any>, B extends Record<string, any>>(

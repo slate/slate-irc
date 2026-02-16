@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * TOPIC plugin to emit "topic" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function topic(): Plugin {

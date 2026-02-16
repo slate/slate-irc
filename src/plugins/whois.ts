@@ -7,7 +7,6 @@ import type { AnyFn, IrcClient, IrcMessage, Plugin } from "../types";
  * WHOIS plugin to emit "whois" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function whoisPlugin(): Plugin {
@@ -103,7 +102,6 @@ export default function whoisPlugin(): Plugin {
  * @param {String} target
  * @param {String} mask
  * @param {Function} fn
- * @api public
  */
 
 function whois(this: IrcClient, target: string, mask?: string | AnyFn, fn?: AnyFn): void {

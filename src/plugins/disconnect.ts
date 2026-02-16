@@ -4,7 +4,6 @@ import type { IrcClient, Plugin } from "../types";
  * DISCONNECT plugin to emit "disconnect" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function disconnect(): Plugin {

@@ -9,7 +9,6 @@ import * as utils from "../utils";
  * KICK plugin to emit "kick" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function kick(): Plugin {

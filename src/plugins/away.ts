@@ -4,7 +4,6 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  * AWAY plugin to emit "away" events.
  *
  * @return {Function}
- * @api public
  */
 
 export default function away(): Plugin {

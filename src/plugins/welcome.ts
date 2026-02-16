@@ -4,7 +4,6 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  * RPL_WELCOME plugin to set `irc.me`.
  *
  * @return {Function}
- * @api public
  */
 
 export default function welcome(): Plugin {
