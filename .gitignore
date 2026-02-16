@@ -1,6 +1,5 @@
 /node_modules/
 /examples/*/node_modules/
-/examples/web/websockify/node_modules/
 
 # build results
 /dist/

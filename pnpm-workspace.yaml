@@ -1,8 +1,6 @@
 packages:
   - .
-  - examples/cli
-  - examples/web
-  - examples/web/websockify
+  - examples/*
 
 ignoredBuiltDependencies:
   - bufferutil

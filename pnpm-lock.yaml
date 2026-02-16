@@ -56,7 +56,7 @@ importers:
         version: 5.5.2
       websockify:
         specifier: workspace:*
-        version: link:websockify
+        version: link:../websockify
     devDependencies:
       '@rsbuild/core':
         specifier: ^1.7.2
@@ -68,7 +68,7 @@ importers:
         specifier: ^9.2.1
         version: 9.2.1
 
-  examples/web/websockify:
+  examples/websockify:
     dependencies:
       bufferutil:
         specifier: ^4.1.0
