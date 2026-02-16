@@ -15,8 +15,8 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
       slate-irc-parser:
-        specifier: ^0.1.10
-        version: 0.1.10
+        specifier: ^0.1.11
+        version: 0.1.11
     devDependencies:
       irc-replies:
         specifier: ^2.0.1
@@ -1442,9 +1442,6 @@ packages:
     resolution: {integrity: sha512-l51N2r93WmGUye3WuFoN5k10zyvrVs0qfKBhyC5ogUQ6Ew6JUSswh78mbSO+IU3nTWsyOArqPCcShdQSadghBQ==}
     engines: {node: '>= 12.0.0'}
 
-  linewise@0.0.3:
-    resolution: {integrity: sha512-8oI90ziJlcTi4k2DnQ0o0Waa2Uk00xbIN8ylvhstEqfJtiRaB4LJ6u8H63If7zTrnnuhCw8SjTJoHf+wLs3ICg==}
-
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
@@ -1777,8 +1774,8 @@ packages:
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
-  slate-irc-parser@0.1.10:
-    resolution: {integrity: sha512-fC2pG08VUldEMZPiaqlq/wvyvRKzm4c9tPXLo8mdhXk7djh0Txx6E2QpT+FwrqJWfac8D9sbPc+98O0RljqkPw==}
+  slate-irc-parser@0.1.11:
+    resolution: {integrity: sha512-DyrKch91+dq7ddNgaxuEkjUQjQaFXzECxGTlmM2oE8IWdWflIJy/A50D7sSvB+C+vITNgl9NZq4Vd44oqDGnqA==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -3159,8 +3156,6 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.31.1
       lightningcss-win32-x64-msvc: 1.31.1
 
-  linewise@0.0.3: {}
-
   linkify-it@5.0.0:
     dependencies:
       uc.micro: 2.1.0
@@ -3599,10 +3594,9 @@ snapshots:
 
   siginfo@2.0.0: {}
 
-  slate-irc-parser@0.1.10:
+  slate-irc-parser@0.1.11:
     dependencies:
       debug: 4.4.3
-      linewise: 0.0.3
     transitivePeerDependencies:
       - supports-color
 

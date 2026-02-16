@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
-    "slate-irc-parser": "^0.1.10"
+    "slate-irc-parser": "^0.1.11"
   },
   "devDependencies": {
     "irc-replies": "^2.0.1",
