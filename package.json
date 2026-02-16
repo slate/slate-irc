@@ -1,6 +1,6 @@
 {
   "name": "slate-irc",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "General purpose IRC client",
   "keywords": [
     "chat",
