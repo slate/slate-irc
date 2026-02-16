@@ -14,24 +14,24 @@ const debug = debugModule("slate-irc");
  * Core plugins.
  */
 
-import away from "./lib/plugins/away";
-import disconnect from "./lib/plugins/disconnect";
-import errors from "./lib/plugins/errors";
-import invite from "./lib/plugins/invite";
-import join from "./lib/plugins/join";
-import kick from "./lib/plugins/kick";
-import mode from "./lib/plugins/mode";
-import motd from "./lib/plugins/motd";
-import names from "./lib/plugins/names";
-import nick from "./lib/plugins/nick";
-import notice from "./lib/plugins/notice";
-import part from "./lib/plugins/part";
-import pong from "./lib/plugins/pong";
-import privmsg from "./lib/plugins/privmsg";
-import quit from "./lib/plugins/quit";
-import topic from "./lib/plugins/topic";
-import welcome from "./lib/plugins/welcome";
-import whois from "./lib/plugins/whois";
+import away from "./plugins/away";
+import disconnect from "./plugins/disconnect";
+import errors from "./plugins/errors";
+import invite from "./plugins/invite";
+import join from "./plugins/join";
+import kick from "./plugins/kick";
+import mode from "./plugins/mode";
+import motd from "./plugins/motd";
+import names from "./plugins/names";
+import nick from "./plugins/nick";
+import notice from "./plugins/notice";
+import part from "./plugins/part";
+import pong from "./plugins/pong";
+import privmsg from "./plugins/privmsg";
+import quit from "./plugins/quit";
+import topic from "./plugins/topic";
+import welcome from "./plugins/welcome";
+import whois from "./plugins/whois";
 
 /**
  * Initialize a new IRC client with the
