@@ -12,10 +12,10 @@ import * as utils from "../utils";
  */
 
 export default function notice(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("NOTICE" != msg.command) return;
-      var e: NoticeEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "NOTICE") return;
+      const e: NoticeEvent = {
         from: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         to: msg.params.toLowerCase(),

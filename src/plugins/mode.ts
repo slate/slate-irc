@@ -12,11 +12,11 @@ import * as utils from "../utils";
  */
 
 export default function mode(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("MODE" != msg.command) return;
-      var params = msg.params.split(" ");
-      var e: ModeEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "MODE") return;
+      const params = msg.params.split(" ");
+      const e: ModeEvent = {
         nick: utils.nick(msg),
         target: params[0],
         mode: params[1] || msg.trailing,

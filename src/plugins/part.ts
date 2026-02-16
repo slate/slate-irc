@@ -12,10 +12,10 @@ import * as utils from "../utils";
  */
 
 export default function part(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("PART" != msg.command) return;
-      var e: PartEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "PART") return;
+      const e: PartEvent = {
         nick: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         channels: utils.channelList(msg.params),

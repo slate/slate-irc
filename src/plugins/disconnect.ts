@@ -7,34 +7,34 @@ import type { IrcClient, Plugin } from "../types";
  */
 
 export default function disconnect(): Plugin {
-  return function (irc: IrcClient): void {
-    var stream = irc.stream;
-    var ms = 60 * 1000;
+  return (irc: IrcClient): void => {
+    const stream = irc.stream;
+    const ms = 60 * 1000;
 
-    stream.on("close", function () {
+    stream.on("close", () => {
       irc.emit("disconnect");
     });
 
     // Do nothing when given stream cannot perform setTimeout() operation
-    if (stream.setTimeout == null) {
+    if (stream.setTimeout === undefined || stream.setTimeout === null) {
       return;
     }
 
     stream.setTimeout(ms);
 
-    stream.on("timeout", function () {
-      var timeout = true;
-      var time = new Date().getTime();
+    stream.on("timeout", () => {
+      let timeout = true;
+      const time = Date.now();
 
-      irc.write("PING :" + time);
+      irc.write(`PING :${time}`);
 
-      irc.once("pong", function (res: string | number) {
-        if (res == time) {
+      irc.once("pong", (res: string | number) => {
+        if (String(res) === String(time)) {
           timeout = false;
         }
       });
 
-      setTimeout(function () {
+      setTimeout(() => {
         if (timeout) {
           stream.destroy();
         }

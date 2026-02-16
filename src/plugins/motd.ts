@@ -7,12 +7,12 @@ import type { IrcClient, IrcMessage, MotdEvent, Plugin } from "../types";
  */
 
 export default function motd(): Plugin {
-  return function (irc: IrcClient): void {
-    var e: MotdEvent = {
+  return (irc: IrcClient): void => {
+    const e: MotdEvent = {
       motd: [],
     };
 
-    irc.on("data", function (msg: IrcMessage) {
+    irc.on("data", (msg: IrcMessage) => {
       switch (msg.command) {
         case "RPL_MOTDSTART":
           e.motd.length = 0;
@@ -24,7 +24,7 @@ export default function motd(): Plugin {
           break;
       }
 
-      if (msg.command == "RPL_ENDOFMOTD") {
+      if (msg.command === "RPL_ENDOFMOTD") {
         irc.emit("motd", e);
       }
     });

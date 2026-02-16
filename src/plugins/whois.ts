@@ -10,17 +10,17 @@ import type { IrcClient, IrcMessage, Plugin, WhoisData, WhoisQueryCallback } fro
  */
 
 export default function whoisPlugin(): Plugin {
-  return function (irc: IrcClient): void {
-    var map: Record<string, WhoisData> = {};
-    var err: string | undefined;
+  return (irc: IrcClient): void => {
+    let map: Record<string, WhoisData> = {};
+    let err: string | undefined;
     irc.whois = whois;
     irc.whoisCallbacks = {};
 
-    irc.on("data", function (msg: IrcMessage) {
+    irc.on("data", (msg: IrcMessage) => {
       switch (msg.command) {
-        case "RPL_WHOISUSER":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        case "RPL_WHOISUSER": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           map[target] = map[target] || { channels: [], oper: false };
           map[target]!.nickname = params[1];
           map[target]!.username = params[2];
@@ -29,68 +29,78 @@ export default function whoisPlugin(): Plugin {
           map[target]!.channels = [];
           map[target]!.oper = false;
           break;
-        case "RPL_WHOISCHANNELS":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
-          var channels = msg.trailing.split(" ");
+        }
+        case "RPL_WHOISCHANNELS": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
+          const channels = msg.trailing.split(" ");
           map[target]!.channels = map[target]!.channels.concat(channels);
           break;
-        case "RPL_WHOISSERVER":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        }
+        case "RPL_WHOISSERVER": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           map[target]!.server = params[2];
           break;
-        case "RPL_AWAY":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        }
+        case "RPL_AWAY": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           if (!map[target]) return;
           map[target]!.away = msg.trailing;
           break;
-        case "RPL_WHOISOPERATOR":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        }
+        case "RPL_WHOISOPERATOR": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           map[target]!.oper = true;
           break;
-        case "RPL_WHOISIDLE":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        }
+        case "RPL_WHOISIDLE": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           map[target]!.idle = params[2]; // new Date(now - (n * 1000))
           map[target]!.sign = params[3]; // new Date(n * 1000)
           break;
-        case "RPL_ENDOFWHOIS":
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+        }
+        case "RPL_ENDOFWHOIS": {
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           if (!map[target]) return;
-          var cb = irc.whoisCallbacks[target];
+          const cb = irc.whoisCallbacks[target];
           if (cb) cb(err, map[target]!);
           else irc.emit("whois", null, map[target]!);
           map = {};
           break;
-        case "ERR_NEEDMOREPARAMS":
+        }
+        case "ERR_NEEDMOREPARAMS": {
           err = "Not enough parameters";
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
           if (target !== "whois") return;
-          var cb = irc.whoisCallbacks[target];
+          const cb = irc.whoisCallbacks[target];
           if (cb) cb(err, null);
           else irc.emit("whois", err, null);
           break;
-        case "ERR_NOSUCHSERVER":
+        }
+        case "ERR_NOSUCHSERVER": {
           err = "No such server";
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
-          var cb = irc.whoisCallbacks[target];
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
+          const cb = irc.whoisCallbacks[target];
           if (cb) cb(err, null);
           else irc.emit("whois", err, null);
           break;
-        case "ERR_NOSUCHNICK":
+        }
+        case "ERR_NOSUCHNICK": {
           err = "No such nick/channel";
-          var params = msg.params.split(" ");
-          var target = params[1]!.toLowerCase();
-          var cb = irc.whoisCallbacks[target];
+          const params = msg.params.split(" ");
+          const target = params[1]!.toLowerCase();
+          const cb = irc.whoisCallbacks[target];
           if (cb) cb(err, null);
           else irc.emit("whois", err, null);
           break;
+        }
       }
     });
   };
@@ -110,7 +120,7 @@ function whois(
   mask?: string | WhoisQueryCallback,
   fn?: WhoisQueryCallback,
 ): void {
-  if ("function" == typeof mask) {
+  if (typeof mask === "function") {
     fn = mask;
     mask = "";
   }

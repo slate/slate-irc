@@ -12,9 +12,9 @@ import * as utils from "../utils";
  */
 
 export default function topic(): Plugin {
-  return function (irc: IrcClient): void {
-    var channel: string | undefined;
-    irc.on("data", function (msg: IrcMessage) {
+  return (irc: IrcClient): void => {
+    let channel: string | undefined;
+    irc.on("data", (msg: IrcMessage) => {
       switch (msg.command) {
         case "RPL_NOTOPIC":
         case "RPL_TOPIC":
@@ -29,12 +29,12 @@ export default function topic(): Plugin {
           return;
       }
 
-      var e: TopicEvent = {
+      const e: TopicEvent = {
         hostmask: utils.hostmask(msg),
         channel: channel!.toLowerCase(),
         topic: msg.trailing,
       };
-      if ("TOPIC" == msg.command) e.nick = utils.nick(msg);
+      if (msg.command === "TOPIC") e.nick = utils.nick(msg);
       irc.emit("topic", e);
     });
   };

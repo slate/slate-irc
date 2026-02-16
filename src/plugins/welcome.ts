@@ -7,9 +7,9 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  */
 
 export default function welcome(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("RPL_WELCOME" != msg.command) return;
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "RPL_WELCOME") return;
       irc.me = msg.params;
       irc.emit("welcome", irc.me);
     });

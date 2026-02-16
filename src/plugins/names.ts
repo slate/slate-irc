@@ -22,40 +22,42 @@ const debug = debugModule("slate-irc:names");
  */
 
 export default function namesPlugin(): Plugin {
-  return function (irc: IrcClient): void {
-    var map: Record<string, NamesUser[]> = {};
+  return (irc: IrcClient): void => {
+    const map: Record<string, NamesUser[]> = {};
     irc.names = names;
     irc.nameCallbacks = {};
 
-    irc.on("data", function (msg: IrcMessage) {
+    irc.on("data", (msg: IrcMessage) => {
       switch (msg.command) {
-        case "RPL_NAMREPLY":
-          var chan = msg.params.split(/ [=@*] /)[1]!.toLowerCase();
-          var names = msg.trailing.split(" ");
-          var users: NamesUser[] = [];
+        case "RPL_NAMREPLY": {
+          const chan = msg.params.split(/ [=@*] /)[1]!.toLowerCase();
+          const names = msg.trailing.split(" ");
+          const users: NamesUser[] = [];
 
-          names.forEach(function (n: string) {
-            var user = n.split(/([~&@%+])/);
-            var name = user.pop()!;
-            var mode = user.pop();
-            users.push({ name: name, mode: mode || "" });
+          names.forEach((n: string) => {
+            const user = n.split(/([~&@%+])/);
+            const name = user.pop()!;
+            const mode = user.pop();
+            users.push({ name, mode: mode || "" });
           });
 
           map[chan] = (map[chan] || []).concat(users);
           debug("add %s %j", chan, users);
           break;
+        }
 
-        case "RPL_ENDOFNAMES":
-          var chan = msg.params.split(" ")[1]!.toLowerCase();
+        case "RPL_ENDOFNAMES": {
+          const chan = msg.params.split(" ")[1]!.toLowerCase();
           debug('emit "names" for %s', chan);
-          var e: NamesEvent = { channel: chan, names: map[chan] || [] };
-          var cb = irc.nameCallbacks[chan];
+          const e: NamesEvent = { channel: chan, names: map[chan] || [] };
+          const cb = irc.nameCallbacks[chan];
 
           if (cb) cb(e);
           else irc.emit("names", e);
 
           delete map[chan];
           break;
+        }
       }
     });
   };
@@ -78,5 +80,5 @@ function names(this: IrcClient, channel: string, fn?: NamesQueryCallback): void 
     };
   }
 
-  this.write("NAMES " + channel);
+  this.write(`NAMES ${channel}`);
 }

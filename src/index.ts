@@ -119,8 +119,7 @@ export default Client;
  * Inherit from `Emitter.prototype`.
  */
 
-(Client.prototype as unknown as { __proto__: typeof Emitter.prototype }).__proto__ =
-  Emitter.prototype;
+Object.setPrototypeOf(Client.prototype, Emitter.prototype);
 
 /**
  * Write `str` without checking for '\r' or '\n' and invoke `fn(err)`.
@@ -130,7 +129,7 @@ export default Client;
  */
 
 Client.prototype.writeUnsafe = function (this: IrcClient, str: string, fn?: WriteCallback): void {
-  this.stream.write(str + "\r\n", fn);
+  this.stream.write(`${str}\r\n`, fn);
 };
 
 /**
@@ -141,7 +140,7 @@ Client.prototype.writeUnsafe = function (this: IrcClient, str: string, fn?: Writ
  */
 
 Client.prototype.write = function (this: IrcClient, str: string, fn?: WriteCallback): void {
-  if (str.indexOf("\n") != -1 || str.indexOf("\r") != -1) {
+  if (str.includes("\n") || str.includes("\r")) {
     if (fn) fn(new Error("The parameter to write() must not contain any '\\n' or '\\r'."));
     return;
   }
@@ -156,7 +155,7 @@ Client.prototype.write = function (this: IrcClient, str: string, fn?: WriteCallb
  */
 
 Client.prototype.pass = function (this: IrcClient, pass: string, fn?: WriteCallback): void {
-  this.write("PASS " + pass, fn);
+  this.write(`PASS ${pass}`, fn);
 };
 
 /**
@@ -178,8 +177,8 @@ Client.prototype.webirc = function (
   ip: string,
   fn?: WriteCallback,
 ): void {
-  var message = [password, username, hostname, ip].join(" ");
-  this.write("WEBIRC " + message, fn);
+  const message = [password, username, hostname, ip].join(" ");
+  this.write(`WEBIRC ${message}`, fn);
 };
 
 /**
@@ -190,7 +189,7 @@ Client.prototype.webirc = function (
  */
 
 Client.prototype.nick = function (this: IrcClient, nick: string, fn?: WriteCallback): void {
-  this.write("NICK " + nick, fn);
+  this.write(`NICK ${nick}`, fn);
 };
 
 /**
@@ -207,7 +206,7 @@ Client.prototype.user = function (
   realname: string,
   fn?: WriteCallback,
 ): void {
-  this.write("USER " + username + " 0 * :" + realname, fn);
+  this.write(`USER ${username} 0 * :${realname}`, fn);
 };
 
 /**
@@ -224,7 +223,7 @@ Client.prototype.invite = function (
   channel: string,
   fn?: WriteCallback,
 ): void {
-  this.write("INVITE " + name + " " + channel, fn);
+  this.write(`INVITE ${name} ${channel}`, fn);
 };
 
 /**
@@ -242,7 +241,7 @@ Client.prototype.send = function (
   msg: string,
   fn?: WriteCallback,
 ): void {
-  this.write("PRIVMSG " + toArray(target).join(",") + " :" + msg, fn);
+  this.write(`PRIVMSG ${toArray(target).join(",")} :${msg}`, fn);
 };
 
 /**
@@ -265,7 +264,7 @@ Client.prototype.action = function (
   msg: string,
   fn?: WriteCallback,
 ): void {
-  this.send(target, "\u0001" + "ACTION " + msg + "\u0001", fn);
+  this.send(target, `\u0001ACTION ${msg}\u0001`, fn);
 };
 
 /**
@@ -283,7 +282,7 @@ Client.prototype.notice = function (
   msg: string,
   fn?: WriteCallback,
 ): void {
-  this.write("NOTICE " + target + " :" + msg, fn);
+  this.write(`NOTICE ${target} :${msg}`, fn);
 };
 
 /**
@@ -301,7 +300,7 @@ Client.prototype.ctcp = function (
   msg: string,
   fn?: WriteCallback,
 ): void {
-  this.notice(target, "\x01" + msg + "\x01", fn);
+  this.notice(target, `\x01${msg}\x01`, fn);
 };
 
 /**
@@ -318,12 +317,12 @@ Client.prototype.join = function (
   keys?: string | string[] | WriteCallback,
   fn?: WriteCallback,
 ): void {
-  if ("function" == typeof keys) {
+  if (typeof keys === "function") {
     fn = keys;
     keys = "";
   }
 
-  this.write("JOIN " + toArray(channels).join(",") + " " + toArray(keys).join(","), fn);
+  this.write(`JOIN ${toArray(channels).join(",")} ${toArray(keys).join(",")}`, fn);
 };
 
 /**
@@ -340,15 +339,15 @@ Client.prototype.part = function (
   msg?: string | WriteCallback,
   fn?: WriteCallback,
 ): void {
-  if ("function" == typeof msg) {
+  if (typeof msg === "function") {
     fn = msg;
     msg = "";
   }
 
-  var part = "PART " + toArray(channels).join(",");
+  let part = `PART ${toArray(channels).join(",")}`;
 
   if (msg) {
-    part += " :" + msg;
+    part += ` :${msg}`;
   }
 
   this.write(part, fn);
@@ -362,8 +361,8 @@ Client.prototype.part = function (
  */
 
 Client.prototype.away = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
-  msg = msg || "Talk to you later!";
-  this.write("AWAY :" + msg, fn);
+  const awayMessage = msg || "Talk to you later!";
+  this.write(`AWAY :${awayMessage}`, fn);
 };
 
 /**
@@ -390,16 +389,16 @@ Client.prototype.topic = function (
   topic?: string | WriteCallback,
   fn?: WriteCallback,
 ): void {
-  if ("function" == typeof topic) {
+  if (typeof topic === "function") {
     fn = topic;
     topic = "";
   }
 
   if (topic) {
-    topic = " :" + topic;
+    topic = ` :${topic}`;
   }
 
-  this.write("TOPIC " + channel + topic, fn);
+  this.write(`TOPIC ${channel}${topic}`, fn);
 };
 
 /**
@@ -418,15 +417,15 @@ Client.prototype.kick = function (
   msg?: string | WriteCallback,
   fn?: WriteCallback,
 ): void {
-  if ("function" == typeof msg) {
+  if (typeof msg === "function") {
     fn = msg;
     msg = "";
   }
 
-  var kick = "KICK " + toArray(channels).join(",") + " " + toArray(nicks).join(",");
+  let kick = `KICK ${toArray(channels).join(",")} ${toArray(nicks).join(",")}`;
 
   if (msg) {
-    kick += " :" + msg;
+    kick += ` :${msg}`;
   }
 
   this.write(kick, fn);
@@ -440,8 +439,8 @@ Client.prototype.kick = function (
  */
 
 Client.prototype.quit = function (this: IrcClient, msg?: string, fn?: WriteCallback): void {
-  msg = msg || "Bye!";
-  this.write("QUIT :" + msg, fn);
+  const quitMessage = msg || "Bye!";
+  this.write(`QUIT :${quitMessage}`, fn);
 };
 
 /**
@@ -461,7 +460,7 @@ Client.prototype.oper = function (
   password: string,
   fn?: WriteCallback,
 ): void {
-  this.write("OPER " + name + " " + password, fn);
+  this.write(`OPER ${name} ${password}`, fn);
 };
 
 /**
@@ -480,14 +479,14 @@ Client.prototype.mode = function (
   params?: string | WriteCallback,
   fn?: WriteCallback,
 ): void {
-  if ("function" === typeof params) {
+  if (typeof params === "function") {
     fn = params;
     params = "";
   }
   if (params) {
-    this.write("MODE " + target + " " + flags + " " + params, fn);
+    this.write(`MODE ${target} ${flags} ${params}`, fn);
   } else {
-    this.write("MODE " + target + " " + flags, fn);
+    this.write(`MODE ${target} ${flags}`, fn);
   }
 };
 

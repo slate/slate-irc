@@ -12,10 +12,10 @@ import * as utils from "../utils";
  */
 
 export default function privmsg(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("PRIVMSG" != msg.command) return;
-      var e: PrivmsgEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "PRIVMSG") return;
+      const e: PrivmsgEvent = {
         from: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         to: msg.params.toLowerCase(),

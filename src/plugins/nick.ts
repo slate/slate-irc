@@ -12,16 +12,16 @@ import * as utils from "../utils";
  */
 
 export default function nick(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("NICK" != msg.command) return;
-      var e: NickEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "NICK") return;
+      const e: NickEvent = {
         nick: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         new: msg.trailing,
       };
       if (!e.new) e.new = msg.params;
-      if (e.nick == irc.me) irc.me = e.new;
+      if (e.nick === irc.me) irc.me = e.new;
       irc.emit("nick", e);
     });
   };

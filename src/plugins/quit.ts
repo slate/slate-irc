@@ -12,10 +12,10 @@ import * as utils from "../utils";
  */
 
 export default function quit(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("QUIT" != msg.command) return;
-      var e: QuitEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "QUIT") return;
+      const e: QuitEvent = {
         nick: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         message: msg.trailing,

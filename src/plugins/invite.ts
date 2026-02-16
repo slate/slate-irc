@@ -12,10 +12,10 @@ import * as utils from "../utils";
  */
 
 export default function invite(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("INVITE" != msg.command) return;
-      var e: InviteEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "INVITE") return;
+      const e: InviteEvent = {
         from: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         to: msg.params.toLowerCase(),

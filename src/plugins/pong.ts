@@ -7,11 +7,11 @@ import type { IrcClient, IrcMessage, Plugin } from "../types";
  */
 
 export default function pong(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("PONG" == msg.command) irc.emit("pong", msg.trailing);
-      if ("PING" != msg.command) return;
-      irc.write("PONG :" + msg.trailing);
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command === "PONG") irc.emit("pong", msg.trailing);
+      if (msg.command !== "PING") return;
+      irc.write(`PONG :${msg.trailing}`);
     });
   };
 }

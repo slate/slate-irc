@@ -8,9 +8,7 @@ import type { Hostmask, IrcMessage } from "./types";
  */
 
 export function channelList(str: string): string[] {
-  return str.split(",").map(function (chan: string) {
-    return chan.toLowerCase();
-  });
+  return str.split(",").map((chan: string) => chan.toLowerCase());
 }
 
 /**
@@ -32,22 +30,22 @@ export function nick(msg: IrcMessage): string {
  */
 
 export function hostmask(msg: IrcMessage): Hostmask {
-  var hostmask: Hostmask = {
+  const mask: Hostmask = {
     nick: "",
     string: msg.prefix,
   };
-  var parts = msg.prefix.split("!");
-  hostmask.nick = parts[0]!;
+  let parts = msg.prefix.split("!");
+  mask.nick = parts[0]!;
 
   try {
     parts = parts[1]!.split("@");
-    hostmask.username = parts[0]!;
-    hostmask.hostname = parts[1]!;
+    mask.username = parts[0]!;
+    mask.hostname = parts[1]!;
   } catch {
     // ..
   }
 
-  return hostmask;
+  return mask;
 }
 
 /**
@@ -62,7 +60,7 @@ export function extend<A extends Record<string, unknown>, B extends Record<strin
   a: A,
   b: B,
 ): A & B {
-  for (var prop in b) {
+  for (const prop in b) {
     (a as Record<string, unknown>)[prop] = b[prop];
   }
   return a as A & B;

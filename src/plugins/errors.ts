@@ -10,10 +10,10 @@ import type { ErrorEvent, IrcClient, IrcMessage, Plugin } from "../types";
  */
 
 export default function errors(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
       if (msg.command.indexOf("ERR_") !== 0) return;
-      var e: ErrorEvent = {
+      const e: ErrorEvent = {
         cmd: msg.command,
         message: msg.trailing,
       };

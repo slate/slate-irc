@@ -7,15 +7,20 @@ import type { AwayEvent, IrcClient, IrcMessage, Plugin } from "../types";
  */
 
 export default function away(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("RPL_AWAY" != msg.command && "RPL_NOWAWAY" != msg.command && "RPL_UNAWAY" != msg.command)
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (
+        msg.command !== "RPL_AWAY" &&
+        msg.command !== "RPL_NOWAWAY" &&
+        msg.command !== "RPL_UNAWAY"
+      ) {
         return;
-      var params = msg.params.split(" ");
-      var e: AwayEvent = {
+      }
+      const params = msg.params.split(" ");
+      const e: AwayEvent = {
         message: msg.trailing,
       };
-      if ("RPL_NOWAWAY" == msg.command || "RPL_UNAWAY" == msg.command) {
+      if (msg.command === "RPL_NOWAWAY" || msg.command === "RPL_UNAWAY") {
         e.nick = params[0];
       } else {
         e.nick = params[1];

@@ -12,11 +12,11 @@ import * as utils from "../utils";
  */
 
 export default function kick(): Plugin {
-  return function (irc: IrcClient): void {
-    irc.on("data", function (msg: IrcMessage) {
-      if ("KICK" != msg.command) return;
-      var params = msg.params.split(" ");
-      var e: KickEvent = {
+  return (irc: IrcClient): void => {
+    irc.on("data", (msg: IrcMessage) => {
+      if (msg.command !== "KICK") return;
+      const params = msg.params.split(" ");
+      const e: KickEvent = {
         nick: utils.nick(msg),
         hostmask: utils.hostmask(msg),
         channel: params[0]!.toLowerCase(),
