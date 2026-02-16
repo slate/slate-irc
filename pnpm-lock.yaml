@@ -40,6 +40,12 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@25.0.8)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.2)
 
+  examples/cli:
+    dependencies:
+      slate-irc:
+        specifier: workspace:*
+        version: link:../..
+
   examples/web:
     dependencies:
       slate-irc:

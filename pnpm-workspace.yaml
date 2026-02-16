@@ -1,5 +1,6 @@
 packages:
   - .
+  - examples/cli
   - examples/web
   - examples/web/websockify
 
