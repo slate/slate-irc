@@ -38,8 +38,6 @@ export type {
   WriteCallback,
 } from "./types";
 
-const debug = debugModule("slate-irc");
-
 /**
  * Core plugins.
  */
@@ -79,6 +77,8 @@ export type ClientFactory = (
 ) => IrcClient;
 
 class ClientImpl extends Emitter {
+  private static readonly debug = debugModule("slate-irc");
+
   stream!: IrcStream;
   parser!: Parser;
   me?: string;
@@ -265,7 +265,7 @@ class ClientImpl extends Emitter {
 
   onmessage(msg: IrcMessage): void {
     msg.command = replies[msg.command as keyof typeof replies] || msg.command;
-    debug("message %s %s", msg.command, msg.string);
+    ClientImpl.debug("message %s %s", msg.command, msg.string);
     this.emit("data", msg);
   }
 }
