@@ -20,10 +20,10 @@
   "files": [
     "dist/*"
   ],
-  "main": "dist/slate-irc.js",
-  "module": "dist/slate-irc.modern.mjs",
+  "type": "module",
+  "exports": "./dist/index.mjs",
   "scripts": {
-    "build": "microbundle -f cjs,modern --target node --compress",
+    "build": "tsdown",
     "ci": "vitest --run && oxlint && oxfmt --check",
     "fix": "oxlint --fix",
     "fmt": "oxfmt"
@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "irc-replies": "^2.0.1",
-    "microbundle": "^0.15.1",
     "oxfmt": "^0.33.0",
     "oxlint": "^1.48.0",
+    "tsdown": "^0.20.3",
     "vitest": "^4.0.17"
   },
   "packageManager": "pnpm@10.29.3"
