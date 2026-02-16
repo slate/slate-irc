@@ -36,7 +36,7 @@ client.names("#express", (_err, names) => {
 });
 ```
 
-To see more examples, please check the [`examples`](examples) directory.
+To see more examples, please check the [`examples`] directory.
 
 &nbsp;
 
@@ -50,5 +50,6 @@ _slate-irc_ is primarily distributed under the terms of the [MIT license]. See
 [npm]: https://npmjs.org/package/slate-irc
 [documentation]: docs.md
 [DEBUG]: https://github.com/visionmedia/debug
+[`examples`]: https://github.com/slate/slate-irc/tree/main/examples
 [MIT license]: LICENSE
 [COPYRIGHT]: COPYRIGHT
