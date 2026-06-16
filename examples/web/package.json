@@ -8,8 +8,8 @@
     "websockify": "workspace:*"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
-    "vite": "npm:rolldown-vite@latest",
-    "vite-plugin-node-polyfills": "^0.25.0"
+    "concurrently": "^10.0.3",
+    "vite": "^8.0.16",
+    "vite-plugin-node-polyfills": "^0.28.0"
   }
 }
