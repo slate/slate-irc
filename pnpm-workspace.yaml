@@ -8,4 +8,8 @@ allowBuilds:
   esbuild: false
 
 overrides:
+  node-stdlib-browser>crypto-browserify: '-'
   websocket-stream@5.5.2>ws: '-'
+
+patchedDependencies:
+  node-stdlib-browser@1.3.1: examples/web/node-stdlib-browser@1.3.1.patch
