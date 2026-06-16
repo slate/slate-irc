@@ -2,10 +2,10 @@ packages:
   - .
   - examples/*
 
-ignoredBuiltDependencies:
-  - bufferutil
-  - core-js
-  - esbuild
+allowBuilds:
+  bufferutil: false
+  core-js: false
+  esbuild: false
 
 overrides:
   node-stdlib-browser>crypto-browserify: '-'
