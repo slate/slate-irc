@@ -16,7 +16,7 @@ import type {
 const debug = debugModule("slate-irc:names");
 
 /**
- * NAMES plugin to emit `name event`.
+ * NAMES plugin to emit "names" events.
  *
  * @return {Function}
  */
